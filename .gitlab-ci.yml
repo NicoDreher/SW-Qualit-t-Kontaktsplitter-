@@ -4,7 +4,7 @@ build:
   stage: build
   image: maven:latest
   script:
-    - mvn package
+    - mvn test package
   artifacts:
     paths:
       - target/Kontaktsplitter-Kings.jar

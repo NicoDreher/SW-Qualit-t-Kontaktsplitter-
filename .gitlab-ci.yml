@@ -1,0 +1,14 @@
+variables:
+  headless: "true"
+build:
+  stage: build
+  image: maven:latest
+  script:
+    - mvn package
+  artifacts:
+    paths:
+      - target/Kontaktsplitter-Kings.jar
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml

@@ -30,9 +30,13 @@ public class Configuration {
     private static Map<String, Gender> names;
 
     static {
+        System.out.println(LANGUAGES);
+
         titles = new ArrayList<>();
-        titles.add(new Title("Maschine"));
+        titles.add(new Title("Professor"));
         titles.add(new Title("Prof."));
+        titles.add(new Title("Dr. h.c. mult."));
+        titles.add(new Title("Dr.-Ing."));
         titles.add(new Title("Dr. rer. nat."));
         titles.add(new Title("Dr."));
         titles.add(new Title("Dipl. Ing."));
@@ -41,9 +45,43 @@ public class Configuration {
         patterns = new ArrayList<>();
         patterns.add(new ContactPattern("Deutsch", Gender.MALE, "Herr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrter Herr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
         patterns.add(new ContactPattern("Deutsch", Gender.FEMALE, "Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrte Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
-        patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + LAST_NAME + ", " + FIRST_NAME, "Guten Tag " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
-        patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrter Damen und Herren"));
-        patterns.add(new ContactPattern("Deutsch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Guten Tag " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+
+        patterns.add(new ContactPattern("Englisch", Gender.FEMALE, "Mrs " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Mrs " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Englisch", Gender.FEMALE, "Ms " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Ms " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Englisch", Gender.MALE, "Mr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Mr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Englisch", Gender.FEMALE, "Mrs. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Mrs " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Englisch", Gender.FEMALE, "Ms. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Ms " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Englisch", Gender.MALE, "Mr. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Mr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+
+        patterns.add(new ContactPattern("Italienisch", Gender.FEMALE, "Signora " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Gentile Signora " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Italienisch", Gender.MALE, "Sig. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Egregio Signora " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+        patterns.add(new ContactPattern("Französisch", Gender.FEMALE, "Mme " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Madame " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Französisch", Gender.MALE, "M " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Monsieur " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Französisch", Gender.FEMALE, "Mme. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Madame " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Französisch", Gender.MALE, "M. " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Monsieur " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+
+        patterns.add(new ContactPattern("Spanisch", Gender.FEMALE, "Señora " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Estimada Señora " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Spanisch", Gender.MALE, "Señor " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Estimada Señor " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+        patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + LAST_NAME + ", " + FIRST_NAME, "Sehr geehrte*r " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrte*r " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Deutsch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrte*r " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+        patterns.add(new ContactPattern("Englisch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Sirs"));
+        patterns.add(new ContactPattern("Englisch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Dear Sirs"));
+
+        patterns.add(new ContactPattern("Italienisch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Egregi Signori"));
+        patterns.add(new ContactPattern("Italienisch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Egregi Signori"));
+
+        patterns.add(new ContactPattern("Französisch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Messieursdames"));
+        patterns.add(new ContactPattern("Französisch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Messieursdames"));
+
+        patterns.add(new ContactPattern("Spanisch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Estimados Señores y Señoras"));
+        patterns.add(new ContactPattern("Spanisch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Estimados Señores y Señoras"));
 
         names = new HashMap<>();
         try(InputStream stream = Configuration.class.getResourceAsStream("/names/names.txt"); InputStreamReader isr = new InputStreamReader(stream); BufferedReader reader = new BufferedReader(isr)) {

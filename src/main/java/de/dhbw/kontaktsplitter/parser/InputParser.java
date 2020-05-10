@@ -43,7 +43,7 @@ public class InputParser {
                     }
                 }
                 else if(token.equalsIgnoreCase("%VORNAME")) {
-                    while(inputIndex < inputTokens.length && inputTokens[inputIndex].matches("^[a-zA-Z]+$") && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() || first == 2)) {
+                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() || first == 2)) {
                         firstNames.add(inputTokens[inputIndex]);
                         if(Gender.NONE.equals(inputGender)) {
                             inputGender = Configuration.getGender(inputTokens[inputIndex]);
@@ -55,7 +55,7 @@ public class InputParser {
                     }
                 }
                 else if(token.equalsIgnoreCase("%NACHNAME")) {
-                    while(inputIndex < inputTokens.length && inputTokens[inputIndex].matches("^[a-zA-Z]+$") && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() || first == 1)) {
+                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() || first == 1)) {
                         lastNames.add(inputTokens[inputIndex]);
                         inputIndex++;
                     }
@@ -74,6 +74,14 @@ public class InputParser {
                 return null;
             }
         }
+        if(firstNames.isEmpty() && lastNames.size() >= 2) {
+            firstNames.add(lastNames.get(lastNames.size() - 1));
+            lastNames.remove(lastNames.size() - 1);
+        }
+        if(lastNames.isEmpty() && firstNames.size() >= 2) {
+            lastNames.add(firstNames.get(firstNames.size() - 1));
+            firstNames.remove(firstNames.size() - 1);
+        }
         return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), parseLastNames(lastNames));
     }
 
@@ -85,7 +93,7 @@ public class InputParser {
                 return contact;
             }
         }
-        return null;
+        return new Contact("Deutsch", Gender.NONE, new ArrayList<>(), "", "");
     }
 
     public static String generateOutput(Contact contact) {

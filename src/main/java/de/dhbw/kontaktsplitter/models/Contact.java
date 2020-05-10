@@ -3,24 +3,25 @@ package de.dhbw.kontaktsplitter.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Contact {
-    private Locale locale;
+    private String language;
     private Gender gender;
     private List<Title> titles;
     private String fistName;
     private String lastName;
 
-    public Contact(Locale locale, Gender gender, List<Title> titles, String firstName, String lastName) {
-        this.locale = locale;
+    public Contact(String language, Gender gender, List<Title> titles, String firstName, String lastName) {
+        this.language = language;
         this.gender = gender;
         this.titles = titles;
         this.fistName = firstName;
         this.lastName = lastName;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLanguage() {
+        return language;
     }
 
     public Gender getGender() {
@@ -39,8 +40,8 @@ public class Contact {
         return lastName;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public void setLanguage(String Language) {
+        this.language = language;
     }
 
     public void setFistName(String fistName) {
@@ -57,5 +58,9 @@ public class Contact {
 
     public void setTitles(List<Title> titles) {
         this.titles = titles;
+    }
+
+    public String getTitlesAsString() {
+        return titles.stream().map(Title::getTitle).collect(Collectors.joining(" "));
     }
 }

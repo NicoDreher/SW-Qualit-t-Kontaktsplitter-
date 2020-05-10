@@ -14,4 +14,26 @@ public class Title {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public boolean matches(String[] inputTokens, int startIndex) {
+        String[] titleTokens = title.split(" ");
+        for(String token : titleTokens) {
+            if(token.equalsIgnoreCase(inputTokens[startIndex])) {
+                startIndex++;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int getLength() {
+        return title.split(" ").length;
+    }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }

@@ -3,6 +3,7 @@ package de.dhbw.kontaktsplitter.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class Contact {
     private Locale locale;
@@ -57,5 +58,9 @@ public class Contact {
 
     public void setTitles(List<Title> titles) {
         this.titles = titles;
+    }
+
+    public String getTitlesAsString() {
+        return titles.stream().map(Title::getTitle).collect(Collectors.joining(" "));
     }
 }

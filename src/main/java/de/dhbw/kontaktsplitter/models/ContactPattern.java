@@ -1,5 +1,7 @@
 package de.dhbw.kontaktsplitter.models;
 
+import de.dhbw.kontaktsplitter.parser.InputParser;
+
 public class ContactPattern {
     private String language;
     private Gender gender;
@@ -43,5 +45,9 @@ public class ContactPattern {
 
     public void setOutputPattern(String outputPattern) {
         this.outputPattern = outputPattern;
+    }
+
+    public String parseContact(Contact contact) {
+        return outputPattern.replace(InputParser.TITLE, contact.getTitlesAsString()).replace(InputParser.FIRST_NAME, contact.getFistName()).replace(InputParser.LAST_NAME, contact.getLastName()).trim();
     }
 }

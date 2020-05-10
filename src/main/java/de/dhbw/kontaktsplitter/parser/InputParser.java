@@ -8,11 +8,12 @@ import de.dhbw.kontaktsplitter.persistence.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class InputParser {
     public static final String TITLE = "%TITEL";
-    public static final String FIRST_NAME = "%FIRST_NAME";
-    public static final String LAST_NAME = "%LAST_NAME";
+    public static final String FIRST_NAME = "%VORNAME";
+    public static final String LAST_NAME = "%NACHNAME";
 
     public static Title findTitle(String[] tokens, int inputIndex) {
         for(Title title : Configuration.getTitles()) {
@@ -63,7 +64,7 @@ public class InputParser {
                 return null;
             }
         }
-        return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), String.join("-", lastNames));
+        return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), parseLastNames(lastNames));
     }
 
     public static Contact parseInput(String input) {
@@ -74,5 +75,32 @@ public class InputParser {
             }
         }
         return null;
+    }
+
+    public static String generateOutput(Contact contact) {
+        Optional<ContactPattern> foundPattern = Configuration.getPatterns().stream().filter(pattern -> pattern.getLanguage().equalsIgnoreCase(contact.getLanguage()) && pattern.getGender().equals(contact.getGender())).findFirst();
+        if(foundPattern.isPresent()) {
+            return foundPattern.get().parseContact(contact);
+        }
+        return "";
+    }
+
+    public static String parseLastNames(List<String> lastNames) {
+        StringBuilder result = new StringBuilder();
+        for(int i = 0; i < lastNames.size(); i++) {
+            if(i < lastNames.size() - 1) {
+                result.append(lastNames.get(i));
+                if(Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i)) || Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i + 1))) {
+                    result.append(" ");
+                }
+                else {
+                    result.append("-");
+                }
+            }
+            else {
+                result.append(lastNames.get(i));
+            }
+        }
+        return result.toString();
     }
 }

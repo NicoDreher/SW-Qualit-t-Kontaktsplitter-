@@ -24,6 +24,8 @@ public class Configuration {
 
     private static List<ContactPattern> patterns;
 
+    private static List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
+
     static {
         titles = new ArrayList<>();
         titles.add(new Title("Prof."));
@@ -55,4 +57,7 @@ public class Configuration {
         return new ArrayList<>(LANGUAGES);
     }
 
+    public static List<String> getPrefixesAndSuffixes() {
+        return new ArrayList<>(prefixesAndSuffixes);
+    }
 }

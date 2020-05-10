@@ -24,7 +24,7 @@ public class ContactPattern {
     }
 
     public String getInputPattern() {
-        return inputPattern;
+        return inputPattern.replaceAll(",", " , ").replaceAll("\\s+", " ");
     }
 
     public String getOutputPattern() {

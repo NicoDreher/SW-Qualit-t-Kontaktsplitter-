@@ -32,6 +32,7 @@ public class InputParser {
         List<String> firstNames = new ArrayList<>();
         List<String> lastNames = new ArrayList<>();
         int inputIndex = 0;
+        int first = 0;
         for(String token : patternTokens) {
             if(token.startsWith("%")) {
                 if(token.equalsIgnoreCase("%TITEL")) {
@@ -42,22 +43,31 @@ public class InputParser {
                     }
                 }
                 else if(token.equalsIgnoreCase("%VORNAME")) {
-                    while(inputIndex < inputTokens.length && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty())) {
+                    while(inputIndex < inputTokens.length && inputTokens[inputIndex].matches("^[a-zA-Z]+$") && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() || first == 2)) {
                         firstNames.add(inputTokens[inputIndex]);
+                        if(Gender.NONE.equals(inputGender)) {
+                            inputGender = Configuration.getGender(inputTokens[inputIndex]);
+                        }
                         inputIndex++;
+                    }
+                    if(first == 0) {
+                        first = 1;
                     }
                 }
                 else if(token.equalsIgnoreCase("%NACHNAME")) {
-                    while(inputIndex < inputTokens.length && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty())) {
+                    while(inputIndex < inputTokens.length && inputTokens[inputIndex].matches("^[a-zA-Z]+$") && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() || first == 1)) {
                         lastNames.add(inputTokens[inputIndex]);
                         inputIndex++;
+                    }
+                    if(first == 0) {
+                        first = 2;
                     }
                 }
                 else {
                     return null;
                 }
             }
-            else if(token.equalsIgnoreCase(inputTokens[inputIndex])) {
+            else if(inputTokens.length > inputIndex && token.equalsIgnoreCase(inputTokens[inputIndex])) {
                 inputIndex++;
             }
             else {
@@ -68,6 +78,7 @@ public class InputParser {
     }
 
     public static Contact parseInput(String input) {
+        input = input.replaceAll(",", " , ").replaceAll("\\s+", " ");
         for(ContactPattern pattern : Configuration.getPatterns()) {
             Contact contact = parse(pattern, input);
             if(contact != null) {

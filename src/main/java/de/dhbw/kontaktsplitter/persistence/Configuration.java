@@ -31,6 +31,7 @@ public class Configuration {
 
     static {
         titles = new ArrayList<>();
+        titles.add(new Title("Maschine"));
         titles.add(new Title("Prof."));
         titles.add(new Title("Dr. rer. nat."));
         titles.add(new Title("Dr."));
@@ -40,6 +41,7 @@ public class Configuration {
         patterns = new ArrayList<>();
         patterns.add(new ContactPattern("Deutsch", Gender.MALE, "Herr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrter Herr " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
         patterns.add(new ContactPattern("Deutsch", Gender.FEMALE, "Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrte Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+        patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + LAST_NAME + ", " + FIRST_NAME, "Guten Tag " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
         patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrter Damen und Herren"));
         patterns.add(new ContactPattern("Deutsch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Guten Tag " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
 
@@ -91,6 +93,10 @@ public class Configuration {
 
     public static boolean isFirstName(String name) {
         return names.containsKey(name);
+    }
+
+    public static Gender getGender(String name) {
+        return names.getOrDefault(name, Gender.NONE);
     }
 
     public static List<String> getLanguages() {

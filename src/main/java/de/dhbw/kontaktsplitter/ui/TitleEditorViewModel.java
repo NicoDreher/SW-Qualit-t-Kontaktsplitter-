@@ -1,6 +1,7 @@
 package de.dhbw.kontaktsplitter.ui;
 
 import de.dhbw.kontaktsplitter.models.Title;
+import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.ui.components.CustomListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -27,6 +27,8 @@ public class TitleEditorViewModel implements Initializable
 
     @FXML
     private Button newEntryButton;
+
+    private boolean editable = true;
 
     private ObservableList<CustomListCell> observableTitles = FXCollections.observableArrayList();
 
@@ -45,21 +47,28 @@ public class TitleEditorViewModel implements Initializable
                 newEntryButton.setDisable(false);
             }
         });
-        updateTitles(Arrays.asList(new Title("Dr"),
-                                   new Title("Prof")));
     }
 
-    public void updateTitles(List<Title> titles)
+    public void updateElements(List<String> elements)
     {
         observableTitles.clear();
 
-        for (Title title : titles)
+        for (String element : elements)
         {
-            observableTitles.add(new CustomListCell(title.getTitle(), this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown));
+            observableTitles.add(new CustomListCell(element, this::removeTitle, this::moveElementUp,
+                                                    this::moveElementDown, editable));
         }
 
         update();
+
+        if (elements.size() > 0){
+            titlesView.scrollTo(0);
+            titlesView.getSelectionModel().select(0);
+        }
+    }
+
+    public void setEditable(boolean editable){
+        this.editable = editable;
     }
 
     private void addTitle()
@@ -78,10 +87,9 @@ public class TitleEditorViewModel implements Initializable
                 new Alert(Alert.AlertType.WARNING, "Dieser Titel existiert bereits").show();
                 return;
             }
-            ;
 
             observableTitles.add(new CustomListCell(newProposedTitle, this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown));
+                                                    this::moveElementDown, editable));
             update();
         }
     }

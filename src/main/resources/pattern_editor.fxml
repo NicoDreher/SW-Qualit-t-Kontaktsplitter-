@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="de.dhbw.kontaktsplitter.ui.PatternEditorViewModel">
+  <items>
+      <GridPane fx:id="leftPane">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+      </GridPane>
+      <TitledPane text="Anrede Konfigurieren">
+         <content>
+            <GridPane>
+              <columnConstraints>
+                <ColumnConstraints halignment="LEFT" hgrow="NEVER" maxWidth="131.3333740234375" minWidth="10.0" prefWidth="104.66673278808595" />
+                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="167.3332672119141" minWidth="10.0" prefWidth="167.3332672119141" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="43.0" prefWidth="171.0" text="Eingabe-Muster:" GridPane.hgrow="SOMETIMES">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="43.0" prefWidth="171.0" text="Sprache:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="43.0" prefWidth="171.0" text="Geschlecht:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="43.0" prefWidth="171.0" text="Ausgabe:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField GridPane.columnIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </TextField>
+                  <ChoiceBox prefHeight="27.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </ChoiceBox>
+                  <ChoiceBox prefHeight="27.0" prefWidth="165.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="5.0" />
+                     </GridPane.margin>
+                  </ChoiceBox>
+               </children>
+            </GridPane>
+         </content>
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TitledPane>
+  </items>
+</SplitPane>

@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
@@ -128,6 +129,9 @@ public class Controller implements Initializable {
     {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/title_editor.fxml"));
+            TitleEditorViewModel viewModel = new TitleEditorViewModel();
+            fxmlLoader.setController(viewModel);
+
             var root = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Titel hinzufügen");
@@ -135,16 +139,37 @@ public class Controller implements Initializable {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
             stage.show();
+
+            viewModel.updateElements(Configuration.getTitles().stream().map(Title::getTitle).collect(
+                    Collectors.toList()));
         }
         catch (IOException e)
         {
+            e.printStackTrace();
             System.out.println("Cannot load new window");
         }
     }
 
     public void addSalutation(ActionEvent actionEvent)
     {
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/pattern_editor.fxml"));
 
+            var root = (Parent)fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Titel hinzufügen");
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(gridPane.getScene().getWindow());
+            stage.show();
+
+            ((PatternEditorViewModel) fxmlLoader.getController()).updateElements(Configuration.getPatterns());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            System.out.println("Cannot load new window");
+        }
     }
 
     public void changedSalutation()

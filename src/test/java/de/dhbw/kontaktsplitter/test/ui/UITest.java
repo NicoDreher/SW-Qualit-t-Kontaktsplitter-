@@ -4,6 +4,7 @@ import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.ui.Startup;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -111,8 +112,6 @@ public class UITest {
         assertNotNull(actualStage);
         assertTrue(actualStage.getTitle().equalsIgnoreCase("Titel hinzufügen"));
         assertTrue(actualStage.isFocused());
-        robot.closeCurrentWindow();
-        assertFalse(actualStage.isFocused());
     }
 
     /**
@@ -128,9 +127,7 @@ public class UITest {
         var actualStage = getTopWindowModal(robot);
         assertNotNull(actualStage);
         assertTrue(actualStage.getTitle().equalsIgnoreCase("Anredenmuster hinzufügen"));
-        assertTrue(actualStage.isFocused());
-        robot.closeCurrentWindow();
-        assertFalse(actualStage.isFocused());
+        assertTrue(actualStage.isFocused());;
     }
 
     /**

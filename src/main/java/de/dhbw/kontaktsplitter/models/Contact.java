@@ -2,21 +2,22 @@ package de.dhbw.kontaktsplitter.models;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class Contact {
     private String language;
     private Gender gender;
     private List<Title> titles;
-    private String fistName;
+    private String firstName;
     private String lastName;
+
+    public Contact(){}
 
     public Contact(String language, Gender gender, List<Title> titles, String firstName, String lastName) {
         this.language = language;
         this.gender = gender;
         this.titles = titles;
-        this.fistName = firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
     }
 
@@ -32,8 +33,8 @@ public class Contact {
         return new ArrayList<>(titles);
     }
 
-    public String getFistName() {
-        return fistName;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
@@ -44,8 +45,8 @@ public class Contact {
         this.language = language;
     }
 
-    public void setFistName(String fistName) {
-        this.fistName = fistName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {

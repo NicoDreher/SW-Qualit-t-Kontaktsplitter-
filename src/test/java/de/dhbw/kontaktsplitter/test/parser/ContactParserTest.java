@@ -22,7 +22,7 @@ public class ContactParserTest {
         assertNotNull(contact);
         assertEquals(gender, contact.getGender());
         assertEquals(titles, contact.getTitlesAsString());
-        assertEquals(firstName, contact.getFistName());
+        assertEquals(firstName, contact.getFirstName());
         assertEquals(lastName, contact.getLastName());
     }
 
@@ -34,7 +34,7 @@ public class ContactParserTest {
         assertEquals(language, contact.getLanguage());
         assertEquals(gender, contact.getGender());
         assertEquals(titles, contact.getTitlesAsString());
-        assertEquals(firstName, contact.getFistName());
+        assertEquals(firstName, contact.getFirstName());
         assertEquals(lastName, contact.getLastName());
     }
 

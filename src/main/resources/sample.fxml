@@ -14,7 +14,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.Controller">
+<?import org.controlsfx.control.CheckComboBox?>
+<GridPane fx:id="gridPane" minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.Controller">
     <columnConstraints>
         <ColumnConstraints hgrow="ALWAYS" maxWidth="294.0" minWidth="140.0" prefWidth="137.0" />
         <ColumnConstraints minWidth="460.0" prefWidth="463.0" />
@@ -32,9 +33,9 @@
         <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <MenuBar GridPane.columnSpan="2">
-        <Menu mnemonicParsing="false" text="Einstellungen">
-            <MenuItem mnemonicParsing="false" onAction="#addSalutation" text="Anreden hinzufügen" />
-            <MenuItem mnemonicParsing="false" onAction="#addTitle" text="Titel hinzufügen" />
+        <Menu fx:id="menu" mnemonicParsing="false" text="Einstellungen">
+            <MenuItem fx:id="men_salutation" mnemonicParsing="false" onAction="#addSalutation" text="Anreden hinzufügen" />
+            <MenuItem fx:id="men_title" mnemonicParsing="false" onAction="#addTitle" text="Titel hinzufügen" />
         </Menu>
     </MenuBar>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Anrede" GridPane.rowIndex="1">
@@ -114,41 +115,41 @@
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </Label>
-    <TextField fx:id="txt_salutation" GridPane.columnIndex="1" GridPane.rowIndex="1">
+    <TextField fx:id="txt_salutation" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyTyped="#changedSalutation">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="txt_firstName" prefHeight="25.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+    <TextField fx:id="txt_firstName" prefHeight="25.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="5" onKeyTyped="#manuallyChangedFirstName">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="txt_surname" GridPane.columnIndex="1" GridPane.rowIndex="6">
+    <TextField fx:id="txt_surname" GridPane.columnIndex="1" GridPane.rowIndex="6" onKeyTyped="#manuallyChangedLastName">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </TextField>
-    <Label fx:id="lbl_salutation" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
+    <Label fx:id="lbl_salutation" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" >
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </Label>
-    <ComboBox fx:id="cmb_language" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2">
+    <ComboBox fx:id="cmb_language" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#manuallyChangedLanguage">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </ComboBox>
-    <ComboBox fx:id="cmb_gender" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3">
+    <ComboBox fx:id="cmb_gender" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#manuallyChanged_Gender">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </ComboBox>
-    <ComboBox fx:id="cmb_title" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <CheckComboBox fx:id="cmb_title" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" >
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
-    </ComboBox>
+    </CheckComboBox>
     <ButtonBar prefHeight="35.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="9">
       <buttons>
           <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen" />

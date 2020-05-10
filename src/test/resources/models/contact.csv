@@ -1,3 +1,4 @@
 "Deutsch", "MALE", "Herr %TITEL %VORNAME %NACHNAME", "Herr Dr. Hans Wurst", "MALE", "Dr.", "Hans", "Wurst"
+"Deutsch", "MALE", "Herr %TITEL %VORNAME %NACHNAME", "Herr Hans Wurst", "MALE", "", "Hans", "Wurst"
 "Deutsch", "MALE", "Herr %TITEL %VORNAME %NACHNAME", "Herr Dr. Dr. rer. nat. Hans Wurst", "MALE", "Dr. Dr. rer. nat.", "Hans", "Wurst"
 "Deutsch", "MALE", "Herr %TITEL %VORNAME %NACHNAME", "Herr Dr. Dr. rer. nat. Hans Wurst Fabrik", "MALE", "Dr. Dr. rer. nat.", "Hans", "Wurst-Fabrik"

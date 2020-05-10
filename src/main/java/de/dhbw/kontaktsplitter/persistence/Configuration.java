@@ -5,10 +5,11 @@ import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Locale;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.dhbw.kontaktsplitter.parser.InputParser.*;
@@ -24,6 +25,10 @@ public class Configuration {
 
     private static List<ContactPattern> patterns;
 
+    private static List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
+
+    private static Map<String, Gender> names;
+
     static {
         titles = new ArrayList<>();
         titles.add(new Title("Prof."));
@@ -37,6 +42,43 @@ public class Configuration {
         patterns.add(new ContactPattern("Deutsch", Gender.FEMALE, "Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrte Frau " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
         patterns.add(new ContactPattern("Deutsch", Gender.NONE, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Sehr geehrter Damen und Herren"));
         patterns.add(new ContactPattern("Deutsch", Gender.DIVERS, TITLE + " " + FIRST_NAME + " " + LAST_NAME, "Guten Tag " + TITLE + " " + FIRST_NAME + " " + LAST_NAME));
+
+        names = new HashMap<>();
+        try(InputStream stream = Configuration.class.getResourceAsStream("/names/names.txt"); InputStreamReader isr = new InputStreamReader(stream); BufferedReader reader = new BufferedReader(isr)) {
+            String line;
+            while((line = reader.readLine()) != null) {
+                line = line.trim();
+                if(line.startsWith("M") || line.startsWith("F") || line.startsWith("?")) {
+                    String[] parts = line.split("\\s+");
+                    if(parts.length > 2) {
+                        Gender gender;
+                        switch(parts[0]) {
+                            case "M": //Intended Fall through
+                            case "?M":
+                                gender = Gender.MALE;
+                                break;
+                            case "F":
+                            case "?F":
+                                gender = Gender.FEMALE;
+                                break;
+                            case "?":
+                                gender = names.getOrDefault(parts[1], Gender.NONE);
+                                break;
+                            default:
+                                gender = null;
+                                break;
+                        }
+                        if(gender != null) {
+                            names.put(parts[1], gender);
+                        }
+                    }
+                }
+            }
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static List<Title> getTitles() {
@@ -48,11 +90,14 @@ public class Configuration {
     }
 
     public static boolean isFirstName(String name) {
-        return false;
+        return names.containsKey(name);
     }
 
     public static List<String> getLanguages() {
         return new ArrayList<>(LANGUAGES);
     }
 
+    public static List<String> getPrefixesAndSuffixes() {
+        return new ArrayList<>(prefixesAndSuffixes);
+    }
 }

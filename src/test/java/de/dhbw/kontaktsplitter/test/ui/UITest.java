@@ -24,6 +24,7 @@ import org.testfx.api.FxAssert;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.framework.junit5.Stop;
 import org.testfx.matcher.control.ComboBoxMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.matcher.control.MenuItemMatchers;
@@ -54,17 +55,27 @@ public class UITest {
         }
     }
 
+    /**
+     * Initialize a new stage
+     * @param stage - instance of Stage
+     * @throws Exception
+     */
     @Start
     public void start(Stage stage) throws Exception {
         new Startup().start(stage);
         this.stage = stage;
     }
 
+    @Stop
+    public void stop()
+    {
+        stage.close();
+    }
+
     /**
      * Test for the correct initialization of the main window.
      * Checks if the combo boxes and the label of the salutation is removed.
-     *
-     * @param robot
+     * @param robot - FxRobot instance
      */
     @Test
     void initializeUI_correct_setup(FxRobot robot) {
@@ -78,8 +89,7 @@ public class UITest {
 
     /**
      * Test for opening and closing the check duplicate interface
-     *
-     * @param robot
+     * @param robot - FxRobot instance
      */
     @Test
     void btnDuplicate_opensAndClosesInfoWindow(FxRobot robot) {
@@ -89,6 +99,7 @@ public class UITest {
 
     /**
      * Test for opening and closing the add title dialog
+     * @param robot - FxRobot instance
      */
     @Test
     void menuItem_openAndCloseAddTitle(FxRobot robot){
@@ -104,6 +115,10 @@ public class UITest {
         assertFalse(actualStage.isFocused());
     }
 
+    /**
+     * Test if menu item for adding a pattern open and closes correctly
+     * @param robot - FxRobot instance
+     */
     @Test
     void menuItem_openAndCloseAddPattern(FxRobot robot)
     {
@@ -118,6 +133,10 @@ public class UITest {
         assertFalse(actualStage.isFocused());
     }
 
+    /**
+     * Test if a missing first name displays an error message
+     * @param robot - FxRobot instance
+     */
     @Test
     void missingFirstName_opensErrorsMessage(FxRobot robot)
     {
@@ -134,6 +153,10 @@ public class UITest {
         alert_dialog_has_header_and_content("Vorname nicht erkannt", "Bitte tragen Sie den Vornamen manuell ein.", robot);
     }
 
+    /**
+     * Test if missing last name displays an error message.
+     * @param robot - FxRobot instance
+     */
     @Test
     void missingLastName_opensErrorsMessage(FxRobot robot)
     {
@@ -165,6 +188,11 @@ public class UITest {
         alert_dialog_has_header_and_content("Sprache nicht erkannt", "Bitte tragen Sie die Sprache manuell ein.", robot);
     }
 
+    /**
+     * Test if a given input provides the correct salutation
+     * @param input - input
+     * @param expected - salutation
+     */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/ui/correctSalutation.csv")
     void correctSalutation(String input, String expected)
@@ -202,6 +230,12 @@ public class UITest {
         assertEquals(titles != null ? titles.split(";").length : 0,resultList.size());
     }
 
+    /**
+     * Helper to check if the current displayed message is correct
+     * @param expectedHeader - expected header of the message
+     * @param expectedContent - expected content of the message
+     * @param robot - FxRobot instance
+     */
     private void alert_dialog_has_header_and_content(final String expectedHeader, final String expectedContent, FxRobot robot) {
         final Stage actualAlertDialog = getTopModalStage(robot);
         assertNotNull(actualAlertDialog);
@@ -214,6 +248,11 @@ public class UITest {
         assertFalse(actualAlertDialog.isFocused());
     }
 
+    /**
+     * Returns the stage for error messages.
+     * @param robot - FxRobot instance
+     * @return stage of current displayed error message
+     */
     private Stage getTopModalStage(FxRobot robot) {
         final List<Window> allWindows = new ArrayList<>(robot.robotContext().getWindowFinder().listWindows());
         Collections.reverse(allWindows);
@@ -226,9 +265,12 @@ public class UITest {
                 .orElse(null);
     }
 
+    /**
+     * Returns stage of a new opened window
+     * @param robot - FxRobot instance
+     * @return returns stage of the current displayed window
+     */
     private Stage getTopWindowModal(FxRobot robot) {
-        // Get a list of windows but ordered from top[0] to bottom[n] ones.
-        // It is needed to get the first found modal window.
         final List<Window> allWindows = new ArrayList<>(robot.robotContext().getWindowFinder().listWindows());
         Collections.reverse(allWindows);
 

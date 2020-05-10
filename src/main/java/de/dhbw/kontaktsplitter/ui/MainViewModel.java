@@ -28,6 +28,10 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * ViewModel of the Main Window.
+ * Implements all controls and communicates with the model and logic classes.
+ */
 public class MainViewModel implements Initializable {
 
     @FXML
@@ -56,6 +60,11 @@ public class MainViewModel implements Initializable {
 
     private Contact contact = new Contact();
 
+    /**
+     * Initializier of the ViewModel
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lbl_salutation.setText("");
@@ -65,6 +74,10 @@ public class MainViewModel implements Initializable {
         cmb_title.getCheckModel().getCheckedItems().addListener((ListChangeListener<Title>) change -> manuallyChangedTitle());
     }
 
+    /**
+     * Splits the given input to the form and checks for any errors.
+     * @param actionEvent
+     */
     public void split(ActionEvent actionEvent)
     {
         if(contact.getFirstName() == null || contact.getFirstName().isEmpty() || contact.getFirstName().isBlank())
@@ -89,31 +102,51 @@ public class MainViewModel implements Initializable {
             lbl_salutation.setText(InputParser.generateOutput(contact));
     }
 
+    /**
+     * Method binding to the ChangedListener of the Gender combo box
+     */
     public void manuallyChanged_Gender()
     {
         contact.setGender(cmb_gender.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Method binding to the ChangedListener of the Title CheckCombobox
+     */
     public void manuallyChangedTitle()
     {
         contact.setTitles(cmb_title.getCheckModel().getCheckedItems());
     }
 
+    /**
+     * Method binding to the ChangedListener of the first name text field
+     */
     public void manuallyChangedFirstName()
     {
         contact.setFirstName(txt_firstName.getText());
     }
 
+    /**
+     * Method binding to the ChangedListener of the last name text field
+     */
     public void manuallyChangedLastName()
     {
         contact.setLastName(txt_surname.getText());
     }
 
+    /**
+     * Method binding to the ChangedListener of the language combo box
+     */
     public void manuallyChangedLanguage()
     {
         contact.setLanguage(cmb_language.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Method binding to provide a interface to the CRM-system.
+     * Currently not implemented and only shows a information message.
+     * @param actionEvent
+     */
     public void duplicate(ActionEvent actionEvent)
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "CRM-System nicht verknüpft.");
@@ -121,6 +154,11 @@ public class MainViewModel implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Method binding to the menu item to add titles to the application.
+     * Shows a dialog to add and remove titles.
+     * @param actionEvent
+     */
     public void addTitle(ActionEvent actionEvent)
     {
         try{
@@ -146,6 +184,11 @@ public class MainViewModel implements Initializable {
         }
     }
 
+    /**
+     * Method binding to the menu item to add salutation patterns.
+     * Opens a new dialog to configure and delete patterns.
+     * @param actionEvent
+     */
     public void addSalutation(ActionEvent actionEvent)
     {
         try{
@@ -168,6 +211,10 @@ public class MainViewModel implements Initializable {
         }
     }
 
+    /**
+     * Method binding to the ChangedListener of the input field.
+     * Actualizes the user interface on the fly
+     */
     public void changedSalutation()
     {
         clear();
@@ -185,6 +232,9 @@ public class MainViewModel implements Initializable {
         }
     }
 
+    /**
+     * Helper method to clear the CheckComboBox to ensure the function of the user interface
+     */
     private void clear()
     {
         cmb_title.getCheckModel().clearChecks();

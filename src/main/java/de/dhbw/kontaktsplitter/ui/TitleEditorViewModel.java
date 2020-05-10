@@ -1,6 +1,7 @@
 package de.dhbw.kontaktsplitter.ui;
 
 import de.dhbw.kontaktsplitter.models.Title;
+import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.ui.components.CustomListCell;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -45,17 +45,15 @@ public class TitleEditorViewModel implements Initializable
                 newEntryButton.setDisable(false);
             }
         });
-        updateTitles(Arrays.asList(new Title("Dr"),
-                                   new Title("Prof")));
     }
 
-    public void updateTitles(List<Title> titles)
+    protected void updateElements(List<String> elements)
     {
         observableTitles.clear();
 
-        for (Title title : titles)
+        for (String element : elements)
         {
-            observableTitles.add(new CustomListCell(title.getTitle(), this::removeTitle, this::moveElementUp,
+            observableTitles.add(new CustomListCell(element, this::removeTitle, this::moveElementUp,
                                                     this::moveElementDown));
         }
 

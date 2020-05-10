@@ -18,9 +18,13 @@ public class CustomListCell extends HBox
     private String value;
 
     public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
-                          Consumer<CustomListCell> onMoveDown){
+                          Consumer<CustomListCell> onMoveDown, boolean editable)
+    {
         super();
         this.value = title;
+
+        setMinWidth(10);
+        textInput.setMinWidth(5);
 
         textInput.setText(title);
         textInput.setDisable(true);
@@ -32,16 +36,21 @@ public class CustomListCell extends HBox
         upButton.getStyleClass().add("inline-button");
         downButton.getStyleClass().add("inline-button");
 
+        editButton.setVisible(editable);
+
         getChildren().addAll(textInput, upButton, downButton, editButton, deleteButton);
         HBox.setHgrow(textInput, Priority.ALWAYS);
 
         editButton.setOnAction(actionEvent -> {
-            if (editButton.getText().equals("✎")){
+            if (editButton.getText().equals("✎"))
+            {
                 editButton.setText("✓");
                 textInput.setDisable(false);
                 textInput.requestFocus();
                 this.value = textInput.getText();
-            } else {
+            }
+            else
+            {
                 editButton.setText("✎");
                 textInput.setDisable(true);
             }
@@ -52,7 +61,13 @@ public class CustomListCell extends HBox
         downButton.setOnAction(event -> onMoveDown.accept(this));
     }
 
-    public String getValue(){
+    public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
+                          Consumer<CustomListCell> onMoveDown){
+        this(title, onDelete, onMoveUp, onMoveDown, true);
+    }
+
+    public String getValue()
+    {
         return value;
     }
 }

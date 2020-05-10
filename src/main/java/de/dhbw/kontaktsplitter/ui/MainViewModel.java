@@ -6,6 +6,7 @@ import de.dhbw.kontaktsplitter.models.Title;
 import de.dhbw.kontaktsplitter.parser.InputParser;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,7 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class Controller implements Initializable {
+public class MainViewModel implements Initializable {
 
     @FXML
     GridPane gridPane;
@@ -53,7 +54,7 @@ public class Controller implements Initializable {
     @FXML
     TextField txt_surname;
 
-    private Contact contact;
+    private Contact contact = new Contact();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,31 +62,26 @@ public class Controller implements Initializable {
         cmb_gender.setItems(FXCollections.observableList(Arrays.asList(Gender.values())));
         cmb_language.setItems(FXCollections.observableList(Configuration.getLanguages()));
         cmb_title.getItems().addAll(FXCollections.observableList(Configuration.getTitles()));
+        cmb_title.getCheckModel().getCheckedItems().addListener((ListChangeListener<Title>) change -> manuallyChangedTitle());
     }
 
     public void split(ActionEvent actionEvent)
     {
-        if(contact.getGender() == Gender.NONE)
-        {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie das Geschlecht manuell .");
-            alert.setHeaderText("Geschlecht wurde nicht erkannt");
-            alert.showAndWait();
-        }
-        else if(contact.getFirstName().isEmpty() || contact.getFirstName().isBlank())
+        if(contact.getFirstName() == null || contact.getFirstName().isEmpty() || contact.getFirstName().isBlank())
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie den Vornamen manuell ein.");
             alert.setHeaderText("Vorname nicht erkannt");
             alert.showAndWait();
         }
-        else if(contact.getLastName().isEmpty() || contact.getLastName().isBlank())
+        else if(contact.getLastName() == null || contact.getLastName().isEmpty() || contact.getLastName().isBlank())
         {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie den Nachnamen manuell ein.");
             alert.setHeaderText("Nachname nicht erkannt");
             alert.showAndWait();
         }
-        else if(contact.getLanguage().isBlank() || contact.getLanguage().isEmpty())
+        else if(contact.getLanguage() == null ||contact.getLanguage().isBlank() || contact.getLanguage().isEmpty())
         {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie die Sprache manuell ein");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie die Sprache manuell ein.");
             alert.setHeaderText("Sprache nicht erkannt");
             alert.showAndWait();
         }
@@ -157,7 +153,7 @@ public class Controller implements Initializable {
 
             var root = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Titel hinzufügen");
+            stage.setTitle("Anredenmuster hinzufügen");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
@@ -174,18 +170,23 @@ public class Controller implements Initializable {
 
     public void changedSalutation()
     {
+        clear();
         contact = InputParser.parseInput(txt_salutation.getText());
         if(contact != null)
         {
             txt_firstName.clear();
             txt_surname.clear();
             cmb_language.getSelectionModel().clearSelection();
-            cmb_title.getCheckModel().clearChecks();
             txt_firstName.setText(contact.getFirstName());
             txt_surname.setText(contact.getLastName());
             cmb_gender.getSelectionModel().clearAndSelect(contact.getGender().ordinal());
             cmb_language.getSelectionModel().select(contact.getLanguage());
             contact.getTitles().forEach(e -> cmb_title.getCheckModel().check(e));
         }
+    }
+
+    private void clear()
+    {
+        cmb_title.getCheckModel().clearChecks();
     }
 }

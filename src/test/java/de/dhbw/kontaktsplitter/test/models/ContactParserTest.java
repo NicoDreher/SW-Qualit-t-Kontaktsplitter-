@@ -4,6 +4,7 @@ import de.dhbw.kontaktsplitter.models.Contact;
 import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
+import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.test.StringArrayConverter;
 import de.dhbw.kontaktsplitter.utils.PatternUtils;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -21,7 +22,7 @@ public class ContactParserTest {
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/models/contact.csv")
     void testMatch(String input, Gender gender, String titles, String firstName, String lastName) {
-        ContactPattern pattern = new ContactPattern(Locale.GERMANY, Gender.MALE, "Herr %TITEL %VORNAME %NACHNAME", "");
+        ContactPattern pattern = new ContactPattern("Deutsch", Gender.MALE, "Herr %TITEL %VORNAME %NACHNAME", "");
         Contact contact = PatternUtils.parse(pattern, input);
         assertNotNull(contact);
         assertEquals(gender, contact.getGender());

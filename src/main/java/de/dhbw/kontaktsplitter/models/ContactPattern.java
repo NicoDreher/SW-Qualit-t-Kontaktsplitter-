@@ -8,20 +8,20 @@ import java.util.List;
 import java.util.Locale;
 
 public class ContactPattern {
-    private Locale locale;
+    private String language;
     private Gender gender;
     private String inputPattern;
     private String outputPattern;
 
-    public ContactPattern(Locale locale, Gender gender, String inputPattern, String outputPattern) {
-        this.locale = locale;
+    public ContactPattern(String language, Gender gender, String inputPattern, String outputPattern) {
+        this.language = language;
         this.gender = gender;
         this.inputPattern = inputPattern;
         this.outputPattern = outputPattern;
     }
 
-    public Locale getLocale() {
-        return locale;
+    public String getLanguage() {
+        return language;
     }
 
     public Gender getGender() {
@@ -36,8 +36,8 @@ public class ContactPattern {
         return outputPattern;
     }
 
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public void setLanguage(String language) {
+        this.language = language;
     }
 
     public void setGender(Gender gender) {

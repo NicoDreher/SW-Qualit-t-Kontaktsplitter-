@@ -60,6 +60,6 @@ public class PatternUtils {
                 return null;
             }
         }
-        return new Contact(pattern.getLocale(), inputGender, titles, String.join(" ", firstNames), String.join("-", lastNames));
+        return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), String.join("-", lastNames));
     }
 }

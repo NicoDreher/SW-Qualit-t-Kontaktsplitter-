@@ -43,4 +43,10 @@ public class ContactParserTest {
     void testLastNames(@ConvertWith(StringArrayConverter.class) String[] lastNames, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.parseLastNames(List.of(lastNames)));
     }
+
+    @ParameterizedTest(name = "[{index}] Input {0}")
+    @CsvFileSource(resources = "/models/outputs.csv")
+    void testOutput(String input, String expectedOutput) {
+        assertEquals(expectedOutput, InputParser.generateOutput(InputParser.parseInput(input)));
+    }
 }

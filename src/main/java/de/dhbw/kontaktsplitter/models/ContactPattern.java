@@ -1,5 +1,9 @@
 package de.dhbw.kontaktsplitter.models;
 
+import de.dhbw.kontaktsplitter.persistence.Configuration;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class ContactPattern {
@@ -45,5 +49,57 @@ public class ContactPattern {
 
     public void setOutputPattern(String outputPattern) {
         this.outputPattern = outputPattern;
+    }
+
+    private Title findTitle(String[] tokens, int inputIndex) {
+        for(Title title : Configuration.getTitles()) {
+            if(title.matches(tokens, inputIndex)) {
+                return title;
+            }
+        }
+        return null;
+    }
+
+    public Contact parse(String input) {
+        String[] inputTokens = input.split(" ");
+        String[] patternTokens = inputPattern.split(" ");
+        Gender inputGender = gender;
+        List<Title> titles = new ArrayList<>();
+        List<String> firstNames = new ArrayList<>();
+        List<String> lastNames = new ArrayList<>();
+        int inputIndex = 0;
+        for(String token : patternTokens) {
+            if(token.startsWith("%")) {
+                if(token.equalsIgnoreCase("%TITLE")) {
+                    Title title = null;
+                    while((title = findTitle(inputTokens, inputIndex)) != null) {
+                        inputIndex += title.getLength();
+                        titles.add(title);
+                    }
+                }
+                else if(token.equalsIgnoreCase("%VORNAME")) {
+                    while(inputIndex < inputTokens.length && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty())) {
+                        firstNames.add(inputTokens[inputIndex]);
+                        inputIndex++;
+                    }
+                }
+                else if(token.equalsIgnoreCase("%NACHNAME")) {
+                    while(inputIndex < inputTokens.length && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty())) {
+                        lastNames.add(inputTokens[inputIndex]);
+                        inputIndex++;
+                    }
+                }
+                else {
+                    return null;
+                }
+            }
+            else if(token.equalsIgnoreCase(inputTokens[inputIndex])) {
+
+            }
+            else {
+                return null;
+            }
+        }
+        return null;
     }
 }

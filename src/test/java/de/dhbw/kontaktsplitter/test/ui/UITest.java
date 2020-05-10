@@ -112,8 +112,6 @@ public class UITest {
         assertNotNull(actualStage);
         assertTrue(actualStage.getTitle().equalsIgnoreCase("Titel hinzufügen"));
         assertTrue(actualStage.isFocused());
-        robot.closeCurrentWindow();
-        assertFalse(actualStage.isFocused());
     }
 
     /**
@@ -121,7 +119,7 @@ public class UITest {
      * @param robot - FxRobot instance
      */
     @Test
-    void menuItem_openAndCloseAddPattern(FxRobot robot) throws InterruptedException
+    void menuItem_openAndCloseAddPattern(FxRobot robot)
     {
         robot.clickOn(stage.getScene().lookup("#menu"), Motion.DIRECT, MouseButton.PRIMARY);
         robot.type(KeyCode.DOWN);
@@ -129,10 +127,7 @@ public class UITest {
         var actualStage = getTopWindowModal(robot);
         assertNotNull(actualStage);
         assertTrue(actualStage.getTitle().equalsIgnoreCase("Anredenmuster hinzufügen"));
-        assertTrue(actualStage.isFocused());
-        Platform.runLater(actualStage::close);
-        Thread.sleep(200);
-        assertFalse(actualStage.isFocused());
+        assertTrue(actualStage.isFocused());;
     }
 
     /**

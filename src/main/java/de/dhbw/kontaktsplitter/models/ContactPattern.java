@@ -1,12 +1,5 @@
 package de.dhbw.kontaktsplitter.models;
 
-import de.dhbw.kontaktsplitter.persistence.Configuration;
-import de.dhbw.kontaktsplitter.utils.PatternUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 public class ContactPattern {
     private String language;
     private Gender gender;

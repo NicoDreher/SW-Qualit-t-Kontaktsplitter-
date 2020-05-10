@@ -1,10 +1,8 @@
 package de.dhbw.kontaktsplitter.test.models;
 
 import de.dhbw.kontaktsplitter.models.Title;
-import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.test.StringArrayConverter;
-import de.dhbw.kontaktsplitter.utils.PatternUtils;
-import org.junit.jupiter.api.Test;
+import de.dhbw.kontaktsplitter.parser.InputParser;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -21,7 +19,7 @@ public class TitleTests {
         String[] inputTokens = input.split(" ");
         List<Title> matches = new ArrayList<>();
         Title title;
-        while((title = PatternUtils.findTitle(inputTokens, inputIndex)) != null) {
+        while((title = InputParser.findTitle(inputTokens, inputIndex)) != null) {
             inputIndex += title.getLength();
             matches.add(title);
         }

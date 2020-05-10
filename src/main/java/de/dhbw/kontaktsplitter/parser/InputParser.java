@@ -1,4 +1,4 @@
-package de.dhbw.kontaktsplitter.utils;
+package de.dhbw.kontaktsplitter.parser;
 
 import de.dhbw.kontaktsplitter.models.Contact;
 import de.dhbw.kontaktsplitter.models.ContactPattern;
@@ -8,9 +8,12 @@ import de.dhbw.kontaktsplitter.persistence.Configuration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class PatternUtils {
+public class InputParser {
+    public static final String TITLE = "%TITEL";
+    public static final String FIRST_NAME = "%FIRST_NAME";
+    public static final String LAST_NAME = "%LAST_NAME";
+
     public static Title findTitle(String[] tokens, int inputIndex) {
         for(Title title : Configuration.getTitles()) {
             if(title.matches(tokens, inputIndex)) {
@@ -32,7 +35,7 @@ public class PatternUtils {
             if(token.startsWith("%")) {
                 if(token.equalsIgnoreCase("%TITEL")) {
                     Title title;
-                    while((title = PatternUtils.findTitle(inputTokens, inputIndex)) != null) {
+                    while((title = InputParser.findTitle(inputTokens, inputIndex)) != null) {
                         inputIndex += title.getLength();
                         titles.add(title);
                     }
@@ -61,5 +64,15 @@ public class PatternUtils {
             }
         }
         return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), String.join("-", lastNames));
+    }
+
+    public static Contact parseInput(String input) {
+        for(ContactPattern pattern : Configuration.getPatterns()) {
+            Contact contact = parse(pattern, input);
+            if(contact != null) {
+                return contact;
+            }
+        }
+        return null;
     }
 }

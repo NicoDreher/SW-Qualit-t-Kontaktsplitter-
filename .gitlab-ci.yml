@@ -5,7 +5,8 @@ build:
   image: maven:latest
   script:
     - mvn test --fail-never
-    - mvn package javadoc:aggregate -Dmaven.test.skip=true
+    - mvn package -Dmaven.test.skip=true
+    - mvn javadoc:aggregate -Dmaven.test.skip=true
     - cp -r target/site/apidocs/ javadoc
     - mv target/Kontaktsplitter-Kings.jar Kontaktsplitter-Kings.jar
   artifacts:

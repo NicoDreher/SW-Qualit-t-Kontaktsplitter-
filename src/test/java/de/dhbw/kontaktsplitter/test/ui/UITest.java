@@ -4,6 +4,7 @@ import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.ui.Startup;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -120,7 +121,7 @@ public class UITest {
      * @param robot - FxRobot instance
      */
     @Test
-    void menuItem_openAndCloseAddPattern(FxRobot robot)
+    void menuItem_openAndCloseAddPattern(FxRobot robot) throws InterruptedException
     {
         robot.clickOn(stage.getScene().lookup("#menu"), Motion.DIRECT, MouseButton.PRIMARY);
         robot.type(KeyCode.DOWN);
@@ -129,7 +130,8 @@ public class UITest {
         assertNotNull(actualStage);
         assertTrue(actualStage.getTitle().equalsIgnoreCase("Anredenmuster hinzufügen"));
         assertTrue(actualStage.isFocused());
-        robot.closeCurrentWindow();
+        Platform.runLater(actualStage::close);
+        Thread.sleep(200);
         assertFalse(actualStage.isFocused());
     }
 

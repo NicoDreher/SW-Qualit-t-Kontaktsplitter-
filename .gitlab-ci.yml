@@ -4,10 +4,13 @@ build:
   stage: build
   image: maven:latest
   script:
-    - mvn test package
+    - mvn test package javadoc:aggregate --fail-never
+    - cp -r target/site/apidocs/ javadoc
+    - mv target/Kontaktsplitter-Kings.jar Kontaktsplitter-Kings.jar
   artifacts:
     paths:
-      - target/Kontaktsplitter-Kings.jar
+      - Kontaktsplitter-Kings.jar
+      - javadoc/
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml

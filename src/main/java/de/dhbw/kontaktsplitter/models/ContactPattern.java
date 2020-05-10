@@ -2,10 +2,26 @@ package de.dhbw.kontaktsplitter.models;
 
 import de.dhbw.kontaktsplitter.parser.InputParser;
 
+/**
+ * The patterns to splice contact information
+ * @author Nico Dreher
+ */
 public class ContactPattern {
+    /**
+     * The language of the input and output
+     */
     private String language;
+    /**
+     * The gender of the matching contact information
+     */
     private Gender gender;
+    /**
+     * The input pattern to scan the salutation
+     */
     private String inputPattern;
+    /**
+     * The output pattern to parse the greetings
+     */
     private String outputPattern;
 
     public ContactPattern(String language, Gender gender, String inputPattern, String outputPattern) {

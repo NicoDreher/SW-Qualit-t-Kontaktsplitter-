@@ -1,20 +1,22 @@
 package de.dhbw.kontaktsplitter.persistence;
 
+import com.google.gson.GsonBuilder;
 import de.dhbw.kontaktsplitter.models.Contact;
 import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.*;
 import java.util.stream.Collectors;
+import com.google.gson.Gson;
 
 import static de.dhbw.kontaktsplitter.parser.InputParser.*;
 
 public class Configuration {
+
+    public static final String CONFIG_PATH = System.getProperty("user.home") + "/Kontaktsplitter-Kings/config.json";
 
     private static List<Title> titles;
 
@@ -30,8 +32,6 @@ public class Configuration {
     private static Map<String, Gender> names;
 
     static {
-        System.out.println(LANGUAGES);
-
         titles = new ArrayList<>();
         titles.add(new Title("Professor"));
         titles.add(new Title("Prof."));
@@ -143,5 +143,32 @@ public class Configuration {
 
     public static List<String> getPrefixesAndSuffixes() {
         return new ArrayList<>(prefixesAndSuffixes);
+    }
+
+    public static void loadConfig() {
+        if(new File(CONFIG_PATH).exists()) {
+            try(FileReader reader = new FileReader(new File(CONFIG_PATH))) {
+                ConfigFile file = new Gson().fromJson(reader, ConfigFile.class);
+                titles = file.getTitles();
+                patterns = file.getPatterns();
+            }
+            catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Configuration.saveConfig();
+        }
+    }
+
+    public static void saveConfig() {
+        new File(CONFIG_PATH).getParentFile().mkdirs();
+        try(FileWriter writer = new FileWriter(new File(CONFIG_PATH))) {
+            ConfigFile file = new ConfigFile(getTitles(), getPatterns());
+            new GsonBuilder().setPrettyPrinting().create().toJson(file, writer);
+        }
+        catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 }

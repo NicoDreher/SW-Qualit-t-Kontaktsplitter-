@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@PrepareForTest(Configuration.class)
 @ExtendWith(ApplicationExtension.class)
 public class TitleEditorViewModelTest
 {

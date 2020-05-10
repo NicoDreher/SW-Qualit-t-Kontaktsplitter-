@@ -28,6 +28,8 @@ public class TitleEditorViewModel implements Initializable
     @FXML
     private Button newEntryButton;
 
+    private boolean editable = true;
+
     private ObservableList<CustomListCell> observableTitles = FXCollections.observableArrayList();
 
     @Override
@@ -47,17 +49,26 @@ public class TitleEditorViewModel implements Initializable
         });
     }
 
-    protected void updateElements(List<String> elements)
+    public void updateElements(List<String> elements)
     {
         observableTitles.clear();
 
         for (String element : elements)
         {
             observableTitles.add(new CustomListCell(element, this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown));
+                                                    this::moveElementDown, editable));
         }
 
         update();
+
+        if (elements.size() > 0){
+            titlesView.scrollTo(0);
+            titlesView.getSelectionModel().select(0);
+        }
+    }
+
+    public void setEditable(boolean editable){
+        this.editable = editable;
     }
 
     private void addTitle()
@@ -76,10 +87,9 @@ public class TitleEditorViewModel implements Initializable
                 new Alert(Alert.AlertType.WARNING, "Dieser Titel existiert bereits").show();
                 return;
             }
-            ;
 
             observableTitles.add(new CustomListCell(newProposedTitle, this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown));
+                                                    this::moveElementDown, editable));
             update();
         }
     }

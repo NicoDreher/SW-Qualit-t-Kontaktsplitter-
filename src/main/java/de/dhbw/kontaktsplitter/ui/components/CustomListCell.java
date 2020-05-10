@@ -1,10 +1,14 @@
 package de.dhbw.kontaktsplitter.ui.components;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class CustomListCell extends HBox
@@ -36,9 +40,13 @@ public class CustomListCell extends HBox
         upButton.getStyleClass().add("inline-button");
         downButton.getStyleClass().add("inline-button");
 
-        editButton.setVisible(editable);
+        ArrayList<Node> children = new ArrayList<>(Arrays.asList(textInput, upButton, downButton));
+        if (editable){
+            children.add(editButton);
+        }
+        children.add(deleteButton);
 
-        getChildren().addAll(textInput, upButton, downButton, editButton, deleteButton);
+        getChildren().addAll(children.toArray(new Node[]{}));
         HBox.setHgrow(textInput, Priority.ALWAYS);
 
         editButton.setOnAction(actionEvent -> {
@@ -59,11 +67,6 @@ public class CustomListCell extends HBox
         deleteButton.setOnAction(event -> onDelete.accept(this));
         upButton.setOnAction(event -> onMoveUp.accept(this));
         downButton.setOnAction(event -> onMoveDown.accept(this));
-    }
-
-    public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
-                          Consumer<CustomListCell> onMoveDown){
-        this(title, onDelete, onMoveUp, onMoveDown, true);
     }
 
     public String getValue()

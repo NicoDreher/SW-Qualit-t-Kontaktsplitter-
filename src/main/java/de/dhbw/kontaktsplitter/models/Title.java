@@ -17,13 +17,18 @@ public class Title {
 
     public boolean matches(String[] inputTokens, int startIndex) {
         String[] titleTokens = title.split(" ");
-        for(String token : titleTokens) {
-            if(token.equalsIgnoreCase(inputTokens[startIndex])) {
-                startIndex++;
+        if(startIndex + titleTokens.length < inputTokens.length) {
+            for(String token : titleTokens) {
+                if(token.equalsIgnoreCase(inputTokens[startIndex])) {
+                    startIndex++;
+                }
+                else {
+                    return false;
+                }
             }
-            else {
-                return false;
-            }
+        }
+        else {
+            return false;
         }
         return true;
     }

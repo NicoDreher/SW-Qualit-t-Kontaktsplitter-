@@ -28,7 +28,7 @@ public class TestUtil
         final Stage actualAlertDialog = getTopModalStage(robot);
         assertNotNull(actualAlertDialog);
 
-        final DialogPane dialogPane = (DialogPane) actualAlertDialog.getScene().getRoot();
+        final var dialogPane = (DialogPane) actualAlertDialog.getScene().getRoot();
         assertEquals(expectedHeader, dialogPane.getHeaderText());
         assertEquals(expectedContent, dialogPane.getContentText());
         assertTrue(actualAlertDialog.isFocused());

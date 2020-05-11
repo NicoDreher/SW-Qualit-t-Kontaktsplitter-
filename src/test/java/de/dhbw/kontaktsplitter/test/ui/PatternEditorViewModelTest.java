@@ -30,6 +30,10 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the {@link de.dhbw.kontaktsplitter.ui.PatternEditorViewModel}
+ * @author Lukas Lautenschlager
+ */
 @ExtendWith(ApplicationExtension.class)
 class PatternEditorViewModelTest {
     private static Scene scene;

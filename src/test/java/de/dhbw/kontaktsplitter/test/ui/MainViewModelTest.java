@@ -29,8 +29,12 @@ import static de.dhbw.kontaktsplitter.test.ui.TestUtil.alert_dialog_has_header_a
 import static de.dhbw.kontaktsplitter.test.ui.TestUtil.getTopWindowModal;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Test class for the {@link de.dhbw.kontaktsplitter.ui.MainViewModel}
+ * @author Lukas Lautenschlager
+ */
 @ExtendWith(ApplicationExtension.class)
-public class UITest
+public class MainViewModelTest
 {
     private Stage stage;
 

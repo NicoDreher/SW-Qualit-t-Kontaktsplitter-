@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 /**
  * ViewModel of the Main Window.
  * Implements all controls and communicates with the model and logic classes.
+ * @author Lukas Lautenschlager
  */
 public class MainViewModel implements Initializable {
 

@@ -1,5 +1,6 @@
 package de.dhbw.kontaktsplitter.test.ui;
 
+import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.models.Title;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
@@ -67,6 +68,9 @@ public class UITest {
         this.stage = stage;
     }
 
+    /**
+     * Closes a stage after a test finished
+     */
     @Stop
     public void stop()
     {
@@ -82,7 +86,7 @@ public class UITest {
     void initializeUI_correct_setup(FxRobot robot) {
         FxAssert.verifyThat("#lbl_salutation", LabeledMatchers.hasText(""));
         FxAssert.verifyThat("#cmb_gender", ComboBoxMatchers.containsItems(Gender.values()));
-        FxAssert.verifyThat("#cmb_language", ComboBoxMatchers.containsExactlyItems(Configuration.getLanguages().toArray()));
+        FxAssert.verifyThat("#cmb_language", ComboBoxMatchers.containsExactlyItems(Configuration.getPatterns().stream().map(ContactPattern::getLanguage).distinct().toArray()));
         var checkComboBox = (CheckComboBox)stage.getScene().lookup("#cmb_title");
         var titles = Configuration.getTitles();
         titles.forEach(e -> assertTrue(checkComboBox.getItems().contains(e)));

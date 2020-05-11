@@ -45,7 +45,7 @@ public class Contact {
         return lastName;
     }
 
-    public void setLanguage(String Language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 

@@ -1,15 +1,15 @@
-.toggleable-text-input:disabled{
+.toggleable-text-input:disabled {
     -fx-opacity: 1.0;
     -fx-text-fill: #000;
 }
 
-.inline-button{
+.inline-button {
     -fx-border-color: transparent;
     -fx-border-width: 0;
     -fx-background-color: #EEE;
     -fx-background-insets: 1px;
 }
 
-.button:pressed{
+.button:pressed {
     -fx-background-color: #CCC;
 }

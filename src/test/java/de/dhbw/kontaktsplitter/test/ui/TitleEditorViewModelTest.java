@@ -31,17 +31,14 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Daniel Bornbaum
  */
 @ExtendWith(ApplicationExtension.class)
-public class TitleEditorViewModelTest
-{
+public class TitleEditorViewModelTest {
     private static Scene scene;
     private Stage stage;
     private Stage mainStage;
 
     @BeforeAll
-    public static void before()
-    {
-        if ("true".equalsIgnoreCase(System.getenv("headless")))
-        {
+    public static void before() {
+        if("true".equalsIgnoreCase(System.getenv("headless"))) {
             System.setProperty("testfx.robot", "glass");
             System.setProperty("testfx.headless", "true");
             System.setProperty("prism.order", "sw");
@@ -57,8 +54,7 @@ public class TitleEditorViewModelTest
      * @throws Exception
      */
     @Start
-    public void start(Stage stage) throws Exception
-    {
+    public void start(Stage stage) throws Exception {
         mainStage = stage;
         new Startup().start(stage);
 
@@ -81,8 +77,7 @@ public class TitleEditorViewModelTest
      * @param robot object simulating user
      */
     @Test
-    public void initializeTest(FxRobot robot)
-    {
+    public void initializeTest(FxRobot robot) {
         TextField newEntryField = (TextField) scene.lookup("#newEntryField");
         Button newEntryButton = (Button) scene.lookup("#newEntryButton");
 
@@ -126,8 +121,7 @@ public class TitleEditorViewModelTest
      * @param robot, simulates user input
      */
     @Test
-    public void addAllowedValueTest(FxRobot robot)
-    {
+    public void addAllowedValueTest(FxRobot robot) {
         TextField newEntryField = (TextField) scene.lookup("#newEntryField");
         Button newEntryButton = (Button) scene.lookup("#newEntryButton");
 
@@ -142,12 +136,10 @@ public class TitleEditorViewModelTest
 
         boolean found = false;
 
-        for (CustomListCell listElement : listView.getItems())
-        {
+        for(CustomListCell listElement : listView.getItems()) {
             TextField textField = (TextField) listElement.getChildren().get(0);
 
-            if (textField.getText().equals("a"))
-            {
+            if(textField.getText().equals("a")) {
                 found = true;
             }
         }
@@ -157,11 +149,11 @@ public class TitleEditorViewModelTest
 
     /**
      * Tests that a message is thrown when a duplicate element is inserted
+     *
      * @param robot
      */
     @Test
-    public void addReplicaValueTest(FxRobot robot)
-    {
+    public void addReplicaValueTest(FxRobot robot) {
         TextField newEntryField = (TextField) scene.lookup("#newEntryField");
         Button newEntryButton = (Button) scene.lookup("#newEntryButton");
 
@@ -179,16 +171,14 @@ public class TitleEditorViewModelTest
         robot.clickOn(newEntryButton);
 
         TestUtil.alert_dialog_has_header_and_content("Meldung",
-                                                     "Ein solches Element besteht schon.", robot);
+                "Ein solches Element besteht schon.", robot);
 
         int asFound = 0;
 
-        for (CustomListCell item : listView.getItems())
-        {
+        for(CustomListCell item : listView.getItems()) {
             TextField textFeld = (TextField) item.getChildren().get(0);
 
-            if (textFeld.getText().equals("a"))
-            {
+            if(textFeld.getText().equals("a")) {
                 asFound++;
             }
         }
@@ -200,8 +190,7 @@ public class TitleEditorViewModelTest
      * Closes a stage after a test finished
      */
     @Stop
-    public void stop()
-    {
+    public void stop() {
         stage.close();
         mainStage.close();
     }

@@ -25,24 +25,21 @@ import org.testfx.matcher.control.ComboBoxMatchers;
 import org.testfx.matcher.control.LabeledMatchers;
 import org.testfx.robot.Motion;
 
-import static de.dhbw.kontaktsplitter.test.ui.TestUtil.alert_dialog_has_header_and_content;
-import static de.dhbw.kontaktsplitter.test.ui.TestUtil.getTopWindowModal;
+import static de.dhbw.kontaktsplitter.test.ui.TestUtil.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test class for the {@link de.dhbw.kontaktsplitter.ui.MainViewModel}
+ *
  * @author Lukas Lautenschlager
  */
 @ExtendWith(ApplicationExtension.class)
-public class MainViewModelTest
-{
+public class MainViewModelTest {
     private Stage stage;
 
     @BeforeAll
-    public static void before()
-    {
-        if ("true".equalsIgnoreCase(System.getenv("headless")))
-        {
+    public static void before() {
+        if("true".equalsIgnoreCase(System.getenv("headless"))) {
             System.setProperty("testfx.robot", "glass");
             System.setProperty("testfx.headless", "true");
             System.setProperty("prism.order", "sw");
@@ -58,8 +55,7 @@ public class MainViewModelTest
      * @throws Exception
      */
     @Start
-    public void start(Stage stage) throws Exception
-    {
+    public void start(Stage stage) throws Exception {
         new Startup().start(stage);
         this.stage = stage;
     }
@@ -68,8 +64,7 @@ public class MainViewModelTest
      * Closes a stage after a test finished
      */
     @Stop
-    public void stop()
-    {
+    public void stop() {
         stage.close();
     }
 
@@ -80,8 +75,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void initializeUI_correct_setup(FxRobot robot)
-    {
+    void initializeUI_correct_setup(FxRobot robot) {
         FxAssert.verifyThat("#lbl_salutation", LabeledMatchers.hasText(""));
         FxAssert.verifyThat("#cmb_gender", ComboBoxMatchers.containsItems(Gender.values()));
         FxAssert.verifyThat("#cmb_language", ComboBoxMatchers.containsExactlyItems(
@@ -109,8 +103,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void menuItem_openAndCloseAddTitle(FxRobot robot)
-    {
+    void menuItem_openAndCloseAddTitle(FxRobot robot) {
         robot.clickOn(stage.getScene().lookup("#menu"), Motion.DIRECT, MouseButton.PRIMARY);
         robot.type(KeyCode.DOWN);
         robot.type(KeyCode.DOWN);
@@ -127,8 +120,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void menuItem_openAndCloseAddPattern(FxRobot robot)
-    {
+    void menuItem_openAndCloseAddPattern(FxRobot robot) {
         robot.clickOn(stage.getScene().lookup("#menu"), Motion.DIRECT, MouseButton.PRIMARY);
         robot.type(KeyCode.DOWN);
         robot.type(KeyCode.ENTER);
@@ -144,8 +136,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void missingFirstName_opensErrorsMessage(FxRobot robot)
-    {
+    void missingFirstName_opensErrorsMessage(FxRobot robot) {
         var scene = stage.getScene();
         robot.clickOn(scene.lookup("#txt_surname"));
         robot.write("Mustermann");
@@ -157,7 +148,7 @@ public class MainViewModelTest
         robot.type(KeyCode.ENTER);
         robot.clickOn(scene.lookup("#btn_split"));
         alert_dialog_has_header_and_content("Vorname nicht erkannt", "Bitte tragen Sie den Vornamen manuell ein.",
-                                            robot);
+                robot);
     }
 
     /**
@@ -166,8 +157,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void missingLastName_opensErrorsMessage(FxRobot robot)
-    {
+    void missingLastName_opensErrorsMessage(FxRobot robot) {
         var scene = stage.getScene();
         robot.clickOn(scene.lookup("#txt_firstName"));
         robot.write("Max");
@@ -179,7 +169,7 @@ public class MainViewModelTest
         robot.type(KeyCode.ENTER);
         robot.clickOn(scene.lookup("#btn_split"));
         alert_dialog_has_header_and_content("Nachname nicht erkannt", "Bitte tragen Sie den Nachnamen manuell ein.",
-                                            robot);
+                robot);
     }
 
     /**
@@ -188,8 +178,7 @@ public class MainViewModelTest
      * @param robot - FxRobot instance
      */
     @Test
-    void missingLanguage_opensErrorMessage(FxRobot robot)
-    {
+    void missingLanguage_opensErrorMessage(FxRobot robot) {
         var scene = stage.getScene();
         robot.clickOn(scene.lookup("#txt_firstName"));
         robot.write("Max");
@@ -200,7 +189,7 @@ public class MainViewModelTest
         robot.type(KeyCode.ENTER);
         robot.clickOn(scene.lookup("#btn_split"));
         alert_dialog_has_header_and_content("Sprache nicht erkannt", "Bitte tragen Sie die Sprache manuell ein.",
-                                            robot);
+                robot);
     }
 
     /**
@@ -211,8 +200,7 @@ public class MainViewModelTest
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/ui/correctSalutation.csv")
-    void correctSalutation(String input, String expected)
-    {
+    void correctSalutation(String input, String expected) {
         FxRobot robot = new FxRobot();
         robot.clickOn(stage.getScene().lookup("#txt_salutation"));
         robot.write(input);
@@ -235,8 +223,7 @@ public class MainViewModelTest
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/ui/input.csv")
     void differentParameters(String input, String firstName, String surName, String gender, String titles,
-                             String language) throws InterruptedException
-    {
+            String language) throws InterruptedException {
         FxRobot robot = new FxRobot();
         robot.clickOn(stage.getScene().lookup("#txt_salutation"));
         robot.write(input);

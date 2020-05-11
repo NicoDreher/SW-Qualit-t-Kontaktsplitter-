@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * A object for the configuration entries
+ *
  * @author Nico Dreher
  */
 public class ConfigFile {

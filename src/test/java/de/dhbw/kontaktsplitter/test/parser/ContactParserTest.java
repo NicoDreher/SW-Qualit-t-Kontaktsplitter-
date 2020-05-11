@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ContactParserTest {
     /**
      * Testing the parsing using a created pattern
+     *
      * @param patternLanguage The language of the pattern
      * @param patternGender The gender of the pattern
      * @param inputPattern The input pattern
@@ -30,7 +31,8 @@ public class ContactParserTest {
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/models/contact.csv")
-    void testMatch(String patternLanguage, Gender patternGender, String inputPattern, String input, Gender gender, String titles, String firstName, String lastName) {
+    void testMatch(String patternLanguage, Gender patternGender, String inputPattern, String input, Gender gender,
+            String titles, String firstName, String lastName) {
         ContactPattern pattern = new ContactPattern(patternLanguage, patternGender, inputPattern, "");
         Contact contact = InputParser.parse(pattern, input);
         assertNotNull(contact);
@@ -42,6 +44,7 @@ public class ContactParserTest {
 
     /**
      * Testing the pattern detection using the default patterns
+     *
      * @param input The input string
      * @param language The expected language
      * @param gender The expected gender
@@ -51,7 +54,8 @@ public class ContactParserTest {
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/models/defaultPatterns.csv")
-    void testMatchDefault(String input, String language, Gender gender, String titles, String firstName, String lastName) {
+    void testMatchDefault(String input, String language, Gender gender, String titles, String firstName,
+            String lastName) {
         Contact contact = InputParser.parseInput(input);
         assertNotNull(contact);
         assertEquals(language, contact.getLanguage());
@@ -63,6 +67,7 @@ public class ContactParserTest {
 
     /**
      * Testing the parsing of the surnames
+     *
      * @param lastNames A array of surnames
      * @param expectedOutput The expected output
      */
@@ -74,6 +79,7 @@ public class ContactParserTest {
 
     /**
      * Testing the parsing of the output
+     *
      * @param input A input string
      * @param expectedOutput The expected output
      */

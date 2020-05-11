@@ -4,6 +4,7 @@ import de.dhbw.kontaktsplitter.parser.InputParser;
 
 /**
  * The patterns to splice contact information
+ *
  * @author Nico Dreher
  */
 public class ContactPattern {
@@ -35,28 +36,28 @@ public class ContactPattern {
         return language;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
-    public String getInputPattern() {
-        return inputPattern.replaceAll(",", " , ").replaceAll("\\s+", " ");
-    }
-
-    public String getOutputPattern() {
-        return outputPattern;
-    }
-
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
     }
 
+    public String getInputPattern() {
+        return inputPattern.replaceAll(",", " , ").replaceAll("\\s+", " ");
+    }
+
     public void setInputPattern(String inputPattern) {
         this.inputPattern = inputPattern;
+    }
+
+    public String getOutputPattern() {
+        return outputPattern;
     }
 
     public void setOutputPattern(String outputPattern) {
@@ -64,11 +65,13 @@ public class ContactPattern {
     }
 
     public String parseContact(Contact contact) {
-        return outputPattern.replace(InputParser.TITLE, contact.getTitlesAsString()).replace(InputParser.FIRST_NAME, contact.getFirstName()).replace(InputParser.LAST_NAME, contact.getLastName()).trim().replaceAll("\\s+", " ");
+        return outputPattern.replace(InputParser.TITLE, contact.getTitlesAsString())
+                .replace(InputParser.FIRST_NAME, contact.getFirstName())
+                .replace(InputParser.LAST_NAME, contact.getLastName()).trim().replaceAll("\\s+", " ");
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("%s; %s -> %s; %s", language, inputPattern, outputPattern, gender.toString());
     }
 }

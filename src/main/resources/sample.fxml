@@ -1,166 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.text.Font?>
-
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import org.controlsfx.control.CheckComboBox?>
-<GridPane fx:id="gridPane" minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.MainViewModel">
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="gridPane" minHeight="300.0" minWidth="600.0"
+          xmlns="http://javafx.com/javafx/11.0.1" fx:controller="de.dhbw.kontaktsplitter.ui.MainViewModel">
     <columnConstraints>
-        <ColumnConstraints minWidth="140.0" prefWidth="137.0" />
+        <ColumnConstraints minWidth="140.0" prefWidth="137.0"/>
         <ColumnConstraints minWidth="460.0" prefWidth="463.0" hgrow="ALWAYS"/>
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="-Infinity" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER"/>
     </rowConstraints>
     <MenuBar GridPane.columnSpan="2">
         <Menu fx:id="menu" mnemonicParsing="false" text="Einstellungen">
-            <MenuItem fx:id="men_salutation" mnemonicParsing="false" onAction="#addSalutation" text="Anreden hinzufügen" />
-            <MenuItem fx:id="men_title" mnemonicParsing="false" onAction="#addTitle" text="Titel hinzufügen" />
+            <MenuItem fx:id="men_salutation" mnemonicParsing="false" onAction="#addSalutation"
+                      text="Anreden hinzufügen"/>
+            <MenuItem fx:id="men_title" mnemonicParsing="false" onAction="#addTitle" text="Titel hinzufügen"/>
         </Menu>
     </MenuBar>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Anrede" GridPane.rowIndex="1">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font name="Arial" size="14.0" />
+            <Font name="Arial" size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Sprache" GridPane.rowIndex="2">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Geschlecht" GridPane.rowIndex="3">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Titel" GridPane.rowIndex="4">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Vorname" GridPane.rowIndex="5">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Nachname" GridPane.rowIndex="6">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Briefanrede" GridPane.rowIndex="8">
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
         <font>
-          <Font size="14.0" />
+            <Font size="14.0"/>
         </font>
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
     <TextField fx:id="txt_salutation" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyReleased="#changedSalutation">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
-    <TextField fx:id="txt_firstName" prefHeight="25.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="5" onKeyTyped="#manuallyChangedFirstName">
+    <TextField fx:id="txt_firstName" prefHeight="25.0" prefWidth="418.0" GridPane.columnIndex="1" GridPane.rowIndex="5"
+               onKeyTyped="#manuallyChangedFirstName">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
     <TextField fx:id="txt_surname" GridPane.columnIndex="1" GridPane.rowIndex="6" onKeyTyped="#manuallyChangedLastName">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </TextField>
-    <Label fx:id="lbl_salutation" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8" >
+    <Label fx:id="lbl_salutation" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="8">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </Label>
-    <ComboBox fx:id="cmb_language" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#manuallyChangedLanguage">
+    <ComboBox fx:id="cmb_language" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="2"
+              onAction="#manuallyChangedLanguage">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </ComboBox>
-    <ComboBox fx:id="cmb_gender" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#manuallyChanged_Gender">
+    <ComboBox fx:id="cmb_gender" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="3"
+              onAction="#manuallyChanged_Gender">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </ComboBox>
     <CheckComboBox fx:id="cmb_title" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <GridPane.margin>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
         </GridPane.margin>
     </CheckComboBox>
     <ButtonBar prefHeight="35.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10">
         <buttons>
-            <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen" />
-            <Button fx:id="btn_split" minWidth="41.0" mnemonicParsing="false" onAction="#split" prefHeight="25.0" text="Kontakt splitten" />
+            <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen"/>
+            <Button fx:id="btn_split" minWidth="41.0" mnemonicParsing="false" onAction="#split" prefHeight="25.0"
+                    text="Kontakt splitten"/>
         </buttons>
         <opaqueInsets>
-          <Insets bottom="1.0" />
+            <Insets bottom="1.0"/>
         </opaqueInsets>
         <padding>
-          <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+            <Insets bottom="10.0" left="5.0" right="5.0" top="5.0"/>
         </padding>
     </ButtonBar>
 </GridPane>

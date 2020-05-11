@@ -16,8 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * @author Lukas Lautenschlager
  */
-public class TestUtil
-{
+public class TestUtil {
     /**
      * Helper to check if the current displayed message is correct
      *
@@ -26,8 +25,7 @@ public class TestUtil
      * @param robot - FxRobot instance
      */
     public static void alert_dialog_has_header_and_content(final String expectedHeader, final String expectedContent,
-                                                           FxRobot robot)
-    {
+            FxRobot robot) {
         final Stage actualAlertDialog = getTopModalStage(robot);
         assertNotNull(actualAlertDialog);
 
@@ -45,8 +43,7 @@ public class TestUtil
      * @param robot - FxRobot instance
      * @return stage of current displayed error message
      */
-    public static Stage getTopModalStage(FxRobot robot)
-    {
+    public static Stage getTopModalStage(FxRobot robot) {
         final List<Window> allWindows = new ArrayList<>(robot.robotContext().getWindowFinder().listWindows());
         Collections.reverse(allWindows);
 
@@ -64,8 +61,7 @@ public class TestUtil
      * @param robot - FxRobot instance
      * @return returns stage of the current displayed window
      */
-    public static Stage getTopWindowModal(FxRobot robot)
-    {
+    public static Stage getTopWindowModal(FxRobot robot) {
         final List<Window> allWindows = new ArrayList<>(robot.robotContext().getWindowFinder().listWindows());
         Collections.reverse(allWindows);
 

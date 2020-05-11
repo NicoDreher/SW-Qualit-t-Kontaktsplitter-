@@ -1,4 +1,4 @@
-"Deutsch", "MALE", "Herr %TITEL %VORNAMEN %NACHNAMEN", "Herr Dr. Hans Wurst", "MALE", "Dr.", "Hans", "Wurst"
-"Deutsch", "MALE", "Herr %TITEL %VORNAMEN %NACHNAMEN", "Herr Hans Wurst", "MALE", "", "Hans", "Wurst"
-"Deutsch", "MALE", "Herr %TITEL %VORNAMEN %NACHNAMEN", "Herr Dr. Dr. rer. nat. Hans Wurst", "MALE", "Dr. Dr. rer. nat.", "Hans", "Wurst"
-"Deutsch", "MALE", "Herr %TITEL %VORNAMEN %NACHNAMEN", "Herr Dr. Dr. rer. nat. Hans Wurst Fabrik", "MALE", "Dr. Dr. rer. nat.", "Hans", "Wurst-Fabrik"
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Hans Wurst"                     ,"MALE","Dr."              ,"Hans","Wurst"
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Hans Wurst"                         ,"MALE",""                 ,"Hans","Wurst"
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Dr. rer. nat. Hans Wurst"       ,"MALE","Dr. Dr. rer. nat.","Hans","Wurst"
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Dr. rer. nat. Hans Wurst Fabrik","MALE","Dr. Dr. rer. nat.","Hans","Wurst-Fabrik"

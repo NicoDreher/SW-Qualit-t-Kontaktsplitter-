@@ -19,6 +19,7 @@ public enum Gender {
     DIVERS("Divers");
 
     String label;
+
     Gender(String label) {
         this.label = label;
     }

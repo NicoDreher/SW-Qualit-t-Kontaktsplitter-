@@ -8,9 +8,11 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
@@ -20,28 +22,25 @@ import java.util.function.Consumer;
  *
  * @author Daniel Bornbaum
  */
-public class PatternDetailView
-{
-    private TitledPane pane;
-    private Consumer<Boolean> validConsumer;
-    private ContactPattern pattern = new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE,
-                                                        "", "");
-
+public class PatternDetailView {
     TextField inputPatternTextField = new TextField();
     ChoiceBox<String> languageBox = new ChoiceBox<>();
     ChoiceBox<Gender> genderBox = new ChoiceBox<>();
     TextField outputPatternTextField = new TextField();
+    private TitledPane pane;
+    private Consumer<Boolean> validConsumer;
+    private ContactPattern pattern = new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE,
+            "", "");
 
     /**
      * Creates the ui
      */
-    public PatternDetailView()
-    {
+    public PatternDetailView() {
         languageBox.setItems(FXCollections.observableList(Configuration.getLanguages()));
         genderBox.setItems(FXCollections.observableList(List.of(Gender.values())));
 
         setPattern(new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE, "",
-                                      ""));
+                ""));
 
         pane = new TitledPane();
         pane.setCollapsible(false);
@@ -110,19 +109,25 @@ public class PatternDetailView
 
     /**
      * Sets additional behaviour on input validation
+     *
      * @param validConsumer consumer that accepts whether the input is valid
      */
-    public void setOnValidate(Consumer<Boolean> validConsumer)
-    {
+    public void setOnValidate(Consumer<Boolean> validConsumer) {
         this.validConsumer = validConsumer;
     }
 
     /**
      * @return TitledPane from JavaFx
      */
-    public TitledPane getPane()
-    {
+    public TitledPane getPane() {
         return pane;
+    }
+
+    /**
+     * @return possibly edited pattern from this detail view
+     */
+    public ContactPattern getPattern() {
+        return pattern;
     }
 
     /**
@@ -130,8 +135,7 @@ public class PatternDetailView
      *
      * @param pattern
      */
-    public void setPattern(ContactPattern pattern)
-    {
+    public void setPattern(ContactPattern pattern) {
         this.pattern = pattern;
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
@@ -141,22 +145,12 @@ public class PatternDetailView
     }
 
     /**
-     * @return possibly edited pattern from this detail view
-     */
-    public ContactPattern getPattern()
-    {
-        return pattern;
-    }
-
-    /**
      * @return whether the given input is valid
      */
-    private boolean validate()
-    {
+    private boolean validate() {
         boolean valid = !"".equals(inputPatternTextField.getText()) && !"".equals(outputPatternTextField.getText());
 
-        if (validConsumer != null)
-        {
+        if(validConsumer != null) {
             validConsumer.accept(valid);
         }
 

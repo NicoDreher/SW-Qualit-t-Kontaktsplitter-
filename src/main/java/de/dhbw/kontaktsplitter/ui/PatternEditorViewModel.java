@@ -28,8 +28,7 @@ import java.util.stream.Collectors;
 /**
  * @author Daniel Bornbaum
  */
-public class PatternEditorViewModel implements Initializable
-{
+public class PatternEditorViewModel implements Initializable {
     @FXML
     private GridPane leftSide;
 
@@ -52,8 +51,7 @@ public class PatternEditorViewModel implements Initializable
      * @param resourceBundle see package javafx.fxml.Initializable
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         view = new PatternDetailView();
         view.getPane().setDisable(true);
         rightSide.getChildren().setAll(view.getPane());
@@ -72,15 +70,13 @@ public class PatternEditorViewModel implements Initializable
      *
      * @param patternList list of ContactPatterns to set for this element
      */
-    public void updateElements(List<ContactPattern> patternList)
-    {
+    public void updateElements(List<ContactPattern> patternList) {
         editor.updateElements(patternList.stream().map(ContactPattern::toString).collect(
                 Collectors.toList()));
         patterns.clear();
         patternList.forEach(contactPattern -> patterns.put(contactPattern.toString(), contactPattern));
 
-        if (patternList.size() > 0)
-        {
+        if(patternList.size() > 0) {
             selectElement(patternList.get(0).toString());
         }
 
@@ -94,12 +90,10 @@ public class PatternEditorViewModel implements Initializable
     /**
      * @return potentially edited patterns for this element
      */
-    public List<ContactPattern> getPatterns()
-    {
+    public List<ContactPattern> getPatterns() {
         List<ContactPattern> outputPatterns = new ArrayList<>();
 
-        for (String element : editor.getElements())
-        {
+        for(String element : editor.getElements()) {
             outputPatterns.add(patterns.get(element));
         }
 
@@ -111,11 +105,9 @@ public class PatternEditorViewModel implements Initializable
      *
      * @param selected pattern title to select
      */
-    private void selectElement(String selected)
-    {
+    private void selectElement(String selected) {
         currentPatternKey = selected;
-        if (selected != null)
-        {
+        if(selected != null) {
             view.setPattern(patterns.get(selected));
         }
     }
@@ -125,35 +117,36 @@ public class PatternEditorViewModel implements Initializable
      *
      * @param edit, whether the current pattern should be added or if a pattern is edited
      */
-    private void addElementPopup(boolean edit)
-    {
+    private void addElementPopup(boolean edit) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/add_pattern_popup.fxml"));
         Scene scene;
         Stage stage;
-        try
-        {
+        try {
             var root = (Parent) loader.load();
             scene = new Scene(root);
             stage = new Stage();
             stage.setScene(scene);
             if(root instanceof Region) {
                 Region region = (Region) root;
-                if(region.getMinHeight() > 0)
+                if(region.getMinHeight() > 0) {
                     stage.setMinHeight(region.getMinHeight());
-                if(region.getMaxHeight() > 0)
+                }
+                if(region.getMaxHeight() > 0) {
                     stage.setMaxHeight(region.getMaxHeight());
-                if(region.getMinWidth() > 0)
+                }
+                if(region.getMinWidth() > 0) {
                     stage.setMinWidth(region.getMinWidth());
-                if(region.getMaxWidth() > 0)
+                }
+                if(region.getMaxWidth() > 0) {
                     stage.setMaxWidth(region.getMaxWidth());
+                }
             }
         }
-        catch (IOException e)
-        {
+        catch(IOException e) {
             new Alert(Alert.AlertType.ERROR,
-                      "Ein Fehler ist aufgetreten. Das Element der Benutzeroberfläche konnte nicht geladen werden.",
-                      ButtonType.OK);
+                    "Ein Fehler ist aufgetreten. Das Element der Benutzeroberfläche konnte nicht geladen werden.",
+                    ButtonType.OK);
             return;
         }
 
@@ -165,32 +158,27 @@ public class PatternEditorViewModel implements Initializable
 
         AddPatternPopupViewModel popupViewModel = loader.getController();
 
-        if (edit)
-        {
+        if(edit) {
             popupViewModel.setPattern(clonePattern(patterns.get(currentPatternKey)));
             popupViewModel.setAddButtonText("Speichern");
         }
         popupViewModel.setSubmitCommand(contactPattern -> {
 
-            if (edit)
-            {
+            if(edit) {
                 patterns.remove(currentPatternKey);
             }
 
-            if (patterns.containsKey(contactPattern.toString()))
-            {
+            if(patterns.containsKey(contactPattern.toString())) {
                 new Alert(Alert.AlertType.INFORMATION, "Ein solches Pattern existiert bereits").show();
                 return;
             }
 
             patterns.put(contactPattern.toString(), contactPattern);
 
-            if (!edit)
-            {
+            if(!edit) {
                 editor.addListElement(contactPattern.toString());
             }
-            else
-            {
+            else {
                 editor.replaceListElement(currentPatternKey, contactPattern.toString());
             }
             stage.close();
@@ -199,13 +187,13 @@ public class PatternEditorViewModel implements Initializable
 
     /**
      * Clones a pattern vor the popup window
+     *
      * @param patternToClone pattern to create duplicate for
      * @return duplicate
      */
-    private ContactPattern clonePattern(ContactPattern patternToClone)
-    {
+    private ContactPattern clonePattern(ContactPattern patternToClone) {
         return new ContactPattern(patternToClone.getLanguage(), patternToClone.getGender(),
-                                  patternToClone.getInputPattern(),
-                                  patternToClone.getOutputPattern());
+                patternToClone.getInputPattern(),
+                patternToClone.getOutputPattern());
     }
 }

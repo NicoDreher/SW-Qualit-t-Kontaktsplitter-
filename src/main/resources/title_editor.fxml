@@ -3,36 +3,32 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-
-<GridPane minHeight="400.0" minWidth="350.0" prefHeight="400.0" prefWidth="350.0" maxHeight="400.0" maxWidth="350.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
-   <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
-      <RowConstraints minHeight="12.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
-   </rowConstraints>
-   <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" fx:id="topBox"/>
-      <HBox prefHeight="49.0" prefWidth="600.0" GridPane.rowIndex="1">
-         <children>
-            <TextField fx:id="newEntryField" HBox.hgrow="ALWAYS">
-               <HBox.margin>
-                  <Insets left="2.0" top="2.0" />
-               </HBox.margin>
-            </TextField>
-            <Button fx:id="newEntryButton" mnemonicParsing="false" text="hinzufügen">
-               <HBox.margin>
-                  <Insets left="5.0" right="2.0" top="2.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-   </children>
+<?import javafx.scene.layout.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" minHeight="400.0" minWidth="350.0" prefHeight="400.0" prefWidth="350.0" maxHeight="400.0"
+          maxWidth="350.0" stylesheets="styles/components.css"
+          xmlns="http://javafx.com/javafx/11.0.1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="ALWAYS"/>
+        <RowConstraints minHeight="12.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER"/>
+    </rowConstraints>
+    <children>
+        <VBox prefHeight="200.0" prefWidth="100.0" fx:id="topBox"/>
+        <HBox prefHeight="49.0" prefWidth="600.0" GridPane.rowIndex="1">
+            <children>
+                <TextField fx:id="newEntryField" HBox.hgrow="ALWAYS">
+                    <HBox.margin>
+                        <Insets left="2.0" top="2.0"/>
+                    </HBox.margin>
+                </TextField>
+                <Button fx:id="newEntryButton" mnemonicParsing="false" text="hinzufügen">
+                    <HBox.margin>
+                        <Insets left="5.0" right="2.0" top="2.0"/>
+                    </HBox.margin>
+                </Button>
+            </children>
+        </HBox>
+    </children>
 </GridPane>

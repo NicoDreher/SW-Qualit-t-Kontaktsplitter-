@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 /**
  * The datatype for the spliced contact information
+ *
  * @author Nico Dreher
  */
 public class Contact {
@@ -15,7 +16,8 @@ public class Contact {
     private String firstName;
     private String lastName;
 
-    public Contact(){}
+    public Contact() {
+    }
 
     public Contact(String language, Gender gender, List<Title> titles, String firstName, String lastName) {
         this.language = language;
@@ -29,40 +31,40 @@ public class Contact {
         return language;
     }
 
-    public Gender getGender() {
-        return gender;
-    }
-
-    public List<Title> getTitles() {
-        return new ArrayList<>(titles);
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     public void setLanguage(String language) {
         this.language = language;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Gender getGender() {
+        return gender;
     }
 
     public void setGender(Gender gender) {
         this.gender = gender;
     }
 
+    public List<Title> getTitles() {
+        return new ArrayList<>(titles);
+    }
+
     public void setTitles(List<Title> titles) {
         this.titles = titles;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getTitlesAsString() {

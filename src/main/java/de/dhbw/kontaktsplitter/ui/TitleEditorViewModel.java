@@ -17,8 +17,7 @@ import java.util.stream.Collectors;
 /**
  * @author Daniel Bornbaum
  */
-public class TitleEditorViewModel implements Initializable
-{
+public class TitleEditorViewModel implements Initializable {
     @FXML
     private VBox topBox;
 
@@ -32,12 +31,12 @@ public class TitleEditorViewModel implements Initializable
 
     /**
      * Overwrites the initialize method from Initializable, sets ui handlers, extends ui from fxml
+     *
      * @param url see package javafx.fxml.Initializable
      * @param resourceBundle see package javafx.fxml.Initializable
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         topBox.getChildren().setAll(editor.getElementsView());
         editor.updateElements(Configuration.getTitles().stream().map(Title::getTitle).collect(Collectors.toList()));
 
@@ -47,12 +46,10 @@ public class TitleEditorViewModel implements Initializable
         });
         newEntryButton.setDisable(true);
         newEntryField.setOnKeyReleased(keyEvent -> {
-            if ("".equals(newEntryField.getText()))
-            {
+            if("".equals(newEntryField.getText())) {
                 newEntryButton.setDisable(true);
             }
-            else
-            {
+            else {
                 newEntryButton.setDisable(false);
             }
         });
@@ -61,8 +58,7 @@ public class TitleEditorViewModel implements Initializable
     /**
      * @return potentially modified titles in this element
      */
-    public List<Title> getTitles()
-    {
+    public List<Title> getTitles() {
         return editor.getElements().stream().map(Title::new).collect(Collectors.toList());
     }
 }

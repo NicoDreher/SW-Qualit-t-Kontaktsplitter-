@@ -12,8 +12,7 @@ import java.util.function.Consumer;
  *
  * @author Daniel Bornbaum
  */
-public class CustomListCell extends HBox
-{
+public class CustomListCell extends HBox {
     private TextField textInput = new TextField("");
     private Button editButton = new Button("✎");
 
@@ -27,8 +26,7 @@ public class CustomListCell extends HBox
      * @param onMoveDown method that is called to move this element down
      */
     public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
-                          Consumer<CustomListCell> onMoveDown)
-    {
+            Consumer<CustomListCell> onMoveDown) {
         super();
         this.value = title;
 
@@ -41,12 +39,10 @@ public class CustomListCell extends HBox
         textInput.getStyleClass().add("toggleable-text-input");
 
         textInput.setOnKeyReleased(event -> {
-            if ("".equals(textInput.getText()))
-            {
+            if("".equals(textInput.getText())) {
                 editButton.setDisable(true);
             }
-            else
-            {
+            else {
                 editButton.setDisable(false);
             }
         });
@@ -63,21 +59,18 @@ public class CustomListCell extends HBox
         HBox.setHgrow(textInput, Priority.ALWAYS);
 
         editButton.setOnAction(actionEvent -> {
-            if (valueConsumer != null)
-            {
+            if(valueConsumer != null) {
                 valueConsumer.accept(value);
                 return;
             }
 
-            if (editButton.getText().equals("✎"))
-            {
+            if(editButton.getText().equals("✎")) {
                 editButton.setText("✓");
                 textInput.setDisable(false);
                 textInput.requestFocus();
                 this.value = textInput.getText();
             }
-            else
-            {
+            else {
                 editButton.setText("✎");
                 textInput.setDisable(true);
             }
@@ -91,8 +84,7 @@ public class CustomListCell extends HBox
     /**
      * @return the value of this element
      */
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
 
@@ -101,8 +93,7 @@ public class CustomListCell extends HBox
      *
      * @param valueConsumer code that is executed when the edit button is clicked
      */
-    public void overwriteEditCommand(Consumer<String> valueConsumer)
-    {
+    public void overwriteEditCommand(Consumer<String> valueConsumer) {
         this.valueConsumer = valueConsumer;
     }
 
@@ -111,8 +102,7 @@ public class CustomListCell extends HBox
      *
      * @return edit behaviour as consumer or null
      */
-    public Consumer<String> getOverwrittenEditCommand()
-    {
+    public Consumer<String> getOverwrittenEditCommand() {
         return valueConsumer;
     }
 }

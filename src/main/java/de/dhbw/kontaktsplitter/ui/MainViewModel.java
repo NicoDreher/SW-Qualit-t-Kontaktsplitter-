@@ -12,7 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -23,7 +22,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.controlsfx.control.CheckComboBox;
 
 import java.io.IOException;
@@ -35,6 +33,7 @@ import java.util.stream.Collectors;
 /**
  * ViewModel of the Main Window.
  * Implements all controls and communicates with the model and logic classes.
+ *
  * @author Lukas Lautenschlager
  */
 public class MainViewModel implements Initializable {
@@ -77,7 +76,8 @@ public class MainViewModel implements Initializable {
         updateTitles();
         updateLanguages();
         cmb_gender.setItems(FXCollections.observableList(Arrays.asList(Gender.values())));
-        cmb_title.getCheckModel().getCheckedItems().addListener((ListChangeListener<Title>) change -> manuallyChangedTitle());
+        cmb_title.getCheckModel().getCheckedItems()
+                .addListener((ListChangeListener<Title>) change -> manuallyChangedTitle());
     }
 
     /**
@@ -86,20 +86,24 @@ public class MainViewModel implements Initializable {
      * @param actionEvent
      */
     public void split(ActionEvent actionEvent) {
-        if (contact.getFirstName() == null || contact.getFirstName().isEmpty() || contact.getFirstName().isBlank()) {
+        if(contact.getFirstName() == null || contact.getFirstName().isEmpty() || contact.getFirstName().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie den Vornamen manuell ein.");
             alert.setHeaderText("Vorname nicht erkannt");
             alert.showAndWait();
-        } else if (contact.getLastName() == null || contact.getLastName().isEmpty() || contact.getLastName().isBlank()) {
+        }
+        else if(contact.getLastName() == null || contact.getLastName().isEmpty() || contact.getLastName().isBlank()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie den Nachnamen manuell ein.");
             alert.setHeaderText("Nachname nicht erkannt");
             alert.showAndWait();
-        } else if (contact.getLanguage() == null || contact.getLanguage().isBlank() || contact.getLanguage().isEmpty()) {
+        }
+        else if(contact.getLanguage() == null || contact.getLanguage().isBlank() || contact.getLanguage().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Bitte tragen Sie die Sprache manuell ein.");
             alert.setHeaderText("Sprache nicht erkannt");
             alert.showAndWait();
-        } else
+        }
+        else {
             lbl_salutation.setText(InputParser.generateOutput(contact));
+        }
     }
 
     /**
@@ -165,14 +169,18 @@ public class MainViewModel implements Initializable {
             stage.initOwner(gridPane.getScene().getWindow());
             if(root instanceof Region) {
                 Region region = (Region) root;
-                if(region.getMinHeight() > 0)
+                if(region.getMinHeight() > 0) {
                     stage.setMinHeight(region.getMinHeight());
-                if(region.getMaxHeight() > 0)
+                }
+                if(region.getMaxHeight() > 0) {
                     stage.setMaxHeight(region.getMaxHeight());
-                if(region.getMinWidth() > 0)
+                }
+                if(region.getMinWidth() > 0) {
                     stage.setMinWidth(region.getMinWidth());
-                if(region.getMaxWidth() > 0)
+                }
+                if(region.getMaxWidth() > 0) {
                     stage.setMaxWidth(region.getMaxWidth());
+                }
             }
             stage.setOnCloseRequest(event -> {
                 Configuration.setTitles(((TitleEditorViewModel) fxmlLoader.getController()).getTitles());
@@ -181,8 +189,7 @@ public class MainViewModel implements Initializable {
 
             stage.show();
         }
-        catch (IOException e)
-        {
+        catch(IOException e) {
             e.printStackTrace();
             System.out.println("Cannot load new window");
         }
@@ -206,14 +213,18 @@ public class MainViewModel implements Initializable {
             stage.initOwner(gridPane.getScene().getWindow());
             if(root instanceof Region) {
                 Region region = (Region) root;
-                if(region.getMinHeight() > 0)
+                if(region.getMinHeight() > 0) {
                     stage.setMinHeight(region.getMinHeight());
-                if(region.getMaxHeight() > 0)
+                }
+                if(region.getMaxHeight() > 0) {
                     stage.setMaxHeight(region.getMaxHeight());
-                if(region.getMinWidth() > 0)
+                }
+                if(region.getMinWidth() > 0) {
                     stage.setMinWidth(region.getMinWidth());
-                if(region.getMaxWidth() > 0)
+                }
+                if(region.getMaxWidth() > 0) {
                     stage.setMaxWidth(region.getMaxWidth());
+                }
             }
             stage.setOnCloseRequest(event -> {
                 Configuration.setPatterns(((PatternEditorViewModel) fxmlLoader.getController()).getPatterns());
@@ -222,8 +233,7 @@ public class MainViewModel implements Initializable {
 
             stage.show();
         }
-        catch (IOException e)
-        {
+        catch(IOException e) {
             e.printStackTrace();
             System.out.println("Cannot load new window");
         }
@@ -253,15 +263,14 @@ public class MainViewModel implements Initializable {
         cmb_language.getSelectionModel().clearSelection();
     }
 
-    private void updateTitles()
-    {
-        cmb_title.getItems().removeIf(e->true);
+    private void updateTitles() {
+        cmb_title.getItems().removeIf(e -> true);
         cmb_title.getItems().addAll(FXCollections.observableList(Configuration.getTitles()));
     }
 
-    private void updateLanguages()
-    {
-        cmb_language.setItems(FXCollections.observableList(Configuration.getPatterns().stream().map(ContactPattern::getLanguage).distinct().sorted().collect(
-                Collectors.toList())));
+    private void updateLanguages() {
+        cmb_language.setItems(FXCollections.observableList(
+                Configuration.getPatterns().stream().map(ContactPattern::getLanguage).distinct().sorted().collect(
+                        Collectors.toList())));
     }
 }

@@ -16,14 +16,12 @@ import java.util.stream.Collectors;
  *
  * @author Daniel Bornbaum
  */
-public class ElementEditor
-{
+public class ElementEditor {
     private ListView<CustomListCell> elementsView;
     private ObservableList<CustomListCell> observableElements = FXCollections.observableArrayList();
     private Consumer<String> onDeleteConsumer;
 
-    public ElementEditor()
-    {
+    public ElementEditor() {
         this.elementsView = new ListView<>();
     }
 
@@ -32,20 +30,17 @@ public class ElementEditor
      *
      * @param elements as string to update
      */
-    public void updateElements(List<String> elements)
-    {
+    public void updateElements(List<String> elements) {
         observableElements.clear();
 
-        for (String element : elements)
-        {
+        for(String element : elements) {
             observableElements.add(new CustomListCell(element, this::removeElement, this::moveElementUp,
-                                                      this::moveElementDown));
+                    this::moveElementDown));
         }
 
         update();
 
-        if (elements.size() > 0)
-        {
+        if(elements.size() > 0) {
             elementsView.scrollTo(0);
             elementsView.getSelectionModel().select(0);
         }
@@ -56,10 +51,8 @@ public class ElementEditor
      *
      * @param valueConsumer behaviour that should be executed instead of the default behaviour
      */
-    public void overwriteElementsEditCommand(Consumer<String> valueConsumer)
-    {
-        for (CustomListCell cell : observableElements)
-        {
+    public void overwriteElementsEditCommand(Consumer<String> valueConsumer) {
+        for(CustomListCell cell : observableElements) {
             cell.overwriteEditCommand(valueConsumer);
         }
 
@@ -71,8 +64,7 @@ public class ElementEditor
      *
      * @param deleteConsumer code to be executed on item delete
      */
-    public void setOnDelete(Consumer<String> deleteConsumer)
-    {
+    public void setOnDelete(Consumer<String> deleteConsumer) {
         onDeleteConsumer = deleteConsumer;
     }
 
@@ -81,12 +73,9 @@ public class ElementEditor
      *
      * @param element title to select
      */
-    public void select(String element)
-    {
-        for (CustomListCell cell : elementsView.getItems())
-        {
-            if (cell.getValue().equals(element))
-            {
+    public void select(String element) {
+        for(CustomListCell cell : elementsView.getItems()) {
+            if(cell.getValue().equals(element)) {
                 elementsView.getSelectionModel().select(cell);
                 break;
             }
@@ -98,15 +87,12 @@ public class ElementEditor
      *
      * @param eventConsumer code to be executed on selected element
      */
-    public void setSelectionHandler(Consumer<String> eventConsumer)
-    {
+    public void setSelectionHandler(Consumer<String> eventConsumer) {
         elementsView.setOnMouseClicked(event -> {
-            if (observableElements.size() > 0)
-            {
+            if(observableElements.size() > 0) {
                 eventConsumer.accept(elementsView.getSelectionModel().getSelectedItems().get(0).getValue());
             }
-            else
-            {
+            else {
                 eventConsumer.accept(null);
             }
         });
@@ -115,16 +101,14 @@ public class ElementEditor
     /**
      * @return the ListView Object from JavaFx
      */
-    public ListView<CustomListCell> getElementsView()
-    {
+    public ListView<CustomListCell> getElementsView() {
         return elementsView;
     }
 
     /**
      * @return elements titles as strings
      */
-    public List<String> getElements()
-    {
+    public List<String> getElements() {
         return elementsView.getItems().stream().map(CustomListCell::getValue).collect(Collectors.toList());
     }
 
@@ -133,19 +117,16 @@ public class ElementEditor
      *
      * @param displayTitle element to add to the list
      */
-    public void addListElement(String displayTitle)
-    {
-        for (CustomListCell element : observableElements)
-        {
-            if (element.getValue().equals(displayTitle))
-            {
+    public void addListElement(String displayTitle) {
+        for(CustomListCell element : observableElements) {
+            if(element.getValue().equals(displayTitle)) {
                 new Alert(Alert.AlertType.INFORMATION, "Ein solches Element besteht schon.", ButtonType.OK).show();
                 return;
             }
         }
 
         CustomListCell cell = new CustomListCell(displayTitle, this::removeElement, this::moveElementUp,
-                                                 this::moveElementDown);
+                this::moveElementDown);
         observableElements.add(cell);
         update();
 
@@ -159,27 +140,24 @@ public class ElementEditor
      * @param oldElement old value of the element
      * @param newElement new value of the element
      */
-    public void replaceListElement(String oldElement, String newElement)
-    {
+    public void replaceListElement(String oldElement, String newElement) {
         //Avoiding java.util.ConcurrentModificationException
         List<CustomListCell> newElements = new ArrayList<>();
 
         observableElements.forEach(cell ->
-                                   {
-                                       if (cell.getValue().equals(oldElement))
-                                       {
-                                           CustomListCell newCell = new CustomListCell(newElement, this::removeElement,
-                                                                                       this::moveElementUp,
-                                                                                       this::moveElementDown);
-                                           newCell.overwriteEditCommand(cell.getOverwrittenEditCommand());
-                                           newElements
-                                                   .add(newCell);
-                                       }
-                                       else
-                                       {
-                                           newElements.add(cell);
-                                       }
-                                   });
+        {
+            if(cell.getValue().equals(oldElement)) {
+                CustomListCell newCell = new CustomListCell(newElement, this::removeElement,
+                        this::moveElementUp,
+                        this::moveElementDown);
+                newCell.overwriteEditCommand(cell.getOverwrittenEditCommand());
+                newElements
+                        .add(newCell);
+            }
+            else {
+                newElements.add(cell);
+            }
+        });
 
         observableElements = FXCollections.observableList(newElements);
         update();
@@ -190,12 +168,10 @@ public class ElementEditor
      *
      * @param cell element to move up
      */
-    private void moveElementUp(CustomListCell cell)
-    {
+    private void moveElementUp(CustomListCell cell) {
         int index = observableElements.indexOf(cell);
 
-        if (index != 0)
-        {
+        if(index != 0) {
             observableElements.remove(cell);
             observableElements.add(index - 1, cell);
         }
@@ -206,12 +182,10 @@ public class ElementEditor
      *
      * @param cell element to move up
      */
-    private void moveElementDown(CustomListCell cell)
-    {
+    private void moveElementDown(CustomListCell cell) {
         int index = observableElements.indexOf(cell);
 
-        if (index != observableElements.size() - 1)
-        {
+        if(index != observableElements.size() - 1) {
             observableElements.remove(cell);
             observableElements.add(index + 1, cell);
         }
@@ -219,12 +193,11 @@ public class ElementEditor
 
     /**
      * Removes an element from this list view
+     *
      * @param cell element to remove
      */
-    private void removeElement(CustomListCell cell)
-    {
-        if (onDeleteConsumer != null)
-        {
+    private void removeElement(CustomListCell cell) {
+        if(onDeleteConsumer != null) {
             onDeleteConsumer.accept(cell.getValue());
         }
 
@@ -236,8 +209,7 @@ public class ElementEditor
     /**
      * Helper method to update the list view
      */
-    private void update()
-    {
+    private void update() {
         elementsView.setItems(observableElements);
     }
 }

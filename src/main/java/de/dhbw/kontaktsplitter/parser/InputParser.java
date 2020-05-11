@@ -12,6 +12,7 @@ import java.util.Optional;
 
 /**
  * All functions to splice a salutation and parse the heading
+ *
  * @author Nico Dreher
  */
 public class InputParser {
@@ -30,6 +31,7 @@ public class InputParser {
 
     /**
      * Scan a token array for titles
+     *
      * @param tokens
      * @param inputIndex The start index of the scan
      * @return The title first found
@@ -45,6 +47,7 @@ public class InputParser {
 
     /**
      * Parse a {@link ContactPattern} and input text to contact details
+     *
      * @param pattern The pattern for the parsing
      * @param input The input string
      * @return The spliced contact details
@@ -68,7 +71,9 @@ public class InputParser {
                     }
                 }
                 else if(token.equalsIgnoreCase(FIRST_NAME)) {
-                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") && (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() || first == 2)) {
+                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") &&
+                            (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() ||
+                                    first == 2)) {
                         firstNames.add(inputTokens[inputIndex]);
                         if(Gender.NONE.equals(inputGender)) {
                             inputGender = Configuration.getGender(inputTokens[inputIndex]);
@@ -80,7 +85,9 @@ public class InputParser {
                     }
                 }
                 else if(token.equalsIgnoreCase(LAST_NAME)) {
-                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") && (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() || first == 1)) {
+                    while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") &&
+                            (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() ||
+                                    first == 1)) {
                         lastNames.add(inputTokens[inputIndex]);
                         inputIndex++;
                     }
@@ -107,11 +114,13 @@ public class InputParser {
             lastNames.add(firstNames.get(firstNames.size() - 1));
             firstNames.remove(firstNames.size() - 1);
         }
-        return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames), parseLastNames(lastNames));
+        return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames),
+                parseLastNames(lastNames));
     }
 
     /**
      * Parse a input string to the spliced contact details. Using the first matching pattern.
+     *
      * @param input The input string
      * @return The spliced contact details
      */
@@ -128,11 +137,14 @@ public class InputParser {
 
     /**
      * Generates a output out using the language and gender of the contact details
+     *
      * @param contact
      * @return A formatted output
      */
     public static String generateOutput(Contact contact) {
-        Optional<ContactPattern> foundPattern = Configuration.getPatterns().stream().filter(pattern -> pattern.getLanguage().equalsIgnoreCase(contact.getLanguage()) && pattern.getGender().equals(contact.getGender())).findFirst();
+        Optional<ContactPattern> foundPattern = Configuration.getPatterns().stream()
+                .filter(pattern -> pattern.getLanguage().equalsIgnoreCase(contact.getLanguage()) &&
+                        pattern.getGender().equals(contact.getGender())).findFirst();
         if(foundPattern.isPresent()) {
             return foundPattern.get().parseContact(contact);
         }
@@ -141,6 +153,7 @@ public class InputParser {
 
     /**
      * Parsing surnames comply with the prefixes and suffixes
+     *
      * @param lastNames A list of the surnames
      * @return The formatted surnames
      */
@@ -149,7 +162,8 @@ public class InputParser {
         for(int i = 0; i < lastNames.size(); i++) {
             if(i < lastNames.size() - 1) {
                 result.append(lastNames.get(i));
-                if(Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i)) || Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i + 1))) {
+                if(Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i)) ||
+                        Configuration.getPrefixesAndSuffixes().contains(lastNames.get(i + 1))) {
                     result.append(" ");
                 }
                 else {

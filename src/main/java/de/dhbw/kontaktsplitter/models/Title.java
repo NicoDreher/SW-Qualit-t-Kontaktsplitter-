@@ -1,5 +1,8 @@
 package de.dhbw.kontaktsplitter.models;
 
+/**
+ * A academic or non academic title
+ */
 public class Title {
     private String title;
 

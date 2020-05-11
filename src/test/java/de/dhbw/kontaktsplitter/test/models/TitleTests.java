@@ -12,7 +12,17 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Nico Dreher
+ */
 public class TitleTests {
+    /**
+     * Testing the detection of titles in a input string
+     * @param input The input string
+     * @param inputIndex The start index of the titles
+     * @param expectedTitles The expected titles
+     * @param finalIndex The index after all titles
+     */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/models/titles.csv")
     void testMatch(String input, int inputIndex, @ConvertWith(StringArrayConverter.class) String[] expectedTitles, int finalIndex) {

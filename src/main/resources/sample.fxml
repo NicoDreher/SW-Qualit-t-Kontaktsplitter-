@@ -15,22 +15,22 @@
 <?import javafx.scene.text.Font?>
 
 <?import org.controlsfx.control.CheckComboBox?>
-<GridPane fx:id="gridPane" minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.Controller">
+<GridPane fx:id="gridPane" minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.MainViewModel">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" maxWidth="294.0" minWidth="140.0" prefWidth="137.0" />
-        <ColumnConstraints minWidth="460.0" prefWidth="463.0" />
+        <ColumnConstraints  minWidth="140.0" prefWidth="137.0" />
+        <ColumnConstraints minWidth="460.0" prefWidth="463.0" hgrow="ALWAYS"/>
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="-Infinity" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
     </rowConstraints>
     <MenuBar GridPane.columnSpan="2">
         <Menu fx:id="menu" mnemonicParsing="false" text="Einstellungen">
@@ -115,7 +115,7 @@
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </Label>
-    <TextField fx:id="txt_salutation" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyTyped="#changedSalutation">
+    <TextField fx:id="txt_salutation" GridPane.columnIndex="1" GridPane.rowIndex="1" onKeyReleased="#changedSalutation">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
@@ -145,7 +145,7 @@
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </ComboBox>
-    <CheckComboBox fx:id="cmb_title" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4" >
+    <CheckComboBox fx:id="cmb_title" maxWidth="1.7976931348623157E308" GridPane.columnIndex="1" GridPane.rowIndex="4">
         <GridPane.margin>
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>

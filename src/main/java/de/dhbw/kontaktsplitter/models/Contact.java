@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The datatype for the spliced contact information
+ * @author Nico Dreher
+ */
 public class Contact {
     private String language;
     private Gender gender;
@@ -41,7 +45,7 @@ public class Contact {
         return lastName;
     }
 
-    public void setLanguage(String Language) {
+    public void setLanguage(String language) {
         this.language = language;
     }
 

@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * @author Daniel Bornbaum
+ */
 public class PatternEditorViewModel implements Initializable
 {
     @FXML
@@ -38,6 +41,11 @@ public class PatternEditorViewModel implements Initializable
 
     private ElementEditor editor = new ElementEditor();
 
+    /**
+     * Overwrites the initialize method from Initializable, sets ui handlers, extends ui from fxml
+     * @param url see package javafx.fxml.Initializable
+     * @param resourceBundle see package javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -54,6 +62,10 @@ public class PatternEditorViewModel implements Initializable
         editor.setOnDelete(element -> patterns.remove(element));
     }
 
+    /**
+     * Updates the elements inside the pattern editor
+     * @param patternList list of ContactPatterns to set for this element
+     */
     public void updateElements(List<ContactPattern> patternList)
     {
         editor.updateElements(patternList.stream().map(ContactPattern::toString).collect(
@@ -73,6 +85,9 @@ public class PatternEditorViewModel implements Initializable
         });
     }
 
+    /**
+     * @return potentially edited patterns for this element
+     */
     public List<ContactPattern> getPatterns(){
         List<ContactPattern> outputPatterns = new ArrayList<>();
 
@@ -83,6 +98,10 @@ public class PatternEditorViewModel implements Initializable
         return outputPatterns;
     }
 
+    /**
+     * Selects a given element by its title
+     * @param selected pattern title to select
+     */
     private void selectElement(String selected)
     {
         currentPatternKey = selected;
@@ -92,6 +111,10 @@ public class PatternEditorViewModel implements Initializable
         }
     }
 
+    /**
+     * Creates popup to edit or create a new pattern
+     * @param edit, whether the current pattern should be added or if a pattern is edited
+     */
     private void addElementPopup(boolean edit){
 
         FXMLLoader loader =  new FXMLLoader(getClass().getResource("/add_pattern_popup.fxml"));

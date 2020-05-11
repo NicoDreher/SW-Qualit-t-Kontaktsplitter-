@@ -1,21 +1,25 @@
 package de.dhbw.kontaktsplitter.ui.components;
 
-import de.dhbw.kontaktsplitter.models.Contact;
 import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
 import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.*;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
 
 import java.util.Arrays;
 import java.util.Locale;
 import java.util.function.Consumer;
 
+/**
+ * A component that displays a pattern in detail and offers editing
+ *
+ * @author Daniel Bornbaum
+ */
 public class PatternDetailView
 {
     private TitledPane pane;
@@ -28,10 +32,14 @@ public class PatternDetailView
     ChoiceBox<String> genderBox = new ChoiceBox<>();
     TextField outputPatternTextField = new TextField();
 
-    public PatternDetailView(){
-
+    /**
+     * Creates the ui
+     */
+    public PatternDetailView()
+    {
         languageBox.setItems(FXCollections.observableList(Configuration.getLanguages()));
-        genderBox.setItems(FXCollections.observableList(Arrays.asList("männlich", "weiblich", "divers", "keine Angabe")));
+        genderBox.setItems(
+                FXCollections.observableList(Arrays.asList("männlich", "weiblich", "divers", "keine Angabe")));
 
         setPattern(new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE, "",
                                       ""));
@@ -78,15 +86,30 @@ public class PatternDetailView
         pane.setContent(gridPane);
     }
 
-    public void setOnValidate(Consumer<Boolean> valid){
-        validConsumer = valid;
+    /**
+     * Sets additional behaviour on input validation
+     * @param validConsumer consumer that accepts whether the input is valid
+     */
+    public void setOnValidate(Consumer<Boolean> validConsumer)
+    {
+        validConsumer = validConsumer;
     }
 
-    public TitledPane getPane(){
+    /**
+     * @return TitledPane from JavaFx
+     */
+    public TitledPane getPane()
+    {
         return pane;
     }
 
-    public void setPattern(ContactPattern pattern){
+    /**
+     * Sets the pattern to be displayed inside this detail view
+     *
+     * @param pattern
+     */
+    public void setPattern(ContactPattern pattern)
+    {
         this.pattern = pattern;
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
@@ -95,14 +118,23 @@ public class PatternDetailView
         validate();
     }
 
-    public ContactPattern getPattern(){
+    /**
+     * @return possibly edited pattern from this detail view
+     */
+    public ContactPattern getPattern()
+    {
         return pattern;
     }
 
-    private boolean validate(){
+    /**
+     * @return whether the given input is valid
+     */
+    private boolean validate()
+    {
         boolean valid = !"".equals(inputPatternTextField.getText()) && !"".equals(outputPatternTextField.getText());
 
-        if (validConsumer != null){
+        if (validConsumer != null)
+        {
             validConsumer.accept(valid);
         }
 

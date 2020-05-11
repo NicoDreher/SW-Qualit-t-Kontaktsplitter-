@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
+/**
+ * @author Daniel Bornbaum
+ */
 public class TitleEditorViewModel implements Initializable
 {
     @FXML
@@ -28,8 +31,9 @@ public class TitleEditorViewModel implements Initializable
     private ElementEditor editor = new ElementEditor();
 
     /**
-     * @param url
-     * @param resourceBundle
+     * Overwrites the initialize method from Initializable, sets ui handlers, extends ui from fxml
+     * @param url see package javafx.fxml.Initializable
+     * @param resourceBundle see package javafx.fxml.Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
@@ -54,6 +58,9 @@ public class TitleEditorViewModel implements Initializable
         });
     }
 
+    /**
+     * @return potentially modified titles in this element
+     */
     public List<Title> getTitles()
     {
         return editor.getElements().stream().map(Title::new).collect(Collectors.toList());

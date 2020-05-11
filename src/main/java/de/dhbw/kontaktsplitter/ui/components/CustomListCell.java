@@ -7,6 +7,11 @@ import javafx.scene.layout.Priority;
 
 import java.util.function.Consumer;
 
+/**
+ * Custom class that changes the appearance of a list cell with buttons
+ *
+ * @author Daniel Bornbaum
+ */
 public class CustomListCell extends HBox
 {
     private TextField textInput = new TextField("");
@@ -15,6 +20,12 @@ public class CustomListCell extends HBox
     private String value;
     private Consumer<String> valueConsumer;
 
+    /**
+     * @param title title of the list element, displayed in an editable element
+     * @param onDelete method that is called to delete this element
+     * @param onMoveUp method that is called to move this element up
+     * @param onMoveDown method that is called to move this element down
+     */
     public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
                           Consumer<CustomListCell> onMoveDown)
     {
@@ -77,17 +88,31 @@ public class CustomListCell extends HBox
         downButton.setOnAction(event -> onMoveDown.accept(this));
     }
 
+    /**
+     * @return the value of this element
+     */
     public String getValue()
     {
         return value;
     }
 
+    /**
+     * A method to overwrite the default edit behaviour, which is enabling the title for editing
+     *
+     * @param valueConsumer code that is executed when the edit button is clicked
+     */
     public void overwriteEditCommand(Consumer<String> valueConsumer)
     {
         this.valueConsumer = valueConsumer;
     }
 
-    public Consumer<String> getOverwrittenEditCommand(){
+    /**
+     * Method that returns the overwritten edit behaviour or null, if none specified
+     *
+     * @return edit behaviour as consumer or null
+     */
+    public Consumer<String> getOverwrittenEditCommand()
+    {
         return valueConsumer;
     }
 }

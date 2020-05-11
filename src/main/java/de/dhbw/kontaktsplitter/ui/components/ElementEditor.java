@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+/**
+ * A class that allows for sorting, deleting and editing elements in a listview
+ *
+ * @author Daniel Bornbaum
+ */
 public class ElementEditor
 {
     private ListView<CustomListCell> elementsView;
@@ -22,6 +27,11 @@ public class ElementEditor
         this.elementsView = new ListView<>();
     }
 
+    /**
+     * Updates elements in list view
+     *
+     * @param elements as string to update
+     */
     public void updateElements(List<String> elements)
     {
         observableElements.clear();
@@ -41,6 +51,11 @@ public class ElementEditor
         }
     }
 
+    /**
+     * Passes the editing behaviour down to each created list element
+     *
+     * @param valueConsumer behaviour that should be executed instead of the default behaviour
+     */
     public void overwriteElementsEditCommand(Consumer<String> valueConsumer)
     {
         for (CustomListCell cell : observableElements)
@@ -51,11 +66,21 @@ public class ElementEditor
         update();
     }
 
+    /**
+     * Sets an additional behaviour on item deletion
+     *
+     * @param deleteConsumer code to be executed on item delete
+     */
     public void setOnDelete(Consumer<String> deleteConsumer)
     {
         onDeleteConsumer = deleteConsumer;
     }
 
+    /**
+     * Selects an element by its title
+     *
+     * @param element title to select
+     */
     public void select(String element)
     {
         for (CustomListCell cell : elementsView.getItems())
@@ -68,6 +93,11 @@ public class ElementEditor
         }
     }
 
+    /**
+     * Handles when an element is selected, passes element or null to the consumer, if none is selected
+     *
+     * @param eventConsumer code to be executed on selected element
+     */
     public void setSelectionHandler(Consumer<String> eventConsumer)
     {
         elementsView.setOnMouseClicked(event -> {
@@ -82,16 +112,27 @@ public class ElementEditor
         });
     }
 
+    /**
+     * @return the ListView Object from JavaFx
+     */
     public ListView<CustomListCell> getElementsView()
     {
         return elementsView;
     }
 
+    /**
+     * @return elements titles as strings
+     */
     public List<String> getElements()
     {
         return elementsView.getItems().stream().map(CustomListCell::getValue).collect(Collectors.toList());
     }
 
+    /**
+     * Adds a list element to the list, shows an alert, if the element is already present
+     *
+     * @param displayTitle element to add to the list
+     */
     public void addListElement(String displayTitle)
     {
         for (CustomListCell element : observableElements)
@@ -112,6 +153,12 @@ public class ElementEditor
         elementsView.scrollTo(cell);
     }
 
+    /**
+     * Finds an element, if present, inside the listview and replaces it
+     *
+     * @param oldElement old value of the element
+     * @param newElement new value of the element
+     */
     public void replaceListElement(String oldElement, String newElement)
     {
         //Avoiding java.util.ConcurrentModificationException
@@ -138,6 +185,11 @@ public class ElementEditor
         update();
     }
 
+    /**
+     * Moves the element up one step inside the list
+     *
+     * @param cell element to move up
+     */
     private void moveElementUp(CustomListCell cell)
     {
         int index = observableElements.indexOf(cell);
@@ -149,6 +201,11 @@ public class ElementEditor
         }
     }
 
+    /**
+     * Moves the element down one step inside the list
+     *
+     * @param cell element to move up
+     */
     private void moveElementDown(CustomListCell cell)
     {
         int index = observableElements.indexOf(cell);
@@ -160,6 +217,10 @@ public class ElementEditor
         }
     }
 
+    /**
+     * Removes an element from this list view
+     * @param cell element to remove
+     */
     private void removeElement(CustomListCell cell)
     {
         if (onDeleteConsumer != null)
@@ -172,6 +233,9 @@ public class ElementEditor
         update();
     }
 
+    /**
+     * Helper method to update the list view
+     */
     private void update()
     {
         elementsView.setItems(observableElements);

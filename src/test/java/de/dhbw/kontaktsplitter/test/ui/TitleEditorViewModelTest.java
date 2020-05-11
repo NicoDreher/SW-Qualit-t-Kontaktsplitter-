@@ -27,7 +27,9 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * @author Daniel Bornbaum
+ */
 @ExtendWith(ApplicationExtension.class)
 public class TitleEditorViewModelTest
 {
@@ -74,7 +76,7 @@ public class TitleEditorViewModelTest
     }
 
     /**
-     * Checks if initial state of the window is ok
+     * Tests if initial state of the window is ok
      *
      * @param robot object simulating user
      */
@@ -119,7 +121,7 @@ public class TitleEditorViewModelTest
     }
 
     /**
-     * Checks that an element, that is not yet present can be added
+     * Tests that an element, that is not yet present can be added
      *
      * @param robot, simulates user input
      */
@@ -154,7 +156,7 @@ public class TitleEditorViewModelTest
     }
 
     /**
-     * Checks that a message is thrown when a duplicate element is inserted
+     * Tests that a message is thrown when a duplicate element is inserted
      * @param robot
      */
     @Test

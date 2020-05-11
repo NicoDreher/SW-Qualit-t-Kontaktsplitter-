@@ -12,6 +12,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
 
+/**
+ * View model for the popup window that is displayed when one presses the add pattern button
+ * @author Daniel Bornbaum
+ */
 public class AddPatternPopupViewModel implements Initializable
 {
     @FXML
@@ -22,6 +26,11 @@ public class AddPatternPopupViewModel implements Initializable
 
     private PatternDetailView detailView;
 
+    /**
+     * Overwrites the initialize method from Initializable, sets ui handlers
+     * @param url see package javafx.fxml.Initializable
+     * @param resourceBundle see package javafx.fxml.Initializable
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
@@ -31,14 +40,26 @@ public class AddPatternPopupViewModel implements Initializable
         topBox.add(detailView.getPane(), 0, 0);
     }
 
+    /**
+     * Sets the pattern to be edited in this popup window
+     * @param pattern to edit in this window
+     */
     public void setPattern(ContactPattern pattern){
         detailView.setPattern(pattern);
     }
 
+    /**
+     * Sets the submit command for this window
+     * @param onSubmitConsumer code that is executed on submit
+     */
     public void setSubmitCommand(Consumer<ContactPattern> onSubmitConsumer){
         addButton.setOnMouseClicked(event -> onSubmitConsumer.accept(detailView.getPattern()));
     }
 
+    /**
+     * Overwrites the default add button text
+     * @param text, text to set for the add button
+     */
     public void setAddButtonText(String text)
     {
         addButton.setText(text);

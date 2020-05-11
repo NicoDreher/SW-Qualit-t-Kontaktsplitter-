@@ -23,6 +23,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * @author Daniel Bornbaum
+ */
 @ExtendWith(ApplicationExtension.class)
 public class EditorTest
 {
@@ -49,6 +52,9 @@ public class EditorTest
         this.stage.show();
     }
 
+    /**
+     * Sets System Properties before all tests
+     */
     @BeforeAll
     public static void before()
     {
@@ -62,6 +68,9 @@ public class EditorTest
         }
     }
 
+    /**
+     * Tests whether the Selection inside the ElementEditor component works properly
+     */
     @Test
     public void elementEditorSelectTest()
     {
@@ -82,9 +91,17 @@ public class EditorTest
             }
 
             assertTrue(found);
+
+            assertEquals(expectedElements.get(1),
+                         ((TextField) editor.getElementsView().getSelectionModel().getSelectedItem().getChildren()
+                                 .get(0)).getText());
         }
     }
 
+    /**
+     * Tests whether the remove button inside a list element works properly
+     * @param robot object that simulates a user
+     */
     @Test
     public void removeButtonTest(FxRobot robot)
     {
@@ -98,6 +115,10 @@ public class EditorTest
         expectedElements.remove(0);
     }
 
+    /**
+     * Tests that moving down an element in the list works properly
+     * @param robot object that simulates a user
+     */
     @Test
     public void moveDownElementTest(FxRobot robot)
     {
@@ -114,6 +135,10 @@ public class EditorTest
         expectedElements.add(1, expectedElement);
     }
 
+    /**
+     * Tests that moving up an element in the list works properly
+     * @param robot object that simulates a user
+     */
     @Test
     public void moveUpElementTest(FxRobot robot)
     {
@@ -130,8 +155,13 @@ public class EditorTest
         expectedElements.add(0, expectedElement);
     }
 
+    /**
+     * Tests that the edit button allows text input and when clicked again, the text is set
+     * @param robot object that simulates a user
+     */
     @Test
-    public void editButtonTest(FxRobot robot){
+    public void editButtonTest(FxRobot robot)
+    {
         CustomListCell cell = editor.getElementsView().getItems().get(0);
         Button editButton = (Button) cell.getChildren().get(3);
 

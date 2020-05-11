@@ -180,6 +180,11 @@ public class PatternEditorViewModel implements Initializable
         });
     }
 
+    /**
+     * Clones a pattern vor the popup window
+     * @param patternToClone pattern to create duplicate for
+     * @return duplicate
+     */
     private ContactPattern clonePattern(ContactPattern patternToClone)
     {
         return new ContactPattern(patternToClone.getLanguage(), patternToClone.getGender(),

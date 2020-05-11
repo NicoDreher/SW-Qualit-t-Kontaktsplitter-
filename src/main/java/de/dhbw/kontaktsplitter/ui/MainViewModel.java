@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -19,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -161,7 +163,17 @@ public class MainViewModel implements Initializable {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
-
+            if(root instanceof Region) {
+                Region region = (Region) root;
+                if(region.getMinHeight() > 0)
+                    stage.setMinHeight(region.getMinHeight());
+                if(region.getMaxHeight() > 0)
+                    stage.setMaxHeight(region.getMaxHeight());
+                if(region.getMinWidth() > 0)
+                    stage.setMinWidth(region.getMinWidth());
+                if(region.getMaxWidth() > 0)
+                    stage.setMaxWidth(region.getMaxWidth());
+            }
             stage.setOnCloseRequest(event -> {
                 Configuration.setTitles(((TitleEditorViewModel) fxmlLoader.getController()).getTitles());
                 Configuration.saveConfig();
@@ -192,6 +204,17 @@ public class MainViewModel implements Initializable {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
+            if(root instanceof Region) {
+                Region region = (Region) root;
+                if(region.getMinHeight() > 0)
+                    stage.setMinHeight(region.getMinHeight());
+                if(region.getMaxHeight() > 0)
+                    stage.setMaxHeight(region.getMaxHeight());
+                if(region.getMinWidth() > 0)
+                    stage.setMinWidth(region.getMinWidth());
+                if(region.getMaxWidth() > 0)
+                    stage.setMaxWidth(region.getMaxWidth());
+            }
             stage.setOnCloseRequest(event -> {
                 Configuration.setPatterns(((PatternEditorViewModel) fxmlLoader.getController()).getPatterns());
                 Configuration.saveConfig();

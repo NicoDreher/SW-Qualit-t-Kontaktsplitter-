@@ -136,6 +136,7 @@ class PatternEditorViewModelTest {
         robot.write(patter.getInputPattern());
         input2.getSelectionModel().select(patter.getLanguage());
         robot.clickOn(input3);
+        robot.type(KeyCode.DOWN);
         robot.type(KeyCode.ENTER);
         robot.clickOn(input4);
         robot.write(patter.getOutputPattern());

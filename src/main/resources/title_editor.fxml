@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane minHeight="20.0" minWidth="20.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1"
+<GridPane minHeight="400.0" minWidth="350.0" prefHeight="400.0" prefWidth="350.0" maxHeight="400.0" maxWidth="350.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1"
           xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
    <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />

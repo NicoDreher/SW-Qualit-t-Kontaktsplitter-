@@ -8,10 +8,10 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TitledPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
+import javafx.scene.layout.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
@@ -29,7 +29,7 @@ public class PatternDetailView
 
     TextField inputPatternTextField = new TextField();
     ChoiceBox<String> languageBox = new ChoiceBox<>();
-    ChoiceBox<String> genderBox = new ChoiceBox<>();
+    ChoiceBox<Gender> genderBox = new ChoiceBox<>();
     TextField outputPatternTextField = new TextField();
 
     /**
@@ -38,8 +38,7 @@ public class PatternDetailView
     public PatternDetailView()
     {
         languageBox.setItems(FXCollections.observableList(Configuration.getLanguages()));
-        genderBox.setItems(
-                FXCollections.observableList(Arrays.asList("männlich", "weiblich", "divers", "keine Angabe")));
+        genderBox.setItems(FXCollections.observableList(List.of(Gender.values())));
 
         setPattern(new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE, "",
                                       ""));
@@ -47,9 +46,29 @@ public class PatternDetailView
         pane = new TitledPane();
         pane.setCollapsible(false);
         pane.setText("Muster-Detailansicht");
+        pane.setMaxHeight(Double.MAX_VALUE);
 
         GridPane gridPane = new GridPane();
         GridPane.setHgrow(gridPane, Priority.ALWAYS);
+        GridPane.setVgrow(gridPane, Priority.ALWAYS);
+
+        ColumnConstraints c1 = new ColumnConstraints(100);
+        c1.setHgrow(Priority.NEVER);
+        ColumnConstraints c2 = new ColumnConstraints();
+        c2.setHgrow(Priority.ALWAYS);
+        gridPane.getColumnConstraints().addAll(c1, c2);
+
+        RowConstraints r1 = new RowConstraints(30);
+        r1.setVgrow(Priority.NEVER);
+        RowConstraints r2 = new RowConstraints(30);
+        r2.setVgrow(Priority.NEVER);
+        RowConstraints r3 = new RowConstraints(30);
+        r3.setVgrow(Priority.NEVER);
+        RowConstraints r4 = new RowConstraints(30);
+        r4.setVgrow(Priority.NEVER);
+        RowConstraints r5 = new RowConstraints();
+        r5.setVgrow(Priority.ALWAYS);
+        gridPane.getRowConstraints().addAll(r1, r2, r3, r4, r5);
 
         gridPane.setHgap(5);
         gridPane.setVgap(5);
@@ -69,6 +88,7 @@ public class PatternDetailView
         gridPane.add(genderBox, 1, 2);
         gridPane.add(outputPatternTextField, 1, 3);
 
+
         inputPatternTextField.setOnKeyTyped(actionEvent -> {
             pattern.setInputPattern(inputPatternTextField.getText());
             validate();
@@ -80,8 +100,10 @@ public class PatternDetailView
         });
 
         languageBox.setOnAction(actionEvent -> pattern.setLanguage(languageBox.getValue()));
+        languageBox.setMaxWidth(Double.MAX_VALUE);
 
-        genderBox.setOnAction(actionEvent -> pattern.setGender(Gender.fromDisplayString(genderBox.getValue())));
+        genderBox.setOnAction(actionEvent -> pattern.setGender(genderBox.getValue()));
+        genderBox.setMaxWidth(Double.MAX_VALUE);
 
         pane.setContent(gridPane);
     }
@@ -113,7 +135,7 @@ public class PatternDetailView
         this.pattern = pattern;
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
-        genderBox.setValue(pattern.getGender().toDisplayString());
+        genderBox.setValue(pattern.getGender());
         outputPatternTextField.setText(pattern.getOutputPattern());
         validate();
     }

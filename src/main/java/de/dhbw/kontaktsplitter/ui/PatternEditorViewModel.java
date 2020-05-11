@@ -7,11 +7,13 @@ import de.dhbw.kontaktsplitter.ui.components.PatternDetailView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -128,9 +130,24 @@ public class PatternEditorViewModel implements Initializable
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/add_pattern_popup.fxml"));
         Scene scene;
+        Stage stage;
         try
         {
-            scene = new Scene(loader.load());
+            var root = (Parent) loader.load();
+            scene = new Scene(root);
+            stage = new Stage();
+            stage.setScene(scene);
+            if(root instanceof Region) {
+                Region region = (Region) root;
+                if(region.getMinHeight() > 0)
+                    stage.setMinHeight(region.getMinHeight());
+                if(region.getMaxHeight() > 0)
+                    stage.setMaxHeight(region.getMaxHeight());
+                if(region.getMinWidth() > 0)
+                    stage.setMinWidth(region.getMinWidth());
+                if(region.getMaxWidth() > 0)
+                    stage.setMaxWidth(region.getMaxWidth());
+            }
         }
         catch (IOException e)
         {
@@ -140,7 +157,7 @@ public class PatternEditorViewModel implements Initializable
             return;
         }
 
-        Stage stage = new Stage();
+
         stage.setScene(scene);
         stage.setTitle(edit ? "Anrede bearbeiten" : "Anrede hinzufügen");
         stage.initModality(Modality.APPLICATION_MODAL);

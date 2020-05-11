@@ -17,20 +17,21 @@
 <?import org.controlsfx.control.CheckComboBox?>
 <GridPane fx:id="gridPane" minHeight="300.0" minWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.MainViewModel">
     <columnConstraints>
-        <ColumnConstraints  minWidth="140.0" prefWidth="137.0" />
+        <ColumnConstraints minWidth="140.0" prefWidth="137.0" />
         <ColumnConstraints minWidth="460.0" prefWidth="463.0" hgrow="ALWAYS"/>
     </columnConstraints>
     <rowConstraints>
         <RowConstraints minHeight="-Infinity" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
         <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
-        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
     </rowConstraints>
     <MenuBar GridPane.columnSpan="2">
         <Menu fx:id="menu" mnemonicParsing="false" text="Einstellungen">
@@ -150,16 +151,16 @@
           <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </GridPane.margin>
     </CheckComboBox>
-    <ButtonBar prefHeight="35.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="9">
-      <buttons>
-          <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen" />
-          <Button fx:id="btn_split" minWidth="41.0" mnemonicParsing="false" onAction="#split" prefHeight="25.0" text="Kontakt splitten" />
-      </buttons>
+    <ButtonBar prefHeight="35.0" prefWidth="462.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10">
+        <buttons>
+            <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen" />
+            <Button fx:id="btn_split" minWidth="41.0" mnemonicParsing="false" onAction="#split" prefHeight="25.0" text="Kontakt splitten" />
+        </buttons>
         <opaqueInsets>
           <Insets bottom="1.0" />
         </opaqueInsets>
         <padding>
-          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
         </padding>
     </ButtonBar>
 </GridPane>

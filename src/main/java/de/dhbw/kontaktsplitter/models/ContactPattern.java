@@ -69,6 +69,6 @@ public class ContactPattern {
 
     @Override
     public String toString(){
-        return String.format("%s; %s -> %s; %s", language, inputPattern, outputPattern, gender.toDisplayString());
+        return String.format("%s; %s -> %s; %s", language, inputPattern, outputPattern, gender.toString());
     }
 }

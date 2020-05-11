@@ -1,5 +1,7 @@
 package de.dhbw.kontaktsplitter.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * @author Nico Dreher
  */
@@ -7,34 +9,26 @@ public enum Gender {
     /**
      * No specific gender
      */
-    NONE,
-    MALE,
-    FEMALE,
-    DIVERS;
+    @SerializedName("NONE")
+    NONE("Keine Angabe"),
+    @SerializedName("MALE")
+    MALE("Männlich"),
+    @SerializedName("FEMALE")
+    FEMALE("Weiblich"),
+    @SerializedName("DIVERS")
+    DIVERS("Divers");
 
-    public String toDisplayString(){
-        switch (this){
-            case DIVERS:
-                return "divers";
-            case FEMALE:
-                return "weiblich";
-            case MALE:
-                return "männlich";
-            default:
-                return "keine Angabe";
-        }
+    String label;
+    Gender(String label) {
+        this.label = label;
     }
 
-    public static Gender fromDisplayString(String displayString){
-        switch (displayString){
-            case "divers":
-                return Gender.DIVERS;
-            case "weiblich":
-                return Gender.FEMALE;
-            case "männlich":
-                return Gender.MALE;
-            default:
-                return Gender.NONE;
-        }
+    @Override
+    public String toString() {
+        return label;
+    }
+
+    public String getLabel() {
+        return label;
     }
 }

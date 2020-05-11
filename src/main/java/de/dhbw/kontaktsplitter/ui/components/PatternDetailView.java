@@ -61,17 +61,14 @@ public class PatternDetailView
         gridPane.add(genderBox, 1, 2);
         gridPane.add(outputPatternTextField, 1, 3);
 
-        inputPatternTextField.setOnKeyPressed(keyEvent -> {
-            if (!"".equals(inputPatternTextField.getText())){
-                pattern.setInputPattern(inputPatternTextField.getText());
-            }
+        inputPatternTextField.setOnKeyTyped(actionEvent -> {
+            pattern.setInputPattern(inputPatternTextField.getText());
+            System.out.println(pattern.toString());
             validate();
         });
 
-        outputPatternTextField.setOnKeyPressed(keyEvent -> {
-            if (!"".equals(outputPatternTextField.getText())){
-                pattern.setOutputPattern(outputPatternTextField.getText());
-            }
+        outputPatternTextField.setOnKeyTyped(keyEvent -> {
+            pattern.setOutputPattern(outputPatternTextField.getText());
             validate();
         });
 

@@ -174,6 +174,10 @@ public class UITest {
         alert_dialog_has_header_and_content("Nachname nicht erkannt", "Bitte tragen Sie den Nachnamen manuell ein.", robot);
     }
 
+    /**
+     * Test if missing Language opens a Error Message
+     * @param robot - FxRobot instance
+     */
     @Test
     void missingLanguage_opensErrorMessage(FxRobot robot)
     {

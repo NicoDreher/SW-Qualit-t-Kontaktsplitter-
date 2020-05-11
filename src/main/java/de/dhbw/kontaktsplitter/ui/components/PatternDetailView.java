@@ -74,7 +74,7 @@ public class PatternDetailView
 
         languageBox.setOnAction(actionEvent -> pattern.setLanguage(languageBox.getValue()));
 
-        genderBox.setOnAction(actionEvent -> pattern.setGender(genderFromDisplayText(genderBox.getValue())));
+        genderBox.setOnAction(actionEvent -> pattern.setGender(Gender.fromDisplayString(genderBox.getValue())));
 
         pane.setContent(gridPane);
     }
@@ -90,39 +90,13 @@ public class PatternDetailView
     public void setPattern(ContactPattern pattern){
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
-        genderBox.setValue(displayTextFromGender(pattern.getGender()));
+        genderBox.setValue(pattern.getGender().toDisplayString());
         outputPatternTextField.setText(pattern.getOutputPattern());
         validate();
     }
 
     public ContactPattern getPattern(){
         return pattern;
-    }
-
-    private String displayTextFromGender(Gender gender){
-        switch (gender){
-            case MALE:
-                return "männlich";
-            case FEMALE:
-                return "weiblich";
-            case DIVERS:
-                return "divers";
-            default:
-                return "keine Angabe";
-        }
-    }
-
-    private Gender genderFromDisplayText(String genderText){
-        switch (genderText){
-            case "männlich":
-                return Gender.MALE;
-            case "weiblich":
-                return Gender.FEMALE;
-            case "divers":
-                return Gender.DIVERS;
-            default:
-                return Gender.NONE;
-        }
     }
 
     private boolean validate(){

@@ -92,7 +92,7 @@ public class PatternDetailView
      */
     public void setOnValidate(Consumer<Boolean> validConsumer)
     {
-        validConsumer = validConsumer;
+        this.validConsumer = validConsumer;
     }
 
     /**

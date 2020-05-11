@@ -8,8 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -43,6 +45,7 @@ public class PatternEditorViewModel implements Initializable
 
     /**
      * Overwrites the initialize method from Initializable, sets ui handlers, extends ui from fxml
+     *
      * @param url see package javafx.fxml.Initializable
      * @param resourceBundle see package javafx.fxml.Initializable
      */
@@ -64,6 +67,7 @@ public class PatternEditorViewModel implements Initializable
 
     /**
      * Updates the elements inside the pattern editor
+     *
      * @param patternList list of ContactPatterns to set for this element
      */
     public void updateElements(List<ContactPattern> patternList)
@@ -88,10 +92,12 @@ public class PatternEditorViewModel implements Initializable
     /**
      * @return potentially edited patterns for this element
      */
-    public List<ContactPattern> getPatterns(){
+    public List<ContactPattern> getPatterns()
+    {
         List<ContactPattern> outputPatterns = new ArrayList<>();
 
-        for (String element : editor.getElements()){
+        for (String element : editor.getElements())
+        {
             outputPatterns.add(patterns.get(element));
         }
 
@@ -100,6 +106,7 @@ public class PatternEditorViewModel implements Initializable
 
     /**
      * Selects a given element by its title
+     *
      * @param selected pattern title to select
      */
     private void selectElement(String selected)
@@ -113,11 +120,13 @@ public class PatternEditorViewModel implements Initializable
 
     /**
      * Creates popup to edit or create a new pattern
+     *
      * @param edit, whether the current pattern should be added or if a pattern is edited
      */
-    private void addElementPopup(boolean edit){
+    private void addElementPopup(boolean edit)
+    {
 
-        FXMLLoader loader =  new FXMLLoader(getClass().getResource("/add_pattern_popup.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/add_pattern_popup.fxml"));
         Scene scene;
         try
         {
@@ -141,12 +150,13 @@ public class PatternEditorViewModel implements Initializable
 
         if (edit)
         {
-            popupViewModel.setPattern(patterns.get(currentPatternKey));
+            popupViewModel.setPattern(clonePattern(patterns.get(currentPatternKey)));
             popupViewModel.setAddButtonText("Speichern");
         }
         popupViewModel.setSubmitCommand(contactPattern -> {
 
-            if (edit){
+            if (edit)
+            {
                 patterns.remove(currentPatternKey);
             }
 
@@ -161,10 +171,19 @@ public class PatternEditorViewModel implements Initializable
             if (!edit)
             {
                 editor.addListElement(contactPattern.toString());
-            } else {
+            }
+            else
+            {
                 editor.replaceListElement(currentPatternKey, contactPattern.toString());
             }
             stage.close();
         });
+    }
+
+    private ContactPattern clonePattern(ContactPattern patternToClone)
+    {
+        return new ContactPattern(patternToClone.getLanguage(), patternToClone.getGender(),
+                                  patternToClone.getInputPattern(),
+                                  patternToClone.getOutputPattern());
     }
 }

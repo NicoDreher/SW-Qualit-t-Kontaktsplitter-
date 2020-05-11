@@ -66,4 +66,9 @@ public class ContactPattern {
     public String parseContact(Contact contact) {
         return outputPattern.replace(InputParser.TITLE, contact.getTitlesAsString()).replace(InputParser.FIRST_NAME, contact.getFirstName()).replace(InputParser.LAST_NAME, contact.getLastName()).trim().replaceAll("\\s+", " ");
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s; %s -> %s; %s", language, inputPattern, outputPattern, gender.toDisplayString());
+    }
 }

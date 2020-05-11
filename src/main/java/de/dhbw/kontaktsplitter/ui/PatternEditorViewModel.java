@@ -56,14 +56,14 @@ public class PatternEditorViewModel implements Initializable
 
     public void updateElements(List<ContactPattern> patternList)
     {
-        editor.updateElements(patternList.stream().map(ContactPattern::getInputPattern).collect(
+        editor.updateElements(patternList.stream().map(ContactPattern::toString).collect(
                 Collectors.toList()));
         patterns.clear();
-        patternList.forEach(contactPattern -> patterns.put(contactPattern.getInputPattern(), contactPattern));
+        patternList.forEach(contactPattern -> patterns.put(contactPattern.toString(), contactPattern));
 
         if (patternList.size() > 0)
         {
-            selectElement(patternList.get(0).getInputPattern());
+            selectElement(patternList.get(0).toString());
         }
 
         editor.overwriteElementsEditCommand(element -> {
@@ -86,7 +86,10 @@ public class PatternEditorViewModel implements Initializable
     private void selectElement(String selected)
     {
         currentPatternKey = selected;
-        view.setPattern(patterns.get(selected));
+        if (selected != null)
+        {
+            view.setPattern(patterns.get(selected));
+        }
     }
 
     private void addElementPopup(boolean edit){
@@ -124,14 +127,20 @@ public class PatternEditorViewModel implements Initializable
                 patterns.remove(currentPatternKey);
             }
 
-            if (patterns.containsKey(contactPattern.getInputPattern()))
+            if (patterns.containsKey(contactPattern.toString()))
             {
                 new Alert(Alert.AlertType.INFORMATION, "Ein solches Pattern existiert bereits").show();
                 return;
             }
 
-            patterns.put(contactPattern.getInputPattern(), contactPattern);
-            editor.addListElement(contactPattern.getInputPattern());
+            patterns.put(contactPattern.toString(), contactPattern);
+
+            if (!edit)
+            {
+                editor.addListElement(contactPattern.toString());
+            } else {
+                editor.replaceListElement(currentPatternKey, contactPattern.toString());
+            }
             stage.close();
         });
     }

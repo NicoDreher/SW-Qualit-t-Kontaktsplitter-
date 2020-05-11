@@ -10,5 +10,31 @@ public enum Gender {
     NONE,
     MALE,
     FEMALE,
-    DIVERS
+    DIVERS;
+
+    public String toDisplayString(){
+        switch (this){
+            case DIVERS:
+                return "divers";
+            case FEMALE:
+                return "weiblich";
+            case MALE:
+                return "männlich";
+            default:
+                return "keine Angabe";
+        }
+    }
+
+    public static Gender fromDisplayString(String displayString){
+        switch (displayString){
+            case "divers":
+                return Gender.DIVERS;
+            case "weiblich":
+                return Gender.FEMALE;
+            case "männlich":
+                return Gender.MALE;
+            default:
+                return Gender.NONE;
+        }
+    }
 }

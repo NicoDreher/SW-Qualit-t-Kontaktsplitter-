@@ -20,7 +20,8 @@ public class PatternDetailView
 {
     private TitledPane pane;
     private Consumer<Boolean> validConsumer;
-    private ContactPattern pattern;
+    private ContactPattern pattern = new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE,
+                                                        "", "");
 
     TextField inputPatternTextField = new TextField();
     ChoiceBox<String> languageBox = new ChoiceBox<>();
@@ -90,7 +91,6 @@ public class PatternDetailView
     }
 
     public void setPattern(ContactPattern pattern){
-        this.pattern = pattern;
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
         genderBox.setValue(displayTextFromGender(pattern.getGender()));

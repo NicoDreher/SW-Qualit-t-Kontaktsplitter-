@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 /**
  * ViewModel of the Main Window.
@@ -161,6 +162,12 @@ public class MainViewModel implements Initializable {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
+
+            stage.setOnCloseRequest(event -> {
+                Configuration.setTitles(((TitleEditorViewModel) fxmlLoader.getController()).getTitles());
+                Configuration.saveConfig();
+            });
+
             stage.show();
         }
         catch (IOException e)
@@ -186,6 +193,10 @@ public class MainViewModel implements Initializable {
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
+            stage.setOnCloseRequest(event -> {
+                Configuration.setPatterns(((PatternEditorViewModel) fxmlLoader.getController()).getPatterns());
+                Configuration.saveConfig();
+            });
 
             stage.show();
         }
@@ -228,6 +239,7 @@ public class MainViewModel implements Initializable {
 
     private void updateLanguages()
     {
-        cmb_language.setItems(FXCollections.observableList(Configuration.getPatterns().stream().map(ContactPattern::getLanguage).distinct().sorted().collect(Collectors.toList())));
+        cmb_language.setItems(FXCollections.observableList(Configuration.getPatterns().stream().map(ContactPattern::getLanguage).distinct().sorted().collect(
+                Collectors.toList())));
     }
 }

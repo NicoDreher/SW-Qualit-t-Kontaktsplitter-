@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -40,21 +41,27 @@ public class ElementEditor
         }
     }
 
-    public void overwriteElementsEditCommand(Consumer<String> valueConsumer){
-        for (CustomListCell cell : observableElements){
+    public void overwriteElementsEditCommand(Consumer<String> valueConsumer)
+    {
+        for (CustomListCell cell : observableElements)
+        {
             cell.overwriteEditCommand(valueConsumer);
         }
 
         update();
     }
 
-    public void setOnDelete(Consumer<String> deleteConsumer){
+    public void setOnDelete(Consumer<String> deleteConsumer)
+    {
         onDeleteConsumer = deleteConsumer;
     }
 
-    public void select(String element){
-        for (CustomListCell cell : elementsView.getItems()){
-            if (cell.getValue().equals(element)){
+    public void select(String element)
+    {
+        for (CustomListCell cell : elementsView.getItems())
+        {
+            if (cell.getValue().equals(element))
+            {
                 elementsView.getSelectionModel().select(cell);
                 break;
             }
@@ -67,7 +74,9 @@ public class ElementEditor
             if (observableElements.size() > 0)
             {
                 eventConsumer.accept(elementsView.getSelectionModel().getSelectedItems().get(0).getValue());
-            } else {
+            }
+            else
+            {
                 eventConsumer.accept(null);
             }
         });
@@ -78,7 +87,8 @@ public class ElementEditor
         return elementsView;
     }
 
-    public List<String> getElements(){
+    public List<String> getElements()
+    {
         return elementsView.getItems().stream().map(CustomListCell::getValue).collect(Collectors.toList());
     }
 
@@ -93,8 +103,38 @@ public class ElementEditor
             }
         }
 
-        observableElements.add(new CustomListCell(displayTitle, this::removeElement, this::moveElementUp,
-                                                  this::moveElementDown));
+        CustomListCell cell = new CustomListCell(displayTitle, this::removeElement, this::moveElementUp,
+                                                 this::moveElementDown);
+        observableElements.add(cell);
+        update();
+
+        elementsView.getSelectionModel().select(cell);
+        elementsView.scrollTo(cell);
+    }
+
+    public void replaceListElement(String oldElement, String newElement)
+    {
+        //Avoiding java.util.ConcurrentModificationException
+        List<CustomListCell> newElements = new ArrayList<>();
+
+        observableElements.forEach(cell ->
+                                   {
+                                       if (cell.getValue().equals(oldElement))
+                                       {
+                                           CustomListCell newCell = new CustomListCell(newElement, this::removeElement,
+                                                                                       this::moveElementUp,
+                                                                                       this::moveElementDown);
+                                           newCell.overwriteEditCommand(cell.getOverwrittenEditCommand());
+                                           newElements
+                                                   .add(newCell);
+                                       }
+                                       else
+                                       {
+                                           newElements.add(cell);
+                                       }
+                                   });
+
+        observableElements = FXCollections.observableList(newElements);
         update();
     }
 
@@ -122,7 +162,8 @@ public class ElementEditor
 
     private void removeElement(CustomListCell cell)
     {
-        if (onDeleteConsumer != null){
+        if (onDeleteConsumer != null)
+        {
             onDeleteConsumer.accept(cell.getValue());
         }
 

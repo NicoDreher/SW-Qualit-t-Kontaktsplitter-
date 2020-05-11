@@ -86,4 +86,8 @@ public class CustomListCell extends HBox
     {
         this.valueConsumer = valueConsumer;
     }
+
+    public Consumer<String> getOverwrittenEditCommand(){
+        return valueConsumer;
+    }
 }

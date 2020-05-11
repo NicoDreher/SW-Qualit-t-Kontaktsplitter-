@@ -121,9 +121,13 @@ public class Configuration {
 
     }
 
+    public static void setTitles(List<Title>newTitles){titles = newTitles;}
+
     public static List<Title> getTitles() {
         return new ArrayList<>(titles);
     }
+
+    public static void setPatterns(List<ContactPattern>newPatterns){patterns = newPatterns;}
 
     public static List<ContactPattern> getPatterns() {
         return new ArrayList<>(patterns);

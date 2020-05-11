@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
@@ -129,19 +128,14 @@ public class Controller implements Initializable {
     {
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/title_editor.fxml"));
-            TitleEditorViewModel viewModel = new TitleEditorViewModel();
-            fxmlLoader.setController(viewModel);
 
             var root = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Titel hinzufügen");
+            stage.setTitle("Titel verwalten");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
             stage.show();
-
-            viewModel.updateElements(Configuration.getTitles().stream().map(Title::getTitle).collect(
-                    Collectors.toList()));
         }
         catch (IOException e)
         {
@@ -157,13 +151,12 @@ public class Controller implements Initializable {
 
             var root = (Parent)fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("Titel hinzufügen");
+            stage.setTitle("Anreden verwalten");
             stage.setScene(new Scene(root));
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(gridPane.getScene().getWindow());
-            stage.show();
 
-            ((PatternEditorViewModel) fxmlLoader.getController()).updateElements(Configuration.getPatterns());
+            stage.show();
         }
         catch (IOException e)
         {

@@ -2,14 +2,15 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane minHeight="20.0" minWidth="10.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane minHeight="20.0" minWidth="20.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
    <columnConstraints>
       <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
    </columnConstraints>
@@ -18,7 +19,7 @@
       <RowConstraints minHeight="12.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
    </rowConstraints>
    <children>
-      <ListView fx:id="titlesView" prefHeight="364.0" prefWidth="600.0" style="-fx-background-color: #e0e0e0;" />
+      <VBox prefHeight="200.0" prefWidth="100.0" fx:id="topBox"/>
       <HBox prefHeight="49.0" prefWidth="600.0" GridPane.rowIndex="1">
          <children>
             <TextField fx:id="newEntryField" HBox.hgrow="ALWAYS">

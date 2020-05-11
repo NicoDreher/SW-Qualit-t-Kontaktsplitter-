@@ -2,15 +2,12 @@ package de.dhbw.kontaktsplitter.ui;
 
 import de.dhbw.kontaktsplitter.models.Title;
 import de.dhbw.kontaktsplitter.persistence.Configuration;
-import de.dhbw.kontaktsplitter.ui.components.CustomListCell;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import de.dhbw.kontaktsplitter.ui.components.ElementEditor;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.List;
@@ -20,7 +17,7 @@ import java.util.stream.Collectors;
 public class TitleEditorViewModel implements Initializable
 {
     @FXML
-    private ListView<CustomListCell> titlesView;
+    private VBox topBox;
 
     @FXML
     private TextField newEntryField;
@@ -28,14 +25,15 @@ public class TitleEditorViewModel implements Initializable
     @FXML
     private Button newEntryButton;
 
-    private boolean editable = true;
-
-    private ObservableList<CustomListCell> observableTitles = FXCollections.observableArrayList();
+    private ElementEditor editor = new ElementEditor();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
-        newEntryButton.setOnAction(event -> this.addTitle());
+        topBox.getChildren().setAll(editor.getElementsView());
+        editor.updateElements(Configuration.getTitles().stream().map(Title::getTitle).collect(Collectors.toList()));
+
+        newEntryButton.setOnAction(event -> editor.addListElement(newEntryField.getText()));
         newEntryButton.setDisable(true);
         newEntryField.setOnKeyReleased(keyEvent -> {
             if ("".equals(newEntryField.getText()))
@@ -49,81 +47,8 @@ public class TitleEditorViewModel implements Initializable
         });
     }
 
-    public void updateElements(List<String> elements)
+    public List<Title> getTitles()
     {
-        observableTitles.clear();
-
-        for (String element : elements)
-        {
-            observableTitles.add(new CustomListCell(element, this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown, editable));
-        }
-
-        update();
-
-        if (elements.size() > 0){
-            titlesView.scrollTo(0);
-            titlesView.getSelectionModel().select(0);
-        }
-    }
-
-    public void setEditable(boolean editable){
-        this.editable = editable;
-    }
-
-    private void addTitle()
-    {
-        String newProposedTitle = newEntryField.getText();
-
-        if (!"".equals(newProposedTitle))
-        {
-            boolean titleExists = observableTitles.stream()
-                    .map(CustomListCell::getValue)
-                    .collect(Collectors.toList())
-                    .contains(newProposedTitle);
-
-            if (titleExists)
-            {
-                new Alert(Alert.AlertType.WARNING, "Dieser Titel existiert bereits").show();
-                return;
-            }
-
-            observableTitles.add(new CustomListCell(newProposedTitle, this::removeTitle, this::moveElementUp,
-                                                    this::moveElementDown, editable));
-            update();
-        }
-    }
-
-    private void moveElementUp(CustomListCell cell)
-    {
-        int index = observableTitles.indexOf(cell);
-
-        if (index != 0)
-        {
-            observableTitles.remove(cell);
-            observableTitles.add(index - 1, cell);
-        }
-    }
-
-    private void moveElementDown(CustomListCell cell)
-    {
-        int index = observableTitles.indexOf(cell);
-
-        if (index != observableTitles.size() - 1)
-        {
-            observableTitles.remove(cell);
-            observableTitles.add(index + 1, cell);
-        }
-    }
-
-    private void removeTitle(CustomListCell cell)
-    {
-        observableTitles.remove(cell);
-        update();
-    }
-
-    private void update()
-    {
-        titlesView.setItems(observableTitles);
+        return editor.getElements().stream().map(Title::new).collect(Collectors.toList());
     }
 }

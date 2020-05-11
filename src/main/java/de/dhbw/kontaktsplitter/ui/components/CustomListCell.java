@@ -1,28 +1,22 @@
 package de.dhbw.kontaktsplitter.ui.components;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.function.Consumer;
 
 public class CustomListCell extends HBox
 {
     private TextField textInput = new TextField("");
-    private Button deleteButton = new Button("\uD83D\uDDD1");
     private Button editButton = new Button("✎");
-    private Button upButton = new Button("▲");
-    private Button downButton = new Button("▼");
 
     private String value;
+    private Consumer<String> valueConsumer;
 
     public CustomListCell(String title, Consumer<CustomListCell> onDelete, Consumer<CustomListCell> onMoveUp,
-                          Consumer<CustomListCell> onMoveDown, boolean editable)
+                          Consumer<CustomListCell> onMoveDown)
     {
         super();
         this.value = title;
@@ -35,21 +29,35 @@ public class CustomListCell extends HBox
         textInput.setBackground(null);
         textInput.getStyleClass().add("toggleable-text-input");
 
+        textInput.setOnKeyReleased(event -> {
+            if ("".equals(textInput.getText()))
+            {
+                editButton.setDisable(true);
+            }
+            else
+            {
+                editButton.setDisable(false);
+            }
+        });
+
+        Button deleteButton = new Button("\uD83D\uDDD1");
         deleteButton.getStyleClass().add("inline-button");
         editButton.getStyleClass().add("inline-button");
+        Button upButton = new Button("▲");
         upButton.getStyleClass().add("inline-button");
+        Button downButton = new Button("▼");
         downButton.getStyleClass().add("inline-button");
 
-        ArrayList<Node> children = new ArrayList<>(Arrays.asList(textInput, upButton, downButton));
-        if (editable){
-            children.add(editButton);
-        }
-        children.add(deleteButton);
-
-        getChildren().addAll(children.toArray(new Node[]{}));
+        getChildren().addAll(textInput, upButton, downButton, editButton, deleteButton);
         HBox.setHgrow(textInput, Priority.ALWAYS);
 
         editButton.setOnAction(actionEvent -> {
+            if (valueConsumer != null)
+            {
+                valueConsumer.accept(value);
+                return;
+            }
+
             if (editButton.getText().equals("✎"))
             {
                 editButton.setText("✓");
@@ -72,5 +80,10 @@ public class CustomListCell extends HBox
     public String getValue()
     {
         return value;
+    }
+
+    public void overwriteEditCommand(Consumer<String> valueConsumer)
+    {
+        this.valueConsumer = valueConsumer;
     }
 }

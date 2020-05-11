@@ -9,25 +9,31 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
+import org.testfx.framework.junit5.Stop;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(ApplicationExtension.class)
 public class TitleEditorViewModelTest
 {
     private static Scene scene;
+    private Stage stage;
+    private Stage mainStage;
 
     @BeforeAll
     public static void before()
@@ -42,43 +48,160 @@ public class TitleEditorViewModelTest
         }
     }
 
+    /**
+     * Initialize stages
+     *
+     * @param stage main stage
+     * @throws Exception
+     */
     @Start
     public void start(Stage stage) throws Exception
     {
+        mainStage = stage;
         new Startup().start(stage);
 
-        GridPane gridPane = FXMLLoader.load(getClass().getResource("/element_editor.fxml"));
+        GridPane gridPane = FXMLLoader.load(getClass().getResource("/title_editor.fxml"));
         scene = new Scene(gridPane);
 
-        Stage titleEditorStage = new Stage();
-        titleEditorStage.initOwner(stage);
-        titleEditorStage.initModality(Modality.WINDOW_MODAL);
-        titleEditorStage.setTitle("UnitTests");
-        titleEditorStage.setScene(scene);
-        titleEditorStage.setMinWidth(650);
-        titleEditorStage.setMinHeight(350);
-        titleEditorStage.show();
-
+        this.stage = new Stage();
+        this.stage.initOwner(stage);
+        this.stage.initModality(Modality.WINDOW_MODAL);
+        this.stage.setTitle("UnitTests");
+        this.stage.setScene(scene);
+        this.stage.setMinWidth(650);
+        this.stage.setMinHeight(350);
+        this.stage.show();
     }
 
+    /**
+     * Checks if initial state of the window is ok
+     *
+     * @param robot object simulating user
+     */
     @Test
-    public void initializeTest()
+    public void initializeTest(FxRobot robot)
     {
-        Button newTitleButton = (Button) scene.lookup("#newTitleButton");
-        TextField newTitleField = (TextField) scene.lookup("#newTitleField");
+        TextField newEntryField = (TextField) scene.lookup("#newEntryField");
+        Button newEntryButton = (Button) scene.lookup("#newEntryButton");
+
+        VBox topBox = (VBox) scene.lookup("#topBox");
 
         @SuppressWarnings("unchecked")
-        ListView<CustomListCell> titlesView = (ListView<CustomListCell>) scene.lookup("#titlesView");
+        ListView<CustomListCell> listView = (ListView<CustomListCell>) topBox.getChildren().get(0);
 
-        assertTrue(newTitleButton.disableProperty().get());
-        assertEquals("", newTitleField.getText());
+        assertTrue(newEntryButton.disableProperty().get());
+        assertEquals("", newEntryField.getText());
 
+        //Titles from the configuration
         List<String> expectedTitles = Configuration.getTitles().stream().map(Title::getTitle).collect(
                 Collectors.toList());
-        List<String> displayedTitles = titlesView.getItems().stream().map(CustomListCell::getValue)
-                .collect(Collectors.toList());
 
+        //Titles given by the value variables
+        List<String> displayedVariableTitles = listView.getItems().stream().map(CustomListCell::getValue)
+                .collect(Collectors.toList());
+        //Titles actually displayed in the ui
+        List<String> displayedTitles = listView.getItems().stream().map(customListCell -> {
+            TextField textField = (TextField) customListCell.getChildren().get(0);
+            return textField.getText();
+        }).collect(Collectors.toList());
+
+        expectedTitles.forEach(title -> assertTrue(displayedVariableTitles.contains(title)));
         expectedTitles.forEach(title -> assertTrue(displayedTitles.contains(title)));
+
+        robot.clickOn(newEntryField);
+        robot.type(KeyCode.A);
+        robot.type(KeyCode.BACK_SPACE);
+
+        assertTrue(newEntryButton.isDisabled());
+
+        robot.type(KeyCode.A);
+        assertFalse(newEntryButton.isDisabled());
+    }
+
+    /**
+     * Checks that an element, that is not yet present can be added
+     *
+     * @param robot, simulates user input
+     */
+    @Test
+    public void addAllowedValueTest(FxRobot robot)
+    {
+        TextField newEntryField = (TextField) scene.lookup("#newEntryField");
+        Button newEntryButton = (Button) scene.lookup("#newEntryButton");
+
+        VBox topBox = (VBox) scene.lookup("#topBox");
+
+        @SuppressWarnings("unchecked")
+        ListView<CustomListCell> listView = (ListView<CustomListCell>) topBox.getChildren().get(0);
+
+        robot.clickOn(newEntryField);
+        robot.type(KeyCode.A);
+        robot.clickOn(newEntryButton);
+
+        boolean found = false;
+
+        for (CustomListCell listElement : listView.getItems())
+        {
+            TextField textField = (TextField) listElement.getChildren().get(0);
+
+            if (textField.getText().equals("a"))
+            {
+                found = true;
+            }
+        }
+
+        assertTrue(found);
+    }
+
+    /**
+     * Checks that a message is thrown when a duplicate element is inserted
+     * @param robot
+     */
+    @Test
+    public void addReplicaValueTest(FxRobot robot)
+    {
+        TextField newEntryField = (TextField) scene.lookup("#newEntryField");
+        Button newEntryButton = (Button) scene.lookup("#newEntryButton");
+
+        VBox topBox = (VBox) scene.lookup("#topBox");
+
+        @SuppressWarnings("unchecked")
+        ListView<CustomListCell> listView = (ListView<CustomListCell>) topBox.getChildren().get(0);
+
+        robot.clickOn(newEntryField);
+        robot.type(KeyCode.A);
+        robot.clickOn(newEntryButton);
+
+        robot.clickOn(newEntryField);
+        robot.type(KeyCode.A);
+        robot.clickOn(newEntryButton);
+
+        TestUtil.alert_dialog_has_header_and_content("Meldung",
+                                                     "Ein solches Element besteht schon.", robot);
+
+        int asFound = 0;
+
+        for (CustomListCell item : listView.getItems())
+        {
+            TextField textFeld = (TextField) item.getChildren().get(0);
+
+            if (textFeld.getText().equals("a"))
+            {
+                asFound++;
+            }
+        }
+
+        assertEquals(1, asFound);
+    }
+
+    /**
+     * Closes a stage after a test finished
+     */
+    @Stop
+    public void stop()
+    {
+        stage.close();
+        mainStage.close();
     }
 
 }

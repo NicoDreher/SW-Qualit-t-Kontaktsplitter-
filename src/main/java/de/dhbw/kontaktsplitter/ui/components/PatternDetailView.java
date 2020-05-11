@@ -63,7 +63,6 @@ public class PatternDetailView
 
         inputPatternTextField.setOnKeyTyped(actionEvent -> {
             pattern.setInputPattern(inputPatternTextField.getText());
-            System.out.println(pattern.toString());
             validate();
         });
 
@@ -88,6 +87,7 @@ public class PatternDetailView
     }
 
     public void setPattern(ContactPattern pattern){
+        this.pattern = pattern;
         inputPatternTextField.setText(pattern.getInputPattern());
         languageBox.setValue(pattern.getLanguage());
         genderBox.setValue(pattern.getGender().toDisplayString());

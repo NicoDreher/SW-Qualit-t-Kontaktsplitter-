@@ -27,13 +27,20 @@ public class TitleEditorViewModel implements Initializable
 
     private ElementEditor editor = new ElementEditor();
 
+    /**
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle)
     {
         topBox.getChildren().setAll(editor.getElementsView());
         editor.updateElements(Configuration.getTitles().stream().map(Title::getTitle).collect(Collectors.toList()));
 
-        newEntryButton.setOnAction(event -> editor.addListElement(newEntryField.getText()));
+        newEntryButton.setOnAction(event -> {
+            editor.addListElement(newEntryField.getText());
+            newEntryField.clear();
+        });
         newEntryButton.setDisable(true);
         newEntryField.setOnKeyReleased(keyEvent -> {
             if ("".equals(newEntryField.getText()))

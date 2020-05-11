@@ -98,7 +98,7 @@ public class ElementEditor
         {
             if (element.getValue().equals(displayTitle))
             {
-                new Alert(Alert.AlertType.INFORMATION, "Ein solches Element besteht schon.", ButtonType.OK);
+                new Alert(Alert.AlertType.INFORMATION, "Ein solches Element besteht schon.", ButtonType.OK).show();
                 return;
             }
         }

@@ -137,10 +137,8 @@ public class MainViewModel implements Initializable {
     /**
      * Method binding to provide a interface to the CRM-system.
      * Currently not implemented and only shows a information message.
-     *
-     * @param actionEvent
      */
-    public void duplicate(ActionEvent actionEvent) {
+    public void duplicate() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "CRM-System nicht verknüpft.");
         alert.setHeaderText("Keine Verbindung möglich");
         alert.showAndWait();

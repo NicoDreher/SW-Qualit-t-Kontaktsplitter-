@@ -93,9 +93,9 @@ public class UITest
      * @param robot - FxRobot instance
      */
     @Test
-    void btnDuplicate_opensAndClosesInfoWindow(FxRobot robot)
-    {
+    void btnDuplicate_opensAndClosesInfoWindow(FxRobot robot) throws InterruptedException {
         robot.clickOn(stage.getScene().lookup("#btn_duplicate"), Motion.DIRECT, MouseButton.PRIMARY);
+        Thread.sleep(200);
         alert_dialog_has_header_and_content("Keine Verbindung möglich", "CRM-System nicht verknüpft.", robot);
     }
 
@@ -113,7 +113,7 @@ public class UITest
         robot.type(KeyCode.ENTER);
         var actualStage = getTopWindowModal(robot);
         assertNotNull(actualStage);
-        assertTrue(actualStage.getTitle().equalsIgnoreCase("Titel hinzufügen"));
+        assertTrue(actualStage.getTitle().equalsIgnoreCase("Titel verwalten"));
         assertTrue(actualStage.isFocused());
     }
 
@@ -130,9 +130,8 @@ public class UITest
         robot.type(KeyCode.ENTER);
         var actualStage = getTopWindowModal(robot);
         assertNotNull(actualStage);
-        assertTrue(actualStage.getTitle().equalsIgnoreCase("Anredenmuster hinzufügen"));
+        assertTrue(actualStage.getTitle().equalsIgnoreCase("Anreden verwalten"));
         assertTrue(actualStage.isFocused());
-        ;
     }
 
     /**

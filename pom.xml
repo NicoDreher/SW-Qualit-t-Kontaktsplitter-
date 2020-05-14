@@ -28,6 +28,7 @@
         <java.target.version>11</java.target.version>
         <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
         <javafx.version>11</javafx.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

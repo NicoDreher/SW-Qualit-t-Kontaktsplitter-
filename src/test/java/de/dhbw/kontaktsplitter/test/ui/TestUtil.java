@@ -32,9 +32,9 @@ public class TestUtil {
         final var dialogPane = (DialogPane) actualAlertDialog.getScene().getRoot();
         assertEquals(expectedHeader, dialogPane.getHeaderText());
         assertEquals(expectedContent, dialogPane.getContentText());
-        assertTrue(actualAlertDialog.isFocused());
-        robot.type(KeyCode.ESCAPE);
-        assertFalse(actualAlertDialog.isFocused());
+        assertTrue(actualAlertDialog.isShowing());
+        robot.clickOn("OK");
+        assertFalse(actualAlertDialog.isShowing());
     }
 
     /**

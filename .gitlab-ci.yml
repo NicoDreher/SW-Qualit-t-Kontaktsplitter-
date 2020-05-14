@@ -2,7 +2,7 @@ variables:
   headless: "true"
 build:
   stage: build
-  image: maven:latest
+  image: nexus.nico-dreher.de:8084/maven-jfx:latest
   script:
     - mvn test --fail-never
     - mvn package -Dmaven.test.skip=true

@@ -1,3 +1,6 @@
+stages:
+  - build
+  - bundle
 variables:
   headless: "true"
 build:
@@ -19,3 +22,17 @@ build:
       junit:
         - target/surefire-reports/TEST-*.xml
         - target/failsafe-reports/TEST-*.xml
+bundle:
+  stage: bundle
+  image: nexus.nico-dreher.de:8084/maven-jfx:latest
+  script:
+    - wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip
+    - unzip openjdk-11+28_windows-x64_bin.zip -d openjdk-11/
+  artifacts:
+    paths:
+      - Kontaktsplitter-Kings.jar
+      - javadoc/
+      - openjdk-11/
+      - start.bat
+      - start.sh
+      - start-bundle.bat

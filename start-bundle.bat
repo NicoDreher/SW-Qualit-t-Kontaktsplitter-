@@ -1,2 +1,1 @@
-openjdk-11/bin/java.exe -jar -Dfile.encoding=utf-8 Kontaktsplitter-Kings.jar
-PAUSE
+cmd /k "openjdk-11\bin\java.exe -jar -Dfile.encoding=utf-8 Kontaktsplitter-Kings.jar && exit"

@@ -9,6 +9,8 @@ import de.dhbw.kontaktsplitter.persistence.Configuration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * All functions to splice a salutation and parse the heading
@@ -25,7 +27,7 @@ public class InputParser {
      */
     public static final String FIRST_NAME = "%VORNAMEN";
     /**
-     * The placeholder for Surnames
+     * The placeholder for surnames
      */
     public static final String LAST_NAME = "%NACHNAMEN";
 
@@ -72,9 +74,9 @@ public class InputParser {
                 }
                 else if(token.equalsIgnoreCase(FIRST_NAME)) {
                     while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") &&
-                            (Configuration.isFirstName(inputTokens[inputIndex]) || firstNames.isEmpty() ||
+                            (Configuration.isFirstName(parseName(inputTokens[inputIndex])) || firstNames.isEmpty() ||
                                     first == 2)) {
-                        firstNames.add(inputTokens[inputIndex]);
+                        firstNames.add(parseName(inputTokens[inputIndex]));
                         if(Gender.NONE.equals(inputGender)) {
                             inputGender = Configuration.getGender(inputTokens[inputIndex]);
                         }
@@ -86,9 +88,9 @@ public class InputParser {
                 }
                 else if(token.equalsIgnoreCase(LAST_NAME)) {
                     while(inputIndex < inputTokens.length && !inputTokens[inputIndex].contains(",") &&
-                            (!Configuration.isFirstName(inputTokens[inputIndex]) || lastNames.isEmpty() ||
+                            (!Configuration.isFirstName(parseName(inputTokens[inputIndex])) || lastNames.isEmpty() ||
                                     first == 1)) {
-                        lastNames.add(inputTokens[inputIndex]);
+                        lastNames.add(parseName(inputTokens[inputIndex]));
                         inputIndex++;
                     }
                     if(first == 0) {
@@ -116,6 +118,35 @@ public class InputParser {
         }
         return new Contact(pattern.getLanguage(), inputGender, titles, String.join(" ", firstNames),
                 parseLastNames(lastNames));
+    }
+
+    /**
+     * Partial replacement in a string
+     * @param start The start index of the replacement
+     * @param end The end index of the replacement
+     * @param string The string to replace parts of
+     * @param replacement The replacement string
+     * @return The edited string
+     */
+    private static String replacePart(int start, int end, String string, String replacement) {
+        return string.substring(0, start) + replacement + string.substring(end);
+    }
+
+    /**
+     * Makes the first char of a name uppercase
+     *
+     * @param name
+     * @return The parsed name
+     */
+    private static String parseName(String name) {
+        if(!Configuration.getPrefixesAndSuffixes().contains(name.toLowerCase())) {
+            Pattern p = Pattern.compile("[a-zA-Z]]+");
+            Matcher m = p.matcher(name);
+            while(m.find()) {
+                name = replacePart(m.start(), m.end(), name, name.substring(m.start(), m.start() + 1).toUpperCase() + name.substring(m.start() + 1, m.end()).toLowerCase());
+            }
+        }
+        return name;
     }
 
     /**

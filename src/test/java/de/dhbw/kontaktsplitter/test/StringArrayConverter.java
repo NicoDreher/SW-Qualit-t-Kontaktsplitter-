@@ -6,12 +6,23 @@ import org.junit.jupiter.params.converter.SimpleArgumentConverter;
 public class StringArrayConverter extends SimpleArgumentConverter {
     @Override
     protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
-        if(source instanceof String && String[].class.isAssignableFrom(targetType)) {
-            return ((String) source).split("\\s*;\\s*");
+        if(source != null) {
+            if(source instanceof String && String[].class.isAssignableFrom(targetType)) {
+                if(!((String) source).isEmpty()) {
+                    return ((String) source).split("\\s*;\\s*");
+                }
+                else {
+                    return new String[0];
+                }
+            }
+            else {
+                throw new ArgumentConversionException("Conversion from " + source.getClass() + " to "
+                        + targetType + " not supported.");
+            }
         }
         else {
-            throw new ArgumentConversionException("Conversion from " + source.getClass() + " to "
-                    + targetType + " not supported.");
+            return null;
         }
+
     }
 }

@@ -30,7 +30,7 @@ public class ContactParserTest {
      * @param lastName The surnames
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/models/contact.csv")
+    @CsvFileSource(resources = "/parser/contact.csv")
     void testMatch(String patternLanguage, Gender patternGender, String inputPattern, String input, Gender gender,
             String titles, String firstName, String lastName) {
         ContactPattern pattern = new ContactPattern(patternLanguage, patternGender, inputPattern, "");
@@ -53,7 +53,7 @@ public class ContactParserTest {
      * @param lastName The expected surnames
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/models/defaultPatterns.csv")
+    @CsvFileSource(resources = "/parser/defaultPatterns.csv")
     void testMatchDefault(String input, String language, Gender gender, String titles, String firstName,
             String lastName) {
         Contact contact = InputParser.parseInput(input);
@@ -72,7 +72,7 @@ public class ContactParserTest {
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/models/lastnames.csv")
+    @CsvFileSource(resources = "/parser/lastnames.csv")
     void testLastNames(@ConvertWith(StringArrayConverter.class) String[] lastNames, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.parseLastNames(List.of(lastNames)));
     }
@@ -84,7 +84,7 @@ public class ContactParserTest {
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/models/outputs.csv")
+    @CsvFileSource(resources = "/parser/outputs.csv")
     void testOutput(String input, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.generateOutput(InputParser.parseInput(input)));
     }

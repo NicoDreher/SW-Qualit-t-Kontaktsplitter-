@@ -12,21 +12,48 @@ import java.util.stream.Collectors;
 
 import static de.dhbw.kontaktsplitter.parser.InputParser.*;
 
+/**
+ * The Class for the saving and loading the patterns
+ *
+ * @author Nico Dreher
+ */
 public class Configuration {
 
+    /**
+     * The path of the configuration folder
+     */
     public static final String CONFIG_PATH = System.getProperty("user.home") + "/Kontaktsplitter-Kings/config.json";
+    /**
+     * The available languages
+     */
     private static final List<String> LANGUAGES = Arrays.stream(Locale.getISOLanguages())
             .map(Locale::new)
             .map(Locale::getDisplayLanguage)
             .collect(Collectors.toList());
+    /**
+     * The academic and non academic titles
+     */
     private static List<Title> titles;
+    /**
+     * The available patterns to parse the salutations
+     */
     private static List<ContactPattern> patterns;
 
+    /**
+     * The known prefixes and suffixes for surnames
+     */
     private static List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
 
+    /**
+     * The name database and the gender
+     */
     private static Map<String, Gender> names;
 
     static {
+        /*
+         * Generates the default titles and patterns
+         * Loads the names from the names.txt
+         */
         titles = new ArrayList<>();
         titles.add(new Title("Professor"));
         titles.add(new Title("Prof."));
@@ -138,7 +165,7 @@ public class Configuration {
                                 break;
                         }
                         if(gender != null) {
-                            names.put(parts[1], gender);
+                            names.put(parts[1].toLowerCase(), gender);
                         }
                     }
                 }
@@ -166,12 +193,22 @@ public class Configuration {
         patterns = newPatterns;
     }
 
+    /**
+     * Checks if the given name is a known forename
+     * @param name The name to check
+     * @return True if the name is in the list of known forenames
+     */
     public static boolean isFirstName(String name) {
-        return names.containsKey(name);
+        return !getPrefixesAndSuffixes().contains(name.toLowerCase()) && names.containsKey(name.toLowerCase());
     }
 
+    /**
+     * Get the gender of a forename
+     * @param name
+     * @return The gender or {@link Gender#NONE} if the name is unknown
+     */
     public static Gender getGender(String name) {
-        return names.getOrDefault(name, Gender.NONE);
+        return names.getOrDefault(name.toLowerCase(), Gender.NONE);
     }
 
     public static List<String> getLanguages() {
@@ -182,6 +219,9 @@ public class Configuration {
         return new ArrayList<>(prefixesAndSuffixes);
     }
 
+    /**
+     * Loads the patterns and titles from the config
+     */
     public static void loadConfig() {
         if(new File(CONFIG_PATH).exists()) {
             try(FileReader reader = new FileReader(new File(CONFIG_PATH))) {
@@ -198,6 +238,9 @@ public class Configuration {
         }
     }
 
+    /**
+     * Saves the patterns und titles to the configuration
+     */
     public static void saveConfig() {
         new File(CONFIG_PATH).getParentFile().mkdirs();
         try(FileWriter writer = new FileWriter(new File(CONFIG_PATH))) {

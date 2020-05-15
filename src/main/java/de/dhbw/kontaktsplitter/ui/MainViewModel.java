@@ -185,6 +185,7 @@ public class MainViewModel implements Initializable {
             stage.setOnCloseRequest(event -> {
                 Configuration.setTitles(((TitleEditorViewModel) fxmlLoader.getController()).getTitles());
                 Configuration.saveConfig();
+                updateTitles();
             });
 
             stage.show();

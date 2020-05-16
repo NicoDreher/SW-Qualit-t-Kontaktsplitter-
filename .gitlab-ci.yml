@@ -42,6 +42,7 @@ bundle:
   stage: bundle
   image: nexus.nico-dreher.de:8084/maven-jfx:latest
   script:
+    - ls
     - if [ ! -d "openjdk-11" ]; then echo "Downloading OpenJDK"; wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip; unzip openjdk-11+28_windows-x64_bin.zip -d ./; mv jdk-11/ openjdk-11/; else echo "OpenJDK Cached"; fi
   cache:
     paths:

@@ -5,6 +5,7 @@ stages:
 variables:
   headless: "true"
 cache:
+  key: openjdk
   paths:
     - openjdk-11/
 docs:

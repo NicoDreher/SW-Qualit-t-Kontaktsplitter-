@@ -111,7 +111,7 @@ public class ContactParserTest {
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/ui/correctSalutation.csv")
+    @CsvFileSource(resources = "/parser/output.csv")
     void testOutput(String input, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.generateOutput(InputParser.parseInput(input)));
     }

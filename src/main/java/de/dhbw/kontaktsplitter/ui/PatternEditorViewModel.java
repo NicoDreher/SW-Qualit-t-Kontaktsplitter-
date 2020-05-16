@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Modality;
@@ -38,11 +36,21 @@ public class PatternEditorViewModel implements Initializable {
     @FXML
     private Button addPopupButton;
 
+    @FXML
+    private ToggleButton helpButton;
+
+    @FXML
+    private GridPane rightGridPane;
+
+    @FXML
+    private ScrollPane helpScrollPane;
+
     private HashMap<String, ContactPattern> patterns = new HashMap<>();
     private String currentPatternKey;
     private PatternDetailView view;
 
     private ElementEditor editor = new ElementEditor();
+    private boolean helpVisible = true;
 
     /**
      * Overwrites the initialize method from Initializable, sets ui handlers, extends ui from fxml
@@ -63,6 +71,10 @@ public class PatternEditorViewModel implements Initializable {
         addPopupButton.setOnMouseClicked(event -> addElementPopup(false));
 
         editor.setOnDelete(element -> patterns.remove(element));
+
+        toggleHelp();
+
+        helpButton.setOnAction(event -> toggleHelp());
     }
 
     /**
@@ -195,5 +207,25 @@ public class PatternEditorViewModel implements Initializable {
         return new ContactPattern(patternToClone.getLanguage(), patternToClone.getGender(),
                 patternToClone.getInputPattern(),
                 patternToClone.getOutputPattern());
+    }
+
+    private void toggleHelp()
+    {
+        if (helpVisible)
+        {
+            rightGridPane.getChildren().remove(2);
+            rightGridPane.getColumnConstraints().get(1).setMinWidth(0);
+            rightGridPane.getColumnConstraints().get(1).setPrefWidth(0);
+            helpButton.setTooltip(new Tooltip("Hilfe öffnen"));
+        }
+        else
+        {
+            rightGridPane.add(helpScrollPane, 1, 0, 1, 2);
+            rightGridPane.getColumnConstraints().get(1).setMinWidth(100);
+            rightGridPane.getColumnConstraints().get(1).setPrefWidth(200);
+            helpButton.setTooltip(new Tooltip("Hilfe schließen"));
+        }
+
+        helpVisible = !helpVisible;
     }
 }

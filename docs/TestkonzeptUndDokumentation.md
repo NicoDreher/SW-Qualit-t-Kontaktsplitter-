@@ -47,10 +47,7 @@ Testfälle, welche zu einem negativen Ergebnis führen, werden ausgeschlossen, d
 | Herr Dr. Tobias Max Lukas Max Prinz von  Sachsen Anhalt      | "Tobias Max Lukas Max" | "Prinz von Sachsen-Anhalt"       | "MALE"         | "Dr."                                              | "Deutsch"     |
 
  
-
-
-
- ## Anhang 2
+## Anhang 2
 
 | Eingabe                                   | Generierte Briefanrede                                 |
 | ----------------------------------------- | ------------------------------------------------------ |

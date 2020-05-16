@@ -5,4 +5,6 @@ files_order:
   - 'docs/TestkonzeptUndDokumentation.md'
 cover_metadata:
   title: 'Kontaktsplitter - Kings'
-  Author: 'Daniel Bornbaum, Lukas Lautenschlager, Nico Dreher'
+  Autoren: 'Daniel Bornbaum, Lukas Lautenschlager, Nico Dreher'
+  Kurs: 'TINF2017'
+  Datum: '22.05.2020'

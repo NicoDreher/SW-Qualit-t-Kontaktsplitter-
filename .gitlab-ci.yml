@@ -10,6 +10,7 @@ docs:
     name: fiware/md2pdf:0.2.2
     entrypoint: [""]
   script:
+    - rm /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template/cover_template.md
     - cp -r docs/cover/. /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
     - ls /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
     - markdown_to_pdf -i docs.yml -o documentation.pdf
@@ -40,9 +41,17 @@ bundle:
   stage: bundle
   image: nexus.nico-dreher.de:8084/maven-jfx:latest
   script:
-    - wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip
-    - unzip openjdk-11+28_windows-x64_bin.zip -d ./
-    - mv jdk-11/ openjdk-11/
+    - if [! -d "openjdk-11"]; then
+    -   echo "Downloading OpenJDK"
+    -   wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip
+    -   unzip openjdk-11+28_windows-x64_bin.zip -d ./
+    -   mv jdk-11/ openjdk-11/
+    - else
+    -   echo "OpenJDK Cached"
+    - fi
+  cache:
+    paths:
+      - openjdk-11/
   artifacts:
     paths:
       - Kontaktsplitter-Kings.jar

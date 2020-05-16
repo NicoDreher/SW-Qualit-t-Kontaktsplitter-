@@ -1,6 +1,6 @@
 # User Stories
 
-### User Story 1 Story Punkte: 3,5:
+## User Story 1 Story Punkte: 3,5:
 
 Priorität: 1
 
@@ -22,13 +22,13 @@ Ich weiß, dass ich fertig bin, wenn:
 
 \-     Falls möglich die Informationen aus der Briefanrede extrahiert werden.
 
-### User Story 2 Story Punkte: 1,5:
+## User Story 2 Story Punkte: 1,5:
 
 Priorität: 2 
 
 Ich als Sachbearbeiter, möchte eine manuelle Eingabe von Feldern, welche nicht automatisch zuordenbar sind, um unvollständige Informationen in der Datenbank zu vermeiden. Ich weiß, dass ich fertig bin, wenn für die nicht automatisch erkannten Felder eine manuelle Eingabe möglich ist.
 
-### User Story 3 Story Punkte: 1,5:
+## User Story 3 Story Punkte: 1,5:
 
 Priorität: 4
 
@@ -38,13 +38,13 @@ Ich als Sachbearbeiter möchte eine Möglichkeit zur Eingabe von neuen Titeln, w
 
 \-     Diese Titel dann für weitere Eingaben automatisch erkannt werden und keine manuelle Eingabe notwendig ist
 
-### User Story 4 (Begeisterungsanforderung) Story Punkte: 1,5:
+## User Story 4 (Begeisterungsanforderung) Story Punkte: 1,5:
 
 Priorität: 5
 
 Ich als Sachbearbeiter möchte die Möglichkeit mir Muster zu konfigurieren, um eine automatische Zuordnung von nicht bisher bekannten Mustern zu unterstützen. Ich weiß, dass ich fertig bin, wenn mir eine Konfigurationsmöglichkeit geboten wurde, um Muster ins System einzupflegen.
 
-### User Story 5 Story Punkte 0,5:
+## User Story 5 Story Punkte 0,5:
 
 Priorität 3:
 
@@ -52,7 +52,7 @@ Ich als Sachbearbeiter möchte eine Anbindung an das CRM System zur Überprüfun
 
 Ich weiß, dass ich fertig bin, wenn eine Schnittstelle zur Überprüfung der Kontakte im CRM-System angeboten wird. 
 
-### User Story 6 (Begeisterungsanforderung) Story Punkte: 1:
+## User Story 6 (Begeisterungsanforderung) Story Punkte: 1:
 
 Priorität 6:
 

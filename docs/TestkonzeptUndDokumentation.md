@@ -2,7 +2,7 @@
 
  
 
-### UI-Test: 
+## UI-Test: 
 
 Die Oberflächentests sollen ungewünschte Verhaltensweisen bei der Bedienung der Oberfläche aufdecken. Hierzu wurde die Funktionalität der einzelnen UI-Elemente getestet und, ob diese zum gewünschten Ergebnis führen (z.B. ein Fenster richtig öffnen). Hierbei werden auch fehlerhafte Eingaben überprüft.
 
@@ -12,15 +12,13 @@ Neben diesen wurde auch die richtige Generierung der Briefanrede sowie das Anzei
 
 Testfälle, welche zu einem negativen Ergebnis führen, werden ausgeschlossen, da das Backend immer eine gültige Formatierung versucht.
 
- 
-
-### Unit Test:
+## Unit Test:
 
  
 
 
 
-### Anhang 1
+## Anhang 1
 
 | **Eingabe**                                                  | **Vorname (erwartet)** | **Nachname (erwartet)**          | **Geschlecht** | **Titel (erwartet, mit ; getrennt)**               | **Sprache**   |
 | ------------------------------------------------------------ | ---------------------- | -------------------------------- | -------------- | -------------------------------------------------- | ------------- |
@@ -52,7 +50,7 @@ Testfälle, welche zu einem negativen Ergebnis führen, werden ausgeschlossen, d
 
 
 
- ### Anhang 2
+ ## Anhang 2
 
 | Eingabe                                   | Generierte Briefanrede                                 |
 | ----------------------------------------- | ------------------------------------------------------ |

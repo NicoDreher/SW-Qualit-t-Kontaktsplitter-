@@ -1,8 +1,18 @@
 stages:
+  - docs
   - build
   - bundle
 variables:
   headless: "true"
+docs:
+  stage: docs
+  image: fiware/md2pdf:0.2.2
+  script:
+    - cp docs/cover /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
+    - markdown_to_pdf -i docs.yml -o documentation.pdf
+  artifacts:
+    paths:
+      - documentation.pdf
 build:
   stage: build
   image: nexus.nico-dreher.de:8084/maven-jfx:latest
@@ -18,6 +28,7 @@ build:
       - javadoc/
       - start.bat
       - start.sh
+      - documentation.pdf
     reports:
       junit:
         - target/surefire-reports/TEST-*.xml
@@ -37,3 +48,4 @@ bundle:
       - start.bat
       - start.sh
       - start-bundle.bat
+      - documentation.pdf

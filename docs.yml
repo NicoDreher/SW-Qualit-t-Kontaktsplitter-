@@ -1,0 +1,8 @@
+files_order:
+  - 'docs/DefinitionOfDone.md'
+  - 'docs/UserStories.md'
+  - 'docs/Architektur.md'
+  - 'docs/TestkonzeptUndDokumentation.md'
+cover_metadata:
+  title: 'Kontaktsplitter - Kings'
+  Author: 'Daniel Bornbaum, Lukas Lautenschlager, Nico Dreher'

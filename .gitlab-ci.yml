@@ -10,7 +10,8 @@ docs:
     name: fiware/md2pdf:0.2.2
     entrypoint: [""]
   script:
-    - cp -r docs/cover /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
+    - cp -r docs/cover/. /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
+    - ls /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
     - markdown_to_pdf -i docs.yml -o documentation.pdf
   artifacts:
     paths:

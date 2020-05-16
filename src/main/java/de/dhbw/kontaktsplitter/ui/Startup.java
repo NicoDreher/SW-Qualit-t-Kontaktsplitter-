@@ -14,7 +14,7 @@ public class Startup extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main_view.fxml"));
         primaryStage.setTitle("Kontaktsplitter");
         primaryStage.setScene(new Scene(root));
         primaryStage.setMinWidth(650);

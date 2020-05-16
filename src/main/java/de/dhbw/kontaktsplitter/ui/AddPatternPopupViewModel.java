@@ -20,8 +20,7 @@ import java.util.regex.Pattern;
  *
  * @author Daniel Bornbaum
  */
-public class AddPatternPopupViewModel implements Initializable
-{
+public class AddPatternPopupViewModel implements Initializable {
     @FXML
     private Button addButton;
 
@@ -40,8 +39,7 @@ public class AddPatternPopupViewModel implements Initializable
      * @param resourceBundle see package javafx.fxml.Initializable
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle)
-    {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         detailView = new PatternDetailView();
         unsupportedPlaceholderLabel.setVisible(false);
 
@@ -55,23 +53,21 @@ public class AddPatternPopupViewModel implements Initializable
             String outputPatternWithoutValidPlaceholders = detailView.getPattern().getOutputPattern()
                     .replaceAll(validPatterns, "");
 
-            if (inputPatternWithoutValidPlaceholders.contains("%") || outputPatternWithoutValidPlaceholders
-                    .contains("%"))
-            {
+            if(inputPatternWithoutValidPlaceholders.contains("%") || outputPatternWithoutValidPlaceholders
+                    .contains("%")) {
                 Pattern pattern = Pattern.compile("%[A-Za-z]*");
                 Matcher matcher = pattern
                         .matcher(inputPatternWithoutValidPlaceholders.concat(outputPatternWithoutValidPlaceholders));
-                if (matcher.find())
-                {
+                if(matcher.find()) {
                     unsupportedPlaceholderLabel
                             .setText("⚠ Achtung: Nicht unterstützter Platzhalter: ".concat(matcher.group(0)));
                     unsupportedPlaceholderLabel.setVisible(true);
                 }
-                else
-                {
+                else {
                     unsupportedPlaceholderLabel.setVisible(false);
                 }
-            } else {
+            }
+            else {
                 unsupportedPlaceholderLabel.setText("");
                 unsupportedPlaceholderLabel.setVisible(false);
             }
@@ -86,8 +82,7 @@ public class AddPatternPopupViewModel implements Initializable
      *
      * @param pattern to edit in this window
      */
-    public void setPattern(ContactPattern pattern)
-    {
+    public void setPattern(ContactPattern pattern) {
         detailView.setPattern(pattern);
     }
 
@@ -96,8 +91,7 @@ public class AddPatternPopupViewModel implements Initializable
      *
      * @param onSubmitConsumer code that is executed on submit
      */
-    public void setSubmitCommand(Consumer<ContactPattern> onSubmitConsumer)
-    {
+    public void setSubmitCommand(Consumer<ContactPattern> onSubmitConsumer) {
         addButton.setOnMouseClicked(event -> onSubmitConsumer.accept(detailView.getPattern()));
     }
 
@@ -106,8 +100,7 @@ public class AddPatternPopupViewModel implements Initializable
      *
      * @param text, text to set for the add button
      */
-    public void setAddButtonText(String text)
-    {
+    public void setAddButtonText(String text) {
         addButton.setText(text);
     }
 }

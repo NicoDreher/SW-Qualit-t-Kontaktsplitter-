@@ -150,7 +150,7 @@
         <buttons>
             <Button fx:id="btn_duplicate" mnemonicParsing="false" onAction="#duplicate" text="Duplikat prüfen"/>
             <Button fx:id="btn_split" minWidth="41.0" mnemonicParsing="false" onAction="#split" prefHeight="25.0"
-                    text="Kontakt splitten"/>
+                    text="Anrede generieren"/>
         </buttons>
         <opaqueInsets>
             <Insets bottom="1.0"/>

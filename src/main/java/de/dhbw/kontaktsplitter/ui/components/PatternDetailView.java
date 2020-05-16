@@ -27,7 +27,7 @@ public class PatternDetailView {
     ChoiceBox<String> languageBox = new ChoiceBox<>();
     ChoiceBox<Gender> genderBox = new ChoiceBox<>();
     TextField outputPatternTextField = new TextField();
-    private TitledPane pane;
+    private final TitledPane pane;
     private Consumer<Boolean> validConsumer;
     private ContactPattern pattern = new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE,
             "", "");

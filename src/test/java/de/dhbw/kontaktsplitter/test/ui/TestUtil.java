@@ -1,7 +1,6 @@
 package de.dhbw.kontaktsplitter.test.ui;
 
 import javafx.scene.control.DialogPane;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;

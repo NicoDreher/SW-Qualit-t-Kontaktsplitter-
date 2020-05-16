@@ -13,8 +13,8 @@ import java.util.function.Consumer;
  * @author Daniel Bornbaum
  */
 public class CustomListCell extends HBox {
-    private TextField textInput = new TextField("");
-    private Button editButton = new Button("✎");
+    private final TextField textInput = new TextField("");
+    private final Button editButton = new Button("✎");
 
     private String value;
     private Consumer<String> valueConsumer;
@@ -39,12 +39,7 @@ public class CustomListCell extends HBox {
         textInput.getStyleClass().add("toggleable-text-input");
 
         textInput.setOnKeyReleased(event -> {
-            if("".equals(textInput.getText())) {
-                editButton.setDisable(true);
-            }
-            else {
-                editButton.setDisable(false);
-            }
+            editButton.setDisable("".equals(textInput.getText()));
         });
 
         Button deleteButton = new Button("\uD83D\uDDD1");

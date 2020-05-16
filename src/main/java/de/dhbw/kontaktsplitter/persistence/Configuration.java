@@ -42,7 +42,7 @@ public class Configuration {
     /**
      * The known prefixes and suffixes for surnames
      */
-    private static List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
+    private static final List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
 
     /**
      * The name database and the gender
@@ -198,6 +198,7 @@ public class Configuration {
 
     /**
      * Checks if the given name is a known forename
+     *
      * @param name The name to check
      * @return True if the name is in the list of known forenames
      */
@@ -207,6 +208,7 @@ public class Configuration {
 
     /**
      * Get the gender of a forename
+     *
      * @param name
      * @return The gender or {@link Gender#NONE} if the name is unknown
      */
@@ -224,6 +226,7 @@ public class Configuration {
 
     /**
      * Get all known names
+     *
      * @return
      */
     public static Set<String> getNames() {

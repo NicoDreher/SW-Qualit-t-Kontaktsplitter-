@@ -102,7 +102,15 @@ public class MainViewModel implements Initializable {
             alert.showAndWait();
         }
         else {
-            lbl_salutation.setText(InputParser.generateOutput(contact));
+            String output = InputParser.generateOutput(contact);
+            if(!output.isEmpty()) {
+                lbl_salutation.setText(output);
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Für diese Sprache und das Geschlecht ist keine Ausgabe definiert. \nDas kann in den Einstellungen -> Anrede Hinzufügen gemacht werden");
+                alert.setHeaderText("Ausgabe nicht definiert");
+                alert.showAndWait();
+            }
         }
     }
 

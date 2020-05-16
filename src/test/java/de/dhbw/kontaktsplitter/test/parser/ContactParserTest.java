@@ -12,9 +12,7 @@ import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -113,7 +111,7 @@ public class ContactParserTest {
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
-    @CsvFileSource(resources = "/parser/outputs.csv")
+    @CsvFileSource(resources = "/ui/correctSalutation.csv")
     void testOutput(String input, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.generateOutput(InputParser.parseInput(input)));
     }
@@ -149,7 +147,7 @@ public class ContactParserTest {
             boolean matches = inputName.matches(InputParser.NAME_PATTERN);
             if(!matches) {
                 System.out.println(name);
-                name.chars().forEach(i -> System.out.println( "\\u" + Integer.toHexString(i | 0x10000).substring(1)));
+                name.chars().forEach(i -> System.out.println("\\u" + Integer.toHexString(i | 0x10000).substring(1)));
             }
             assertTrue(matches);
         }

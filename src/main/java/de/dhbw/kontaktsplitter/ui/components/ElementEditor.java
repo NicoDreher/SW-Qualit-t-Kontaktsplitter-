@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  * @author Daniel Bornbaum
  */
 public class ElementEditor {
-    private ListView<CustomListCell> elementsView;
+    private final ListView<CustomListCell> elementsView;
     private ObservableList<CustomListCell> observableElements = FXCollections.observableArrayList();
     private Consumer<String> onDeleteConsumer;
 

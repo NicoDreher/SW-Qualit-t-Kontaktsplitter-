@@ -34,7 +34,8 @@ public class InputParser {
     /**
      * Regex Pattern for names
      */
-    public static final String NAME_PATTERN = "[A-Za-z\\u00C0-\\u00D6\\u00D8-\\u00f6\\u00f8-\\u00ff\\u0100-\\u017E\\u0300-\\u030F]+";
+    public static final String NAME_PATTERN =
+            "[A-Za-z\\u00C0-\\u00D6\\u00D8-\\u00f6\\u00f8-\\u00ff\\u0100-\\u017E\\u0300-\\u030F]+";
 
     /**
      * Scan a token array for titles
@@ -127,6 +128,7 @@ public class InputParser {
 
     /**
      * Partial replacement in a string
+     *
      * @param start The start index of the replacement
      * @param end The end index of the replacement
      * @param string The string to replace parts of
@@ -148,7 +150,8 @@ public class InputParser {
             Pattern p = Pattern.compile(NAME_PATTERN);
             Matcher m = p.matcher(name);
             while(m.find()) {
-                name = replacePart(m.start(), m.end(), name, name.substring(m.start(), m.start() + 1).toUpperCase() + name.substring(m.start() + 1, m.end()).toLowerCase());
+                name = replacePart(m.start(), m.end(), name, name.substring(m.start(), m.start() + 1).toUpperCase() +
+                        name.substring(m.start() + 1, m.end()).toLowerCase());
             }
         }
         return name;

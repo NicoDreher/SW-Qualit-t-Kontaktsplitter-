@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class EditorTest {
     private Stage stage;
     private ElementEditor editor;
-    private List<String> expectedElements = new ArrayList<>(
+    private final List<String> expectedElements = new ArrayList<>(
             Arrays.asList("Element1", "Element2", "Element3", "Element4", "Element5"));
 
     /**

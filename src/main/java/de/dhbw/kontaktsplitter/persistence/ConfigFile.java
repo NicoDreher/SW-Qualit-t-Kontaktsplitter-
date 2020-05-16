@@ -11,8 +11,8 @@ import java.util.List;
  * @author Nico Dreher
  */
 public class ConfigFile {
-    private List<Title> titles;
-    private List<ContactPattern> patterns;
+    private final List<Title> titles;
+    private final List<ContactPattern> patterns;
 
     public ConfigFile(List<Title> titles, List<ContactPattern> patterns) {
         this.titles = titles;

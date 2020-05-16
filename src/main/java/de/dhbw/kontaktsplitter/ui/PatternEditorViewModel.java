@@ -45,11 +45,11 @@ public class PatternEditorViewModel implements Initializable {
     @FXML
     private ScrollPane helpScrollPane;
 
-    private HashMap<String, ContactPattern> patterns = new HashMap<>();
+    private final HashMap<String, ContactPattern> patterns = new HashMap<>();
     private String currentPatternKey;
     private PatternDetailView view;
 
-    private ElementEditor editor = new ElementEditor();
+    private final ElementEditor editor = new ElementEditor();
     private boolean helpVisible = true;
 
     /**
@@ -209,17 +209,14 @@ public class PatternEditorViewModel implements Initializable {
                 patternToClone.getOutputPattern());
     }
 
-    private void toggleHelp()
-    {
-        if (helpVisible)
-        {
+    private void toggleHelp() {
+        if(helpVisible) {
             rightGridPane.getChildren().remove(2);
             rightGridPane.getColumnConstraints().get(1).setMinWidth(0);
             rightGridPane.getColumnConstraints().get(1).setPrefWidth(0);
             helpButton.setTooltip(new Tooltip("Hilfe öffnen"));
         }
-        else
-        {
+        else {
             rightGridPane.add(helpScrollPane, 1, 0, 1, 2);
             rightGridPane.getColumnConstraints().get(1).setMinWidth(100);
             rightGridPane.getColumnConstraints().get(1).setPrefWidth(200);

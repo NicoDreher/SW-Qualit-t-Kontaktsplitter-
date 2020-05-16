@@ -6,7 +6,9 @@ variables:
   headless: "true"
 docs:
   stage: docs
-  image: fiware/md2pdf:0.2.2
+  image:
+    name: fiware/md2pdf:0.2.2
+    entrypoint: ["/bin/sh"]
   script:
     - cp docs/cover /tools.Md2pdf-0.2.2/markdown_to_pdf/cover_template
     - markdown_to_pdf -i docs.yml -o documentation.pdf

@@ -2,33 +2,106 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.*?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" minHeight="400.0" minWidth="350.0" prefHeight="400.0" prefWidth="350.0" maxHeight="400.0"
-          maxWidth="350.0" stylesheets="styles/components.css"
-          xmlns="http://javafx.com/javafx/11.0.1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane fx:id="helpSplitGrid" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="350.0" prefHeight="500.0" prefWidth="700.0" stylesheets="styles/components.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dhbw.kontaktsplitter.ui.TitleEditorViewModel">
     <columnConstraints>
-        <ColumnConstraints hgrow="ALWAYS" minWidth="10.0"/>
+        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+      <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="100.0" prefWidth="300.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints minHeight="10.0" vgrow="ALWAYS"/>
-        <RowConstraints minHeight="12.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER"/>
+        <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+        <RowConstraints minHeight="12.0" prefHeight="30.0" valignment="BOTTOM" vgrow="NEVER" />
     </rowConstraints>
     <children>
-        <VBox prefHeight="200.0" prefWidth="100.0" fx:id="topBox"/>
+        <VBox fx:id="topBox" prefHeight="200.0" prefWidth="100.0" />
         <HBox prefHeight="49.0" prefWidth="600.0" GridPane.rowIndex="1">
             <children>
                 <TextField fx:id="newEntryField" HBox.hgrow="ALWAYS">
                     <HBox.margin>
-                        <Insets left="2.0" top="2.0"/>
+                        <Insets left="2.0" top="2.0" />
                     </HBox.margin>
                 </TextField>
                 <Button fx:id="newEntryButton" mnemonicParsing="false" text="hinzufügen">
                     <HBox.margin>
-                        <Insets left="5.0" right="2.0" top="2.0"/>
+                        <Insets left="5.0" top="2.0" />
                     </HBox.margin>
                 </Button>
+            <ToggleButton fx:id="helpButton" layoutX="282.0" layoutY="12.0" mnemonicParsing="false" text="?">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" top="2.0" />
+               </HBox.margin>
+            </ToggleButton>
             </children>
         </HBox>
+      <ScrollPane fx:id="helpScrollPane" fitToWidth="true" hbarPolicy="NEVER" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
+         <content>
+            <VBox>
+               <children>
+                  <Label text="Hilfe" underline="true" wrapText="true">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="79.0" text="Dieses Element verfügt über auto save und speichert beim Schließen." textAlignment="JUSTIFY" wrapText="true">
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="243.0" text="Reihenfolge der Titel bearbeiten" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="90.0" text="Beim automatisierten Erstellen einer Briefanrede wird die Person mit ihrem höchsten Titel angesprochen. Die Rangfolge der Titel kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden." textAlignment="JUSTIFY" wrapText="true" />
+                  <Label text="Titel hinzufügen" wrapText="true" VBox.vgrow="ALWAYS">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Label>
+                  <Label text="Zum Hinzufügen eines Titels am unteren Bildrand einen neuen Titel in das Textfeld eingeben und den Knopf &quot;hinzufügen&quot; betätigen" textAlignment="JUSTIFY" wrapText="true" />
+                  <Label layoutX="15.0" layoutY="41.0" text="Titel bearbeiten" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="63.0" text="Zum Bearbeiten eines Titels den Knopf &quot;✎&quot; am Listenelement betätigen, einen neuen Titel im Textfeld vergeben und mit &quot;✓&quot; bestätigen." textAlignment="JUSTIFY" wrapText="true" />
+                  <Label layoutX="15.0" layoutY="131.0" text="Titel löschen" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <padding>
+                        <Insets top="10.0" />
+                     </padding>
+                  </Label>
+                  <Label layoutX="15.0" layoutY="158.0" text="Zum Löschen eines Titels den Knopf &quot;🗑&quot; am jeweiligen Listenelement betätigen." textAlignment="JUSTIFY" wrapText="true" />
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
     </children>
 </GridPane>

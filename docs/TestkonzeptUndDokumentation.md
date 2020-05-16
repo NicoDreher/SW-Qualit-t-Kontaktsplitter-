@@ -2,7 +2,7 @@
 ## CI/CD
 Tests werden im Repository bei jedem push automatisch ausgeführt. Außerdem wird ausgewertet welche Tests erfolgreich waren und welche fehlgeschlagen sind. Bei den fehlgeschlagenen Tests wird außerdem die Fehlermeldung protokolliert, damit der Fehler behoben werden kann.
 
-Die Informationen zum aktuellsten Durchlauf des CI/CD Systems befinden sich unter: https://git.nico-dreher.de/University/sw-quality/splitter/pipelines/latest/test_report
+Die Informationen zum aktuellsten Durchlauf des CI/CD Systems befinden sich unter: https://git.nico-dreher.de/University/sw-quality/splitter/pipelines/latest/
 
 Durch auswählen des *Tests* Reiter, gelangt man zur Auflistung der Test suites. Wählt man davon eine aus, kann man die Auflistung der Tests sehen.
 ## UI-Test

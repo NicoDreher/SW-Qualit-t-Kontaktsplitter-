@@ -4,12 +4,17 @@ import de.dhbw.kontaktsplitter.models.Contact;
 import de.dhbw.kontaktsplitter.models.ContactPattern;
 import de.dhbw.kontaktsplitter.models.Gender;
 import de.dhbw.kontaktsplitter.parser.InputParser;
+import de.dhbw.kontaktsplitter.persistence.Configuration;
 import de.dhbw.kontaktsplitter.test.StringArrayConverter;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,6 +22,24 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Nico Dreher
  */
 public class ContactParserTest {
+
+    /**
+     * Testing the result of {@link InputParser#parseInput(String)} when no pattern matches
+     */
+    @Test
+    void testNoPatternFound() {
+        List<ContactPattern> patterns = Configuration.getPatterns();
+        Configuration.setPatterns(new ArrayList<>());
+        Contact contact = InputParser.parseInput("XXXXX");
+        Configuration.setPatterns(patterns);
+        assertNotNull(contact);
+        assertEquals("Deutsch", contact.getLanguage());
+        assertEquals("", contact.getFirstName());
+        assertEquals("", contact.getLastName());
+        assertEquals(Gender.NONE, contact.getGender());
+        assertEquals("", contact.getTitlesAsString());
+    }
+
     /**
      * Testing the parsing using a created pattern
      *
@@ -28,18 +51,24 @@ public class ContactParserTest {
      * @param titles The expected titles
      * @param firstName The forenames
      * @param lastName The surnames
+     * @param isNull Should the result be null
      */
-    @ParameterizedTest(name = "[{index}] Input {0}")
+    @ParameterizedTest(name = "[{index}] Input: {3}")
     @CsvFileSource(resources = "/parser/contact.csv")
     void testMatch(String patternLanguage, Gender patternGender, String inputPattern, String input, Gender gender,
-            String titles, String firstName, String lastName) {
+            String titles, String firstName, String lastName, boolean isNull) {
         ContactPattern pattern = new ContactPattern(patternLanguage, patternGender, inputPattern, "");
         Contact contact = InputParser.parse(pattern, input);
-        assertNotNull(contact);
-        assertEquals(gender, contact.getGender());
-        assertEquals(titles, contact.getTitlesAsString());
-        assertEquals(firstName, contact.getFirstName());
-        assertEquals(lastName, contact.getLastName());
+        if(!isNull) {
+            assertNotNull(contact);
+            assertEquals(gender, contact.getGender());
+            assertEquals(titles, contact.getTitlesAsString());
+            assertEquals(firstName, contact.getFirstName());
+            assertEquals(lastName, contact.getLastName());
+        }
+        else {
+            assertNull(contact);
+        }
     }
 
     /**
@@ -68,7 +97,7 @@ public class ContactParserTest {
     /**
      * Testing the parsing of the surnames
      *
-     * @param lastNames A array of surnames
+     * @param lastNames An array of surnames
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
@@ -80,12 +109,49 @@ public class ContactParserTest {
     /**
      * Testing the parsing of the output
      *
-     * @param input A input string
+     * @param input An input string
      * @param expectedOutput The expected output
      */
     @ParameterizedTest(name = "[{index}] Input {0}")
     @CsvFileSource(resources = "/parser/outputs.csv")
     void testOutput(String input, String expectedOutput) {
         assertEquals(expectedOutput, InputParser.generateOutput(InputParser.parseInput(input)));
+    }
+
+    /**
+     * Testing a pattern with an invalid token
+     */
+    @Test
+    void testInvalidToken() {
+        ContactPattern pattern = new ContactPattern("Deutsch", Gender.MALE, "Hallo %INVALID", "");
+        Contact contact = InputParser.parse(pattern, "Hallo Hans");
+        assertNull(contact);
+    }
+
+    /**
+     * Test the generated output of a contact with no matching pattern
+     */
+    @Test
+    void generateTokenWithoutPattern() {
+        assertEquals("", InputParser.generateOutput(new Contact(null, null, null, null, null)));
+        assertEquals("", InputParser.generateOutput(new Contact(null, Gender.NONE, null, null, null)));
+        assertEquals("", InputParser.generateOutput(new Contact("Not a language", null, null, null, null)));
+        assertEquals("", InputParser.generateOutput(new Contact("Not a language", Gender.NONE, null, null, null)));
+    }
+
+    /**
+     * Test the name regex pattern for all known names
+     */
+    @Test
+    void testNamePattern() {
+        for(String name : Configuration.getNames()) {
+            String inputName = name.replaceAll("[+'\\-]", "");
+            boolean matches = inputName.matches(InputParser.NAME_PATTERN);
+            if(!matches) {
+                System.out.println(name);
+                name.chars().forEach(i -> System.out.println( "\\u" + Integer.toHexString(i | 0x10000).substring(1)));
+            }
+            assertTrue(matches);
+        }
     }
 }

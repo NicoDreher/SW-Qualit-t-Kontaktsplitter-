@@ -1,7 +1,7 @@
 package de.dhbw.kontaktsplitter.models;
 
 /**
- * A academic or non academic title
+ * An academic or non academic title
  */
 public class Title {
     private String title;
@@ -20,7 +20,7 @@ public class Title {
 
     public boolean matches(String[] inputTokens, int startIndex) {
         String[] titleTokens = title.split(" ");
-        if(startIndex + titleTokens.length < inputTokens.length) {
+        if(startIndex + titleTokens.length <= inputTokens.length) {
             for(String token : titleTokens) {
                 if(token.equalsIgnoreCase(inputTokens[startIndex])) {
                     startIndex++;

@@ -50,10 +50,14 @@ public class Configuration {
     private static Map<String, Gender> names;
 
     static {
-        /*
-         * Generates the default titles and patterns
-         * Loads the names from the names.txt
-         */
+        initialize();
+    }
+
+    /**
+     * Generates the default titles and patterns
+     * Loads the names from the names.txt
+     */
+    private static void initialize() {
         titles = new ArrayList<>();
         titles.add(new Title("Professor"));
         titles.add(new Title("Prof."));
@@ -174,7 +178,6 @@ public class Configuration {
         catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static List<Title> getTitles() {
@@ -217,6 +220,14 @@ public class Configuration {
 
     public static List<String> getPrefixesAndSuffixes() {
         return new ArrayList<>(prefixesAndSuffixes);
+    }
+
+    /**
+     * Get all known names
+     * @return
+     */
+    public static Set<String> getNames() {
+        return new HashSet<>(names.keySet());
     }
 
     /**

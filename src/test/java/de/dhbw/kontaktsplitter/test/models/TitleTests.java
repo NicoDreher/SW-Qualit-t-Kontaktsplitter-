@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class TitleTests {
     /**
-     * Testing the detection of titles in a input string
+     * Testing the detection of titles in an input string
      *
      * @param input The input string
      * @param inputIndex The start index of the titles

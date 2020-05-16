@@ -6,7 +6,7 @@ import de.dhbw.kontaktsplitter.models.Title;
 import java.util.List;
 
 /**
- * A object for the configuration entries
+ * An object for the configuration entries
  *
  * @author Nico Dreher
  */

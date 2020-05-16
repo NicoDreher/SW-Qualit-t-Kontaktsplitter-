@@ -1,5 +1,14 @@
-# ignore
-"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Hans Wurst"                     ,"MALE","Dr."              ,"Hans","Wurst"
-"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Hans Wurst"                         ,"MALE",""                 ,"Hans","Wurst"
-"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Dr. rer. nat. Hans Wurst"       ,"MALE","Dr. Dr. rer. nat.","Hans","Wurst"
-"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Dr. rer. nat. Hans Wurst Fabrik","MALE","Dr. Dr. rer. nat.","Hans","Wurst-Fabrik"
+#Testing the parser output of a specific input pattern. Only using one gender and two input pattern because the behavior of the parser ist the same with all patterns and genders
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. lukas müller"                     ,"MALE","Dr."              ,"Lukas","Müller", false
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr luki mon"                         ,"MALE",""                 ,"Luki","Mon", false
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","HerR Dr. Dr. rer. nat. Tim maier"       ,"MALE","Dr. Dr. rer. nat.","Tim","Maier", false
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","HERR Dr. Dr. rer. nat. Hans Schöne stadt","MALE","Dr. Dr. rer. nat.","Hans","Schöne-Stadt", false
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr Dr. Dr. rer. nat. Hans Schöne stadt","MALE","Dr. Dr. rer. nat.","Hans","Schöne-Stadt", false
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN", "XXXXX", "NONE","","","", true
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","", "NONE","","","", true
+"Deutsch","MALE","Herr %TITEL %VORNAMEN %NACHNAMEN","Herr", "MALE","","","", false
+"Deutsch", "MALE",Herr %TITEL %VORNAMEN %NACHNAMEN, "Herr Dr. Dr. ", "MALE", "Dr. Dr.", "", "", false
+"Deutsch", "MALE",Herr %TITEL %VORNAMEN %NACHNAMEN, "Herr Dr. Dr. Daniel Daniel", "MALE", "Dr. Dr.", "Daniel", "Daniel", false
+"Deutsch", "MALE",Herr %TITEL %VORNAMEN %NACHNAMEN, "Herr Dr. Dr. Daniel Daniel Meier", "MALE", "Dr. Dr.", "Daniel Daniel", "Meier", false
+"Deutsch", "MALE",Herr %TITEL %NACHNAMEN %VORNAMEN, "Herr Dr. Dr. Hans Dieter", "MALE", "Dr. Dr.", "Dieter", "Hans", false
+"Deutsch", "MALE",Herr %TITEL %NACHNAMEN %VORNAMEN, "Herr Dr. Dr. Müller Müller", "MALE", "Dr. Dr.", "Müller", "Müller", false

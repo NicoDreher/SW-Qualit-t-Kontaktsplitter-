@@ -32,6 +32,11 @@ public class InputParser {
     public static final String LAST_NAME = "%NACHNAMEN";
 
     /**
+     * Regex Pattern for names
+     */
+    public static final String NAME_PATTERN = "[A-Za-z\\u00C0-\\u00D6\\u00D8-\\u00f6\\u00f8-\\u00ff\\u0100-\\u017E\\u0300-\\u030F]+";
+
+    /**
      * Scan a token array for titles
      *
      * @param tokens
@@ -140,7 +145,7 @@ public class InputParser {
      */
     private static String parseName(String name) {
         if(!Configuration.getPrefixesAndSuffixes().contains(name.toLowerCase())) {
-            Pattern p = Pattern.compile("[a-zA-Z]]+");
+            Pattern p = Pattern.compile(NAME_PATTERN);
             Matcher m = p.matcher(name);
             while(m.find()) {
                 name = replacePart(m.start(), m.end(), name, name.substring(m.start(), m.start() + 1).toUpperCase() + name.substring(m.start() + 1, m.end()).toLowerCase());
@@ -150,7 +155,7 @@ public class InputParser {
     }
 
     /**
-     * Parse a input string to the spliced contact details. Using the first matching pattern.
+     * Parse an input string to the spliced contact details. Using the first matching pattern.
      *
      * @param input The input string
      * @return The spliced contact details
@@ -167,7 +172,7 @@ public class InputParser {
     }
 
     /**
-     * Generates a output out using the language and gender of the contact details
+     * Generates an output out using the language and gender of the contact details
      *
      * @param contact
      * @return A formatted output

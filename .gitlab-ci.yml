@@ -10,6 +10,7 @@ docs:
     name: fiware/md2pdf:0.2.2
     entrypoint: [""]
   script:
+    - rm /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template/cover_img.png
     - rm /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template/cover_template.md
     - cp -r docs/cover/. /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template
     - ls /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template

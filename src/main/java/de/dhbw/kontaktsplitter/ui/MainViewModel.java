@@ -125,7 +125,12 @@ public class MainViewModel implements Initializable {
      * Method binding to the ChangedListener of the Title CheckCombobox
      */
     public void manuallyChangedTitle() {
-        contact.setTitles(cmb_title.getCheckModel().getCheckedItems());
+        for (var title: cmb_title.getCheckModel().getCheckedItems()
+             ) {
+            if(!contact.getTitles().contains(title))
+                contact.addTitle(title);
+        }
+        cmb_title.getItems().filtered(e -> !cmb_title.getCheckModel().getCheckedItems().contains(e)).forEach(e -> contact.removeTitle(e));
     }
 
     /**

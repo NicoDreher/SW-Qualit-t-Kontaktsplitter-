@@ -70,4 +70,14 @@ public class Contact {
     public String getTitlesAsString() {
         return titles.stream().map(Title::getTitle).collect(Collectors.joining(" "));
     }
+
+    public void addTitle(Title title)
+    {
+        this.titles.add(title);
+    }
+
+    public void removeTitle(Title title)
+    {
+        this.titles.removeAll(titles.stream().filter(e -> e.equals(title)).collect(Collectors.toList()));
+    }
 }

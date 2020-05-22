@@ -18,25 +18,19 @@ import java.util.stream.Collectors;
  * @author Daniel Bornbaum
  */
 public class TitleEditorViewModel implements Initializable {
+    private final ElementEditor editor = new ElementEditor();
     @FXML
     private VBox topBox;
-
     @FXML
     private TextField newEntryField;
-
     @FXML
     private Button newEntryButton;
-
     @FXML
     private ToggleButton helpButton;
-
     @FXML
     private GridPane helpSplitGrid;
-
     @FXML
     private ScrollPane helpScrollPane;
-
-    private final ElementEditor editor = new ElementEditor();
     private boolean helpVisible = true;
 
     /**

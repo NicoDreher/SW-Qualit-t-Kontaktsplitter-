@@ -27,29 +27,22 @@ import java.util.stream.Collectors;
  * @author Daniel Bornbaum
  */
 public class PatternEditorViewModel implements Initializable {
+    private final HashMap<String, ContactPattern> patterns = new HashMap<>();
+    private final ElementEditor editor = new ElementEditor();
     @FXML
     private GridPane leftSide;
-
     @FXML
     private GridPane rightSide;
-
     @FXML
     private Button addPopupButton;
-
     @FXML
     private ToggleButton helpButton;
-
     @FXML
     private GridPane rightGridPane;
-
     @FXML
     private ScrollPane helpScrollPane;
-
-    private final HashMap<String, ContactPattern> patterns = new HashMap<>();
     private String currentPatternKey;
     private PatternDetailView view;
-
-    private final ElementEditor editor = new ElementEditor();
     private boolean helpVisible = true;
 
     /**

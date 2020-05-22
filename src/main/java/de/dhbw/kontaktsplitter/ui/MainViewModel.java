@@ -107,7 +107,8 @@ public class MainViewModel implements Initializable {
                 lbl_salutation.setText(output);
             }
             else {
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Für diese Sprache und das Geschlecht ist keine Ausgabe definiert. \nDas kann in den Einstellungen -> Anrede Hinzufügen gemacht werden");
+                Alert alert = new Alert(Alert.AlertType.ERROR,
+                        "Für diese Sprache und das Geschlecht ist keine Ausgabe definiert. \nDas kann in den Einstellungen -> Anrede Hinzufügen gemacht werden");
                 alert.setHeaderText("Ausgabe nicht definiert");
                 alert.showAndWait();
             }
@@ -125,12 +126,13 @@ public class MainViewModel implements Initializable {
      * Method binding to the ChangedListener of the Title CheckCombobox
      */
     public void manuallyChangedTitle() {
-        for (var title: cmb_title.getCheckModel().getCheckedItems()
-             ) {
-            if(!contact.getTitles().contains(title))
+        for(var title : cmb_title.getCheckModel().getCheckedItems()) {
+            if(!contact.getTitles().contains(title)) {
                 contact.addTitle(title);
+            }
         }
-        cmb_title.getItems().filtered(e -> !cmb_title.getCheckModel().getCheckedItems().contains(e)).forEach(e -> contact.removeTitle(e));
+        cmb_title.getItems().filtered(e -> !cmb_title.getCheckModel().getCheckedItems().contains(e))
+                .forEach(e -> contact.removeTitle(e));
     }
 
     /**

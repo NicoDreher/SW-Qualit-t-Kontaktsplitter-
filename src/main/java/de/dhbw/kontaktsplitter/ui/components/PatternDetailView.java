@@ -23,11 +23,11 @@ import java.util.function.Consumer;
  * @author Daniel Bornbaum
  */
 public class PatternDetailView {
+    private final TitledPane pane;
     TextField inputPatternTextField = new TextField();
     ChoiceBox<String> languageBox = new ChoiceBox<>();
     ChoiceBox<Gender> genderBox = new ChoiceBox<>();
     TextField outputPatternTextField = new TextField();
-    private final TitledPane pane;
     private Consumer<Boolean> validConsumer;
     private ContactPattern pattern = new ContactPattern(Locale.getDefault().getDisplayLanguage(), Gender.NONE,
             "", "");

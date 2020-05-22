@@ -94,7 +94,7 @@
                                 <Label layoutY="235.0"
                                        text="Titel einer Person, zum Beispiel ihr akademischer Grad"
                                        textAlignment="JUSTIFY" wrapText="true"/>
-                                <Label layoutX="15.0" layoutY="58.0" text="\%VORNAMEN" wrapText="true" >
+                                <Label layoutX="15.0" layoutY="58.0" text="\%VORNAMEN" wrapText="true">
                                     <font>
                                         <Font name="System Italic" size="12.0"/>
                                     </font>
@@ -131,8 +131,8 @@
                                     </VBox.margin>
                                 </Label>
                                 <Label
-                                       text="Aus den erkannten Eigenschaften der eingegebenen Anrede wird eine Briefanrede generiert. Diese wird auf Grundlage der hier angelegten Anrede-Muster generiert. Das in der Liste am höchsten liegende Muster, das die Eigenschaften der Anfrage widerspiegelt wird dazu verwendet eine Briefanrede zu generieren. Die Rangfolge der Muster kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden."
-                                       wrapText="true" textAlignment="JUSTIFY"/>
+                                        text="Aus den erkannten Eigenschaften der eingegebenen Anrede wird eine Briefanrede generiert. Diese wird auf Grundlage der hier angelegten Anrede-Muster generiert. Das in der Liste am höchsten liegende Muster, das die Eigenschaften der Anfrage widerspiegelt wird dazu verwendet eine Briefanrede zu generieren. Die Rangfolge der Muster kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden."
+                                        wrapText="true" textAlignment="JUSTIFY"/>
                                 <Label layoutX="15.0" layoutY="284.0" text="Anreden hinzufügen">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>

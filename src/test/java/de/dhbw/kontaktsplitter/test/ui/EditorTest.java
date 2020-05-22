@@ -27,10 +27,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 @ExtendWith(ApplicationExtension.class)
 public class EditorTest {
-    private Stage stage;
-    private ElementEditor editor;
     private final List<String> expectedElements = new ArrayList<>(
             Arrays.asList("Element1", "Element2", "Element3", "Element4", "Element5"));
+    private Stage stage;
+    private ElementEditor editor;
 
     /**
      * Sets System Properties before all tests

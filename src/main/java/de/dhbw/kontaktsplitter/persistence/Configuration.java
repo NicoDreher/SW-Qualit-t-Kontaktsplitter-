@@ -31,6 +31,10 @@ public class Configuration {
             .map(Locale::getDisplayLanguage)
             .collect(Collectors.toList());
     /**
+     * The known prefixes and suffixes for surnames
+     */
+    private static final List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
+    /**
      * The academic and non academic titles
      */
     private static List<Title> titles;
@@ -38,12 +42,6 @@ public class Configuration {
      * The available patterns to parse the salutations
      */
     private static List<ContactPattern> patterns;
-
-    /**
-     * The known prefixes and suffixes for surnames
-     */
-    private static final List<String> prefixesAndSuffixes = List.of("van", "von", "zu", "vom");
-
     /**
      * The name database and the gender
      */

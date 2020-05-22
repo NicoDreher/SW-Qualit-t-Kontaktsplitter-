@@ -70,7 +70,7 @@
                                     </font>
                                 </Label>
                                 <Label layoutX="15.0" layoutY="149.0"
-                                       text="Dieses Element verfügt über auto save und speichert beim Schließen."
+                                       text="Diese Einstellungen werden beim Schließen des Fensters automatisch gespeichert."
                                        textAlignment="JUSTIFY" wrapText="true">
                                     <font>
                                         <Font name="System Italic" size="12.0"/>
@@ -86,15 +86,15 @@
                                 </Label>
                                 <Label text="Folgende Platzhalter werden in der Erstellung von Anreden und generierten Briefanreden unterstützt:"
                                        textAlignment="JUSTIFY" wrapText="true"/>
-                                <Label layoutX="15.0" layoutY="200.0" text="\%TITEL" wrapText="true">
+                                <Label layoutY="200.0" text="\%TITEL" wrapText="true">
                                     <font>
                                         <Font name="System Italic" size="12.0"/>
                                     </font>
                                 </Label>
-                                <Label layoutX="21.0" layoutY="235.0"
+                                <Label layoutY="235.0"
                                        text="Titel einer Person, zum Beispiel ihr akademischer Grad"
                                        textAlignment="JUSTIFY" wrapText="true"/>
-                                <Label layoutX="15.0" layoutY="58.0" text="\%VORNAMEN" wrapText="true">
+                                <Label layoutX="15.0" layoutY="58.0" text="\%VORNAMEN" wrapText="true" >
                                     <font>
                                         <Font name="System Italic" size="12.0"/>
                                     </font>
@@ -102,13 +102,13 @@
                                         <Insets top="5.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="58.0" text="Ein oder mehrere Vornamen"
+                                <Label layoutY="58.0" text="Ein oder mehrere Vornamen"
                                        textAlignment="JUSTIFY" wrapText="true">
                                     <VBox.margin>
                                         <Insets left="5.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="149.0" text="\%NACHNAMEN" wrapText="true">
+                                <Label layoutY="149.0" text="\%NACHNAMEN" wrapText="true">
                                     <font>
                                         <Font name="System Italic" size="12.0"/>
                                     </font>
@@ -116,13 +116,13 @@
                                         <Insets top="5.0"/>
                                     </padding>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="166.0" text="Ein oder mehrere Nachnamen"
+                                <Label layoutY="166.0" text="Ein oder mehrere Nachnamen"
                                        textAlignment="JUSTIFY" wrapText="true">
                                     <padding>
                                         <Insets left="5.0"/>
                                     </padding>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="92.0" text="Reihenfolge der Anreden">
+                                <Label layoutY="92.0" text="Anreden verwalten">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
                                     </font>
@@ -130,9 +130,9 @@
                                         <Insets top="10.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label prefWidth="209.0"
+                                <Label
                                        text="Aus den erkannten Eigenschaften der eingegebenen Anrede wird eine Briefanrede generiert. Diese wird auf Grundlage der hier angelegten Anrede-Muster generiert. Das in der Liste am höchsten liegende Muster, das die Eigenschaften der Anfrage widerspiegelt wird dazu verwendet eine Briefanrede zu generieren. Die Rangfolge der Muster kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden."
-                                       wrapText="true"/>
+                                       wrapText="true" textAlignment="JUSTIFY"/>
                                 <Label layoutX="15.0" layoutY="284.0" text="Anreden hinzufügen">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
@@ -141,9 +141,9 @@
                                         <Insets top="10.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="301.0" prefWidth="209.0"
+                                <Label layoutX="15.0" layoutY="301.0"
                                        text="Zum Anlegen eines Anrede-Musters kann der Knopf &quot;hinzufügen&quot; am unteren rechten Rand des Bildes verwendet werden. Es öffnet sich ein Fenster, das die Eingabe der Eigenschaften des Musters erlaubt. Die Eingabe kann über den Knopf &quot;hinzufügen&quot; innerhalb dieses Fensters bestätigt oder durch schließen des Fensters abgebrochen werden. "
-                                       wrapText="true"/>
+                                       wrapText="true" textAlignment="JUSTIFY"/>
                                 <Label layoutX="15.0" layoutY="533.0" text="Anreden editieren">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
@@ -152,9 +152,9 @@
                                         <Insets top="10.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="550.0" prefWidth="209.0"
+                                <Label layoutX="15.0" layoutY="550.0"
                                        text="Zum Editieren eines Anrede-Musters kann der Knopf &quot;✎&quot; am jeweiligen Listenelement betätigt werden. Es öffnet sich ein Fenster, das die Bearbeitung der Eigenschaften des Musters erlaubt. Die Eingabe kann über den Knopf &quot;hinzufügen&quot; innerhalb dieses Fensters bestätigt oder durch schließen des Fensters abgebrochen werden."
-                                       wrapText="true"/>
+                                       wrapText="true" textAlignment="JUSTIFY"/>
                                 <Label layoutX="15.0" layoutY="713.0" text="Anreden löschen">
                                     <font>
                                         <Font name="System Bold" size="12.0"/>
@@ -163,9 +163,9 @@
                                         <Insets top="10.0"/>
                                     </VBox.margin>
                                 </Label>
-                                <Label layoutX="15.0" layoutY="730.0" prefWidth="209.0"
+                                <Label layoutX="15.0" layoutY="730.0"
                                        text="Zum Löschen eines Anrede-Musters den Knopf &quot;🗑&quot; am jeweiligen Listenelement betätigen."
-                                       wrapText="true"/>
+                                       wrapText="true" textAlignment="JUSTIFY"/>
                             </children>
                         </VBox>
                     </content>

@@ -5,7 +5,7 @@
 
 **Priorität:** 1
 
-Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihre Bestandteile aufteilen, um automatisiert Informationen aus der Briefanrede zu extrahieren. Die Bestandteile sind:
+Ich als Sachbearbeiter möchte, dass eingegebene Briefanreden automatisch in ihre Bestandteile aufgeteilt werden, um automatisiert Informationen aus der Briefanrede extrahieren zu können. Die Bestandteile sind:
 
 * Anrede
 * Standardisierte Briefanrede
@@ -22,17 +22,17 @@ Ich weiß, dass ich fertig bin, wenn:
 
 **Priorität:** 2 
 
-Ich als Sachbearbeiter, möchte eine manuelle Eingabe von Feldern, welche nicht automatisch zuordenbar sind, um unvollständige Informationen in der Datenbank zu vermeiden. 
+Ich als Sachbearbeiter möchte eine Möglichkeit zur manuellen Eingabe von Daten, welche nicht automatisch zuordenbar sind, um unvollständige Informationen in der Datenbank zu vermeiden. 
 
 Ich weiß, dass ich fertig bin, wenn:
-* Für die nicht automatisch erkannten Felder eine manuelle Eingabe möglich ist.
+* Für die nicht automatisch erkannten Daten eine manuelle Eingabe möglich ist.
 
 ## User Story 3 
 **Story Punkte:** 1,5
 
 **Priorität:** 4
 
-Ich als Sachbearbeiter möchte eine Möglichkeit zur Eingabe von neuen Titeln, welche dann später genutzt werden können. Diese Titel werden dann für weitere Eingaben automatisch erkannt. 
+Ich als Sachbearbeiter möchte eine Möglichkeit zur Eingabe von neuen Titeln. Diese Titel werden dann für weitere Eingaben automatisch erkannt. 
 
 Ich weiß, dass ich fertig bin, wenn:
 * Ich über eine Eingabemaske neue Titel hinzufügen kann
@@ -43,7 +43,7 @@ Ich weiß, dass ich fertig bin, wenn:
 
 **Priorität:** 5
 
-Ich als Sachbearbeiter möchte die Möglichkeit mir Muster zu konfigurieren, um eine automatische Zuordnung von nicht bisher bekannten Mustern zu unterstützen. 
+Ich als Sachbearbeiter möchte die Möglichkeit haben, Muster einer Briefanrede zu konfigurieren, um eine automatische Zuordnung von nicht bisher bekannten Mustern dieser zu unterstützen. 
 
 Ich weiß, dass ich fertig bin, wenn:
 * Mir eine Konfigurationsmöglichkeit geboten wurde, um Muster ins System einzupflegen.
@@ -56,7 +56,7 @@ Ich weiß, dass ich fertig bin, wenn:
 Ich als Sachbearbeiter möchte eine Anbindung an das CRM System zur Überprüfung, ob der eingegebene Kontakt schon existiert, um Duplikate im CRM-System zu vermeiden.
 
 Ich weiß, dass ich fertig bin, wenn:
-* Eine Schnittstelle zur Überprüfung der Kontakte im CRM-System angeboten wird. 
+* Eine Schnittstelle des CRM zur Überprüfung der Kontakte durch die Anwendung bedient, bzw. ich über die fehlende Erreichbarkeit des CRM informiert werde.
 
 ## User Story 6 (Begeisterungsanforderung)
 
@@ -64,9 +64,9 @@ Ich weiß, dass ich fertig bin, wenn:
 
 **Priorität:** 6
 
-Ich als Sachbearbeiter möchte eine automatisierte Erkennung des Geschlechts mithilfe des Vornamens, um eine Unterstützung vom System zu erhalten, falls kein Geschlecht erkennbar ist.
+Ich als Sachbearbeiter möchte eine automatisierte Erkennung des Geschlechts mithilfe des Vornamens, um eine Unterstützung vom System zu erhalten, falls für mich ein Geschlecht nicht direkt erkennbar ist.
 
 Ich weiß, dass ich fertig bin, wenn:
-* Anhand vom Vornamen ohne explizite Zuweisung durch das Eingabefeld oder die Auswahlliste erkannt werden und ihnen eindeutig ein Geschlecht zugeordnet werden kann. Dies soll nur geschehen, wenn keine weiteren Informationen, welche auf das Geschlecht schließen lassen, vorliegen.
+* Anhand vom Vornamen ohne explizite Zuweisung durch das Eingabefeld oder die Auswahlliste Vornamen erkannt werden und ihnen eindeutig ein Geschlecht zugeordnet werden kann. Dies soll nur geschehen, wenn keine weiteren Informationen vorliegen, welche auf das Geschlecht schließen lassen.
 
  

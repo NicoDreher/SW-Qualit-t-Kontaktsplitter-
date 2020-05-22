@@ -49,13 +49,13 @@
                             </font>
                         </Label>
                         <Label layoutX="15.0" layoutY="79.0"
-                               text="Dieses Element verfügt über auto save und speichert beim Schließen."
+                               text="Diese Einstellungen werden beim Schließen des Fensters automatisch gespeichert."
                                textAlignment="JUSTIFY" wrapText="true">
                             <font>
                                 <Font name="System Italic" size="12.0"/>
                             </font>
                         </Label>
-                        <Label layoutX="15.0" layoutY="243.0" text="Reihenfolge der Titel bearbeiten" wrapText="true">
+                        <Label layoutX="15.0" layoutY="243.0" text="Titel verwalten" wrapText="true">
                             <font>
                                 <Font name="System Bold" size="12.0"/>
                             </font>
@@ -64,7 +64,7 @@
                             </padding>
                         </Label>
                         <Label layoutX="15.0" layoutY="90.0"
-                               text="Beim automatisierten Erstellen einer Briefanrede wird die Person mit ihrem höchsten Titel angesprochen. Die Rangfolge der Titel kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden."
+                               text="Beim automatisierten Erstellen einer Briefanrede wird die Person mit ihren Titeln in der Reihenfolge der Liste angesprochen. Die Titel werden außerdem in der Reihenfolge der Liste geprüft und der erste passende Titel wird übernommen. Die Reihenfolge der Titel kann über die Knöpfe &quot;▲&quot; und &quot;▼&quot; am jeweiligen Listenelement festgelegt werden."
                                textAlignment="JUSTIFY" wrapText="true"/>
                         <Label text="Titel hinzufügen" wrapText="true" VBox.vgrow="ALWAYS">
                             <font>

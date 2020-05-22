@@ -1,33 +1,33 @@
 # Testkonzept und Dokumentation
 ## CI/CD
-Tests werden im Repository bei jedem push automatisch ausgeführt. Außerdem wird ausgewertet welche Tests erfolgreich waren und welche fehlgeschlagen sind. Bei den fehlgeschlagenen Tests wird außerdem die Fehlermeldung protokolliert, damit der Fehler behoben werden kann.
+Tests der Anwendung werden im Repository bei jedem push automatisch ausgeführt. Außerdem wird ausgewertet, welche Tests erfolgreich waren und welche fehlgeschlagen sind. Die Fehlermeldung fehlgeschlagener Tests wird zur Fehlerbehebung protokolliert.
 
-Die Informationen zum aktuellsten Durchlauf des CI/CD Systems befinden sich unter: https://git.nico-dreher.de/University/sw-quality/splitter/pipelines/latest/
+Die Informationen des aktuellsten Durchlaufs des CI/CD Systems befinden sich unter: https://git.nico-dreher.de/University/sw-quality/splitter/pipelines/latest/
 
-Durch auswählen des *Tests* Reiter, gelangt man zur Auflistung der Test suites. Wählt man davon eine aus, kann man die Auflistung der Tests sehen.
+Durch Auswählen des Reiter *Tests*, gelangt man zur Auflistung der Test suites. Wählt man eine davon aus, kann man die Auflistung der Tests sehen.
 ## UI-Test
-Die Oberflächentests sollen ungewünschte Verhaltensweisen bei der Bedienung der Oberfläche aufdecken. Hierzu wurde die Funktionalität der einzelnen UI-Elemente getestet und, ob diese zum gewünschten Ergebnis führen (z.B. ein Fenster richtig öffnen). Hierbei werden auch fehlerhafte Eingaben überprüft.
+Die Oberflächentests sollen unerwünschte Verhaltensweisen bei der Bedienung der Oberfläche aufdecken. Hierzu wurde die Funktionalität der einzelnen UI-Elemente getestet und ob diese zum gewünschten Ergebnis führen (z.B. ein Fenster richtig öffnen). Hierbei werden auch fehlerhafte Eingaben überprüft.
 
-Die Kernfunktionialität der Oberfläche wird über parametrisierte Tests gestaltet. Hierbei soll zum einen geprüft werden, ob die Felder zur manuellen Eingabe mit den richtigen Daten gefüllt wird, wenn eine Eingabe getätigt wird. Hierzu wurden folgende Testfälle definiert, welche alle zum richtigen Ergebnis führen. (Testfälle in Anhang 1)
+Die Kernfunktionalität der Oberfläche wird über parametrisierte Tests validiert. Hierbei soll zum einen geprüft werden, ob die Felder zur manuellen Eingabe der Personendaten mit den richtigen Werten gefüllt werden, wenn eine Eingabe in das Anrede-Feld getätigt wird. Hierzu wurden folgende Testfälle definiert, welche alle zum erwarteten Ergebnis führen. (Testfälle in Anhang 1)
 
-Neben diesen wurde auch die richtige Generierung der Briefanrede sowie das Anzeigen auf der Benutzeroberfläche gezeigt. In Anhang 2 werden die Testdaten gezeigt, welche alle zum erwarteten Ergebnis führen. Dieser Test bekommen als Parameter den Eingabestring und das erwartete Ergebnis und werden dann ausgewertet.
+Neben diesen Tests wurde auch die richtige Generierung der Briefanrede sowie das Anzeigen auf der Benutzeroberfläche gezeigt. In Anhang 2 werden die Testdaten aufgeführt, welche alle zum erwarteten Ergebnis führen. Diese Tests bekommen als Parameter den Eingabestring und das erwartete Ergebnis und werden dann ausgewertet.
 
 ## Unit Test
-Durch Unit Tests sollen die Backend Komponenten getestet werden. Dadurch können Testfälle abgedeckt werden, welche in den UI-Tests nicht möglich sind. Dazu zählen Schnittstellen, die in der Anwendung so ineinandergreifen, dass die Funktionen der Komponenten durch die UI-Tests nicht ausreichend überprüft werden.
+Durch Unit Tests sollen die Komponenten des Backends der Anwendung getestet werden. Dadurch können Testfälle abgedeckt werden, welche in den UI-Tests nicht abgedeckt werden können. Dazu zählen Schnittstellen, die in der Anwendung so ineinandergreifen, dass die Funktionen der Komponenten durch die UI-Tests nicht ausreichend überprüft werden.
 
-Für einige Testfälle werden parametriesierte Tests verwendet. Dadurch können viele Testfälle durch wenig Code und einer Tabelle abgebildet werden. 
+Für einige Testfälle werden parametrisierte Tests verwendet. Dadurch können viele Testfälle durch wenig Code und einer Tabelle abgebildet werden. 
 
 Um das Parsen durch die standard Muster zu überprüfen, wird ein parametrisierter Test durchgeführt. Dazu wird der Input Text und die erwarteten Outputs definiert. (Testfälle in Anhang 3)
 
-Um das Parsen von einzelnen Mustern zu überprüfen, wird ein parametrisierter Test durchgeführt. Dazu wird ein Muster angegeben und die erwarteten Outputs definiert. Es sind nur Testfälle für ein Geschlecht und zwei Muster angegeben, weil das Verhalten der Paser unabhänig vom Geschlecht und Muster getestet wird. Die Testfälle befinden sich unter Anhang 4.
+Um das Parsen von einzelnen Mustern zu überprüfen, wird ein parametrisierter Test durchgeführt. Dazu wird ein Muster angegeben und die erwarteten Outputs definiert. Es sind nur Testfälle für ein Geschlecht und zwei Muster angegeben, weil das Verhalten der Parser unabhängig vom Geschlecht und Muster getestet wird. Die Testfälle befinden sich unter Anhang 4.
 
-Um zu überprüfen ob der Ausgabe Parser mit den Eingaben die richtige Briefanrede generiert, wird ein parametrisierter Test durchgeführt. Dazu wurde die Testfälle aus Anhang 2 verwendet.
+Um zu überprüfen, ob der Ausgabe Parser mit den Eingaben die richtige Briefanrede generiert, wird ein parametrisierter Test durchgeführt. Dazu wurde die Testfälle aus Anhang 2 verwendet.
 
 Um das Erkennen der Titel zu testen, wird ein parametrisierter Test durchgeführt. Dazu wird eine Eingabe in die Titel zerlegt und mit dem erwarteten Ergebnis verglichen. (Testfälle in Anhang 5)
 
-Damit die Nachname korrekt formatiert werden, wird ein parametrisierter Test durchgeführt. Dazu werden die Tokens eines Nachnamen mit Semikolon separiert eigegeben und mit der erwarteten formatierten Ausgabe verglichen. Die Destfälle befinden sich in Anhang 6.
+Damit der Nachname korrekt formatiert werden, wird ein parametrisierter Test durchgeführt. Dazu werden die Tokens eines Nachnamen mit Semikolon separiert eingegeben und mit der erwarteten formatierten Ausgabe verglichen. Die Testfälle befinden sich in Anhang 6.
 
-Zusätzlich zu den zuvor genannten Tests, wird auch das Verhalten überprüft, wenn kein Muster zu einer Eingabe passt. Außerdem wurde das Verhalten bei ungültigen Tokens im Muster getestet. Das Verhalten beim Versuch einen Kontakt auszugeben, für den es kein Ausgabemuster gibt, wird auch überprüft. Das Regex muster für Namen wird mithilfe aller Namen aus der Namensliste getestet.
+Zusätzlich zu den zuvor genannten Tests wird auch das Verhalten überprüft, wenn kein Muster zu einer Eingabe passt. Außerdem wurde das Verhalten bei ungültigen Tokens im Muster getestet. Das Verhalten beim Versuch einen Kontakt auszugeben, für den es kein Ausgabemuster gibt, wird auch überprüft. Das Regex-Muster für Namen wird mithilfe aller Namen aus der Namensliste getestet.
 
 ## Anhang 1
 

@@ -1,0 +1,121 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+  workflow_dispatch:
+    inputs:
+      bundle:
+        description: 'Build a Bundle'
+        required: false
+        default: 'false'
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    container: 
+      image: fiware/md2pdf:0.2.2
+      options: --entrypoint ""
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build PDF
+        run: |
+          rm /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template/cover_img.png
+          rm /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template/cover_template.md
+          cp -r docs/cover/. /usr/local/lib/python2.7/dist-packages/markdown_to_pdf-0.2.2-py2.7.egg/markdown_to_pdf/cover_template
+          markdown_to_pdf -i docs.yml -o documentation.pdf
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Documentation
+          path: documentation.pdf
+  build:
+    needs: docs
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/nicodreher/docker-maven-jfx/docker-maven-jfx:3-openjdk-11
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.REGISTRY_TOKEN }}
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: Documentation
+          path: /
+      - name: Build Project
+        run: |
+          mvn test
+          mvn package -Dmaven.test.skip=true
+          mvn javadoc:aggregate -Dmaven.test.skip=true
+          cp -r target/site/apidocs/ javadoc
+          mv target/Kontaktsplitter-Kings.jar Kontaktsplitter-Kings.jar
+        env: 
+          headless: true
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: target/surefire-reports/TEST-*.xml
+      - uses: actions/download-artifact@v2
+        with:
+          name: Documentation
+          path: 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Kontaktsplitter
+          path: |
+            Kontaktsplitter-Kings.jar
+            javadoc/
+            start.bat
+            start.sh
+            documentation.pdf
+  bundle:
+    needs: build
+    if: github.event.inputs.bundle == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: actions/download-artifact@v2
+        with:
+          name: Documentation
+          path: 
+      - uses: actions/download-artifact@v2
+        with:
+          name: Kontaktsplitter
+          path: 
+      - name: Download JDK
+        run: |
+          wget https://download.java.net/openjdk/jdk11/ri/openjdk-11+28_windows-x64_bin.zip
+          unzip openjdk-11+28_windows-x64_bin.zip -d ./
+          mv jdk-11/ openjdk-11/
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Kontaktsplitter-Bundle
+          path: |
+            Kontaktsplitter-Kings.jar
+            javadoc/
+            openjdk-11/
+            start-bundle.bat
+            documentation.pdf
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    container: 
+      image: ghcr.io/nicodreher/docker-maven-jfx/docker-maven-jfx:3-openjdk-11
+      credentials:
+        username: ${{ github.repository_owner }}
+        password: ${{ secrets.REGISTRY_TOKEN }}
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Project
+        run: mvn deploy -Dmaven.test.skip=true
+        env:
+          GITHUB_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner}}
+  

@@ -103,7 +103,7 @@ jobs:
             documentation.pdf
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/master'
+    if: github.event_name != 'workflow_dispatch' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     container: 
       image: ghcr.io/nicodreher/docker-maven-jfx/docker-maven-jfx:3-openjdk-11
